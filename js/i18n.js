@@ -35,7 +35,7 @@
       chartMain: 'Strategy Equity Curve + Price Overlay',
       chartRsi: 'RSI Indicator',
 
-      footer: 'QUANT TERMINAL v2.1 — Simulated data for reference only. Not financial advice. Past performance does not guarantee future results.',
+      footer: 'QUANT TERMINAL v2.5 — Simulated data for reference only. Not financial advice. Past performance does not guarantee future results.',
 
       alertBinanceError: 'Binance API error: ',
       alertBinanceFallback: '\nAuto-switched to MOCK mode',
@@ -103,7 +103,7 @@
       chartMain: '策略收益曲线 + 价格叠加',
       chartRsi: 'RSI 指标',
 
-      footer: 'QUANT TERMINAL v2.1 — 模拟数据仅供参考，不构成投资建议。历史表现不代表未来收益。',
+      footer: 'QUANT TERMINAL v2.5 — 模拟数据仅供参考，不构成投资建议。历史表现不代表未来收益。',
 
       alertBinanceError: '币安接口异常：',
       alertBinanceFallback: '\n自动切回 MOCK 模式',
