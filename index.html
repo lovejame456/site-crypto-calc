@@ -11,7 +11,7 @@
         extend: {
           fontFamily: {
             mono: ['JetBrains Mono', 'monospace'],
-            sans: ['Space Grotesk', 'system-ui', 'sans-serif']
+            sans: ['IBM Plex Sans', 'system-ui', 'sans-serif']
           }
         }
       }
@@ -28,28 +28,28 @@
         <span class="font-mono text-sm tracking-wider text-[#12b5c5]">QUANT</span>
         <span class="font-mono text-sm tracking-wider text-[#3d4656]">TERMINAL</span>
       </div>
-      <div class="font-mono text-xs text-[#2d3548]" id="clock"></div>
+      <div class="font-mono text-xs text-[#4a5568]" id="clock"></div>
     </header>
 
     <div class="flex-1 flex flex-col p-4 gap-4 max-w-[1600px] mx-auto w-full">
 
       <section class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <div class="glass metric-card p-4 animate-in animate-delay-1">
+        <div class="glass metric-card p-4 animate-in animate-delay-1" data-role="return">
           <div class="metric-label">累计收益率</div>
           <div class="metric-value positive" id="m-return">+0.00%</div>
           <div class="metric-sub mt-1" id="m-equity">$10,000</div>
         </div>
-        <div class="glass metric-card p-4 animate-in animate-delay-2">
+        <div class="glass metric-card p-4 animate-in animate-delay-2" data-role="winrate">
           <div class="metric-label">开仓胜率</div>
           <div class="metric-value neutral" id="m-winrate">0%</div>
           <div class="metric-sub mt-1" id="m-trades">0 笔交易</div>
         </div>
-        <div class="glass metric-card p-4 animate-in animate-delay-3">
+        <div class="glass metric-card p-4 animate-in animate-delay-3" data-role="mdd">
           <div class="metric-label">最大回撤 MDD</div>
           <div class="metric-value negative" id="m-mdd">-0.00%</div>
           <div class="metric-sub mt-1">峰值到谷底</div>
         </div>
-        <div class="glass metric-card p-4 animate-in animate-delay-4">
+        <div class="glass metric-card p-4 animate-in animate-delay-4" data-role="sharpe">
           <div class="metric-label">夏普比率</div>
           <div class="metric-value positive" id="m-sharpe">0.00</div>
           <div class="metric-sub mt-1">年化风险调整收益</div>
@@ -89,7 +89,7 @@
               <span class="val" id="ma-val">20</span>
             </div>
             <input type="range" id="ma-slider" min="5" max="60" value="20" step="1" />
-            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#2d3548]">
+            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#4a5568]">
               <span>5</span><span>60</span>
             </div>
           </div>
@@ -100,7 +100,7 @@
               <span class="val val-red" id="ob-val">70</span>
             </div>
             <input type="range" class="range-red" id="ob-slider" min="55" max="90" value="70" step="1" />
-            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#2d3548]">
+            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#4a5568]">
               <span>55</span><span>90</span>
             </div>
           </div>
@@ -111,7 +111,7 @@
               <span class="val" id="os-val">30</span>
             </div>
             <input type="range" id="os-slider" min="10" max="45" value="30" step="1" />
-            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#2d3548]">
+            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#4a5568]">
               <span>10</span><span>45</span>
             </div>
           </div>
@@ -136,7 +136,7 @@
           </button>
 
           <div class="mt-auto pt-4 border-t border-white/[0.04]">
-            <div class="font-mono text-[10px] text-[#2d3548] leading-relaxed">
+            <div class="font-mono text-[10px] text-[#4a5568] leading-relaxed">
               <div>开多：突破布林下轨 + RSI超卖 + MACD绿柱拉长</div>
               <div class="mt-1">ATR止损：价格跌破 开仓价−ATR×2 强制平仓</div>
               <div class="mt-1">平仓：触及布林上轨 或 RSI超买</div>
@@ -147,11 +147,11 @@
 
         <div class="flex flex-col gap-4 min-h-0">
           <div class="glass p-4 flex-1 animate-in animate-delay-3 flex flex-col">
-            <div class="text-xs text-[#4a5568] mb-2 font-mono tracking-wider">策略收益曲线 + 价格叠加</div>
+            <div class="chart-title">策略收益曲线 + 价格叠加</div>
             <div class="chart-container flex-1" id="main-chart"></div>
           </div>
           <div class="glass p-4 animate-in animate-delay-4">
-            <div class="text-xs text-[#4a5568] mb-2 font-mono tracking-wider">RSI 指标</div>
+            <div class="chart-title">RSI 指标</div>
             <div class="chart-container-sm" id="rsi-chart"></div>
           </div>
         </div>
@@ -160,7 +160,7 @@
 
     </div>
 
-    <footer class="border-t border-white/[0.04] px-6 py-2 text-center font-mono text-[10px] text-[#1e2536]">
+    <footer class="border-t border-white/[0.04] px-6 py-2 text-center font-mono text-[10px] text-[#4a5568]">
       QUANT TERMINAL v1.0 — 模拟数据仅供参考，不构成投资建议
     </footer>
 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
   --cyan: #12b5c5;
@@ -22,7 +22,7 @@
 html { font-size: 15px; -webkit-font-smoothing: antialiased; }
 
 body {
-  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
   background: #0a0b10;
   color: #c0c8d8;
   min-height: 100vh;
@@ -35,7 +35,21 @@ body::before {
   inset: 0;
   background:
     radial-gradient(ellipse 80% 50% at 20% 10%, rgba(18,181,197,0.025), transparent),
-    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(34,139,34,0.02), transparent);
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(34,139,34,0.02), transparent),
+    linear-gradient(rgba(18,181,197,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18,181,197,0.015) 1px, transparent 1px);
+  background-size: 100%, 100%, 48px 48px, 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
   pointer-events: none;
   z-index: 0;
 }
@@ -59,7 +73,25 @@ body::before {
 .metric-card {
   position: relative;
   overflow: hidden;
+  padding-left: 18px;
 }
+
+.metric-card::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 0;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--role-color, #3d4656);
+  opacity: 0.7;
+}
+
+.metric-card[data-role="return"] { --role-color: #12b5c5; }
+.metric-card[data-role="winrate"] { --role-color: #b0a67d; }
+.metric-card[data-role="mdd"] { --role-color: #a94442; }
+.metric-card[data-role="sharpe"] { --role-color: #228b22; }
 
 .metric-card::before {
   content: '';
@@ -102,6 +134,13 @@ input[type="range"] {
   background: rgba(255,255,255,0.06);
   outline: none;
   cursor: pointer;
+  --fill-color: #12b5c5;
+}
+
+input[type="range"]::-moz-range-progress {
+  background: var(--fill-color);
+  border-radius: 2px;
+  height: 4px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -128,6 +167,10 @@ input[type="range"]::-moz-range-thumb {
   border: none;
   box-shadow: 0 0 8px rgba(18,181,197,0.4);
   cursor: pointer;
+}
+
+input[type="range"].range-red {
+  --fill-color: #a94442;
 }
 
 input[type="range"].range-red::-webkit-slider-thumb {
@@ -217,6 +260,28 @@ input[type="range"].range-red::-moz-range-thumb {
   height: 180px;
   border-radius: 8px;
   overflow: hidden;
+}
+
+.chart-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  color: #4a5568;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.chart-title::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 12px;
+  border-radius: 1px;
+  background: #12b5c5;
+  opacity: 0.6;
 }
 
 @keyframes fadeInUp {

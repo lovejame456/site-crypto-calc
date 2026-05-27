@@ -211,21 +211,30 @@
     });
   }
 
+  function updateSliderFill(slider) {
+    var min = parseFloat(slider.min);
+    var max = parseFloat(slider.max);
+    var val = parseFloat(slider.value);
+    var pct = ((val - min) / (max - min)) * 100;
+    var fill = getComputedStyle(slider).getPropertyValue('--fill-color').trim() || '#12b5c5';
+    slider.style.background =
+      'linear-gradient(to right, ' + fill + ' 0%, ' + fill + ' ' + pct + '%, rgba(255,255,255,0.06) ' + pct + '%, rgba(255,255,255,0.06) 100%)';
+  }
+
   function initSliders() {
-    $('ma-slider').addEventListener('input', function () {
-      state.maPeriod = parseInt(this.value);
-      $('ma-val').textContent = this.value;
-      debouncedSim();
-    });
-    $('ob-slider').addEventListener('input', function () {
-      state.rsiOverbought = parseInt(this.value);
-      $('ob-val').textContent = this.value;
-      debouncedSim();
-    });
-    $('os-slider').addEventListener('input', function () {
-      state.rsiOversold = parseInt(this.value);
-      $('os-val').textContent = this.value;
-      debouncedSim();
+    var sliders = [
+      { el: $('ma-slider'), stateKey: 'maPeriod', display: $('ma-val') },
+      { el: $('ob-slider'), stateKey: 'rsiOverbought', display: $('ob-val') },
+      { el: $('os-slider'), stateKey: 'rsiOversold', display: $('os-val') }
+    ];
+    sliders.forEach(function (s) {
+      updateSliderFill(s.el);
+      s.el.addEventListener('input', function () {
+        state[s.stateKey] = parseInt(this.value);
+        s.display.textContent = this.value;
+        updateSliderFill(this);
+        debouncedSim();
+      });
     });
   }
 
@@ -264,9 +273,9 @@
   function syncUIFromState() {
     var btns = $('token-group').querySelectorAll('.token-btn');
     btns.forEach(function (b) { b.classList.toggle('active', b.dataset.token === state.token); });
-    $('ma-slider').value = state.maPeriod; $('ma-val').textContent = state.maPeriod;
-    $('ob-slider').value = state.rsiOverbought; $('ob-val').textContent = state.rsiOverbought;
-    $('os-slider').value = state.rsiOversold; $('os-val').textContent = state.rsiOversold;
+    $('ma-slider').value = state.maPeriod; $('ma-val').textContent = state.maPeriod; updateSliderFill($('ma-slider'));
+    $('ob-slider').value = state.rsiOverbought; $('ob-val').textContent = state.rsiOverbought; updateSliderFill($('ob-slider'));
+    $('os-slider').value = state.rsiOversold; $('os-val').textContent = state.rsiOversold; updateSliderFill($('os-slider'));
     $('lev-input').value = state.leverage; $('lev-val').textContent = state.leverage + 'x';
 
     if (state.dataMode === 'LIVE') {
