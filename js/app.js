@@ -7,6 +7,7 @@
     rsiOversold: 30,
     leverage: 1,
     atrMultiplier: 2,
+    initialBalance: 10000,
     liveData: null
   };
 
@@ -110,7 +111,8 @@
         rsiOversold: state.rsiOversold,
         leverage: state.leverage,
         dataMode: state.dataMode,
-        atrMultiplier: state.atrMultiplier
+        atrMultiplier: state.atrMultiplier,
+        initialBalance: state.initialBalance
       }
     };
 
@@ -177,7 +179,8 @@
       rsiOverbought: state.rsiOverbought,
       rsiOversold: state.rsiOversold,
       leverage: state.leverage,
-      atrMultiplier: state.atrMultiplier
+      atrMultiplier: state.atrMultiplier,
+      initialCapital: state.initialBalance
     });
 
     updateMetrics(result.metrics);
@@ -270,6 +273,32 @@
     });
   }
 
+  function formatBalanceShort(v) {
+    if (v >= 1000000) return '$' + (v / 1000000).toFixed(1) + 'M';
+    if (v >= 1000) return '$' + (v / 1000).toFixed(v % 1000 === 0 ? 0 : 1) + 'K';
+    return '$' + v.toLocaleString();
+  }
+
+  function initBalance() {
+    var balInput = $('bal-input');
+    balInput.addEventListener('input', function () {
+      var v = parseFloat(this.value);
+      if (isNaN(v) || v < 1) v = 1;
+      state.initialBalance = v;
+      $('bal-val').textContent = formatUSD(v);
+      debouncedSim();
+    });
+    document.querySelectorAll('.bal-preset').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var v = parseInt(btn.dataset.bal);
+        balInput.value = v;
+        state.initialBalance = v;
+        $('bal-val').textContent = formatUSD(v);
+        debouncedSim();
+      });
+    });
+  }
+
   function initClock() {
     function tick() {
       $('clock').textContent = new Date().toLocaleString('en-US', {
@@ -289,6 +318,7 @@
     $('os-slider').value = state.rsiOversold; $('os-val').textContent = state.rsiOversold; updateSliderFill($('os-slider'));
     $('atr-slider').value = state.atrMultiplier; $('atr-val').textContent = parseFloat(state.atrMultiplier).toFixed(1); updateSliderFill($('atr-slider'));
     $('lev-input').value = state.leverage; $('lev-val').textContent = state.leverage + 'x';
+    $('bal-input').value = state.initialBalance; $('bal-val').textContent = formatUSD(state.initialBalance);
 
     if (state.dataMode === 'LIVE') {
       var toggle = $('mode-toggle');
@@ -311,6 +341,7 @@
           if (c.rsiOverbought) state.rsiOverbought = c.rsiOverbought;
           if (c.rsiOversold) state.rsiOversold = c.rsiOversold;
           if (c.leverage) state.leverage = c.leverage;
+          if (c.initialBalance) state.initialBalance = c.initialBalance;
           if (c.atrMultiplier) state.atrMultiplier = c.atrMultiplier;
           syncUIFromState();
           if (c.dataMode === 'LIVE') switchToLIVE();
@@ -335,6 +366,7 @@
     initTokenSelector();
     initSliders();
     initLeverage();
+    initBalance();
     initClock();
     initSaveButton();
     initLangToggle();

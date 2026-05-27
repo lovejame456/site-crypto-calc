@@ -91,7 +91,7 @@ var Strategy = (function () {
     var rsiOversold = opts.rsiOversold;
     var leverage = opts.leverage;
     var atrMultiplier = opts.atrMultiplier || 2;
-    var initialCapital = 10000;
+    var initialCapital = opts.initialCapital || 10000;
 
     var boll = calcBOLL(prices, bollPeriod);
     var rsi = calcRSI(prices, 14);
