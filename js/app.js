@@ -177,23 +177,29 @@
   }
 
   function runSimulation() {
-    var data = getCurrentData();
-    var result = Strategy.runBacktest({
-      prices: data.prices,
-      highs: data.highs,
-      lows: data.lows,
-      maPeriod: state.maPeriod,
-      rsiOverbought: state.rsiOverbought,
-      rsiOversold: state.rsiOversold,
-      leverage: state.leverage,
-      atrMultiplier: state.atrMultiplier,
-      initialCapital: state.initialBalance
-    });
+    try {
+      var data = getCurrentData();
+      var result = Strategy.runBacktest({
+        prices: data.prices,
+        highs: data.highs,
+        lows: data.lows,
+        maPeriod: state.maPeriod,
+        rsiOverbought: state.rsiOverbought,
+        rsiOversold: state.rsiOversold,
+        leverage: state.leverage,
+        atrMultiplier: state.atrMultiplier,
+        initialCapital: state.initialBalance
+      });
 
-    updateMetrics(result.metrics);
-    ChartManager.updateMainChart(data.dates, data.prices, result.boll, result.equity);
-    ChartManager.updateRsiChart(data.dates, result.rsi, state.rsiOverbought, state.rsiOversold);
-    flashSimIndicator();
+      updateMetrics(result.metrics);
+      ChartManager.updateMainChart(data.dates, data.prices, result.boll, result.equity);
+      ChartManager.updateRsiChart(data.dates, result.rsi, state.rsiOverbought, state.rsiOversold);
+      flashSimIndicator();
+    } catch (err) {
+      console.error('[QuantTerminal] runSimulation error:', err);
+      var el = $('sim-flash');
+      if (el) { el.textContent = '✗ ERROR'; el.style.color = '#ff4757'; el.style.opacity = '1'; }
+    }
   }
 
   function debouncedSim() {
@@ -242,22 +248,26 @@
     ];
     sliders.forEach(function (s) {
       updateSliderFill(s.el);
-      s.el.addEventListener('input', function () {
-        state[s.stateKey] = parseInt(this.value);
-        s.display.textContent = this.value;
-        updateSliderFill(this);
+      function onSlide() {
+        state[s.stateKey] = parseInt(s.el.value);
+        s.display.textContent = s.el.value;
+        updateSliderFill(s.el);
         debouncedSim();
-      });
+      }
+      s.el.addEventListener('input', onSlide);
+      s.el.addEventListener('change', onSlide);
     });
 
     var atrSlider = $('atr-slider');
     updateSliderFill(atrSlider);
-    atrSlider.addEventListener('input', function () {
-      state.atrMultiplier = parseFloat(this.value);
-      $('atr-val').textContent = parseFloat(this.value).toFixed(1);
-      updateSliderFill(this);
+    function onAtrSlide() {
+      state.atrMultiplier = parseFloat(atrSlider.value);
+      $('atr-val').textContent = parseFloat(atrSlider.value).toFixed(1);
+      updateSliderFill(atrSlider);
       debouncedSim();
-    });
+    }
+    atrSlider.addEventListener('input', onAtrSlide);
+    atrSlider.addEventListener('change', onAtrSlide);
   }
 
   function initLeverage() {
@@ -378,6 +388,10 @@
     initClock();
     initSaveButton();
     initLangToggle();
+
+    $('btn-run').addEventListener('click', function () {
+      runSimulation();
+    });
 
     window.onLangChange = function () {
       $('btn-save').querySelector('.save-btn-text').textContent = t('btnSave');

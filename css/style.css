@@ -572,3 +572,31 @@ input[type="range"].range-gold::-moz-range-thumb {
   background: var(--gold);
   box-shadow: 0 0 10px rgba(232,168,56,0.5);
 }
+
+.run-btn {
+  font-family: 'JetBrains Mono', monospace;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(0,212,255,0.30);
+  background: rgba(0,212,255,0.06);
+  color: #00d4ff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+
+.run-btn:hover {
+  background: rgba(0,212,255,0.12);
+  border-color: rgba(0,212,255,0.50);
+  box-shadow: 0 0 20px rgba(0,212,255,0.15), 0 0 6px rgba(0,212,255,0.30);
+  color: #33ddff;
+}
+
+.run-btn:active {
+  transform: scale(0.97);
+  background: rgba(0,212,255,0.18);
+}
