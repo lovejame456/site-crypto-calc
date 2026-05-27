@@ -17,6 +17,8 @@
 
   function $(id) { return document.getElementById(id); }
 
+  function t(key) { return window.I18n ? I18n.t(key) : key; }
+
   function getCurrentData() {
     if (state.dataMode === 'LIVE' && state.liveData) return state.liveData;
     return MockData.get(state.token);
@@ -66,7 +68,7 @@
       })
       .catch(function (err) {
         setModeLoading(false);
-        alert('币安接口异常：' + (err.message || 'timeout') + '\n自动切回 MOCK 模式');
+        alert(t('alertBinanceError') + (err.message || 'timeout') + t('alertBinanceFallback'));
         switchToMOCK();
       });
   }
@@ -93,11 +95,11 @@
   function saveConfigToCloud() {
     var btn = $('btn-save');
     var textEl = btn.querySelector('.save-btn-text');
-    var originalText = textEl.textContent;
+    var originalText = t('btnSave');
 
     btn.classList.add('loading');
     btn.classList.remove('success', 'error');
-    textEl.innerHTML = '<span class="save-spinner"></span>SYNCING...';
+    textEl.innerHTML = '<span class="save-spinner"></span>' + t('btnSaveLoading');
 
     var payload = {
       siteId: 'crypto-calc',
@@ -122,15 +124,15 @@
       if (json.success) {
         btn.classList.remove('loading');
         btn.classList.add('success');
-        textEl.textContent = '✓ CONFIG SAVED';
-        setTimeout(function () { btn.classList.remove('success'); textEl.textContent = originalText; }, 2200);
+        textEl.textContent = t('btnSaveSuccess');
+        setTimeout(function () { btn.classList.remove('success'); textEl.textContent = t('btnSave'); }, 2200);
       } else { throw new Error(json.error || 'Unknown error'); }
     })
     .catch(function () {
       btn.classList.remove('loading');
       btn.classList.add('error');
-      textEl.textContent = '✗ SAVE FAILED';
-      setTimeout(function () { btn.classList.remove('error'); textEl.textContent = originalText; }, 2800);
+      textEl.textContent = t('btnSaveFail');
+      setTimeout(function () { btn.classList.remove('error'); textEl.textContent = t('btnSave'); }, 2800);
     });
   }
 
@@ -156,7 +158,7 @@
     var elWR = $('m-winrate');
     elWR.textContent = (metrics.winRate * 100).toFixed(1) + '%';
     elWR.className = 'metric-value ' + (metrics.winRate >= 0.5 ? 'positive' : 'negative');
-    $('m-trades').textContent = metrics.totalTrades + ' 笔交易';
+    $('m-trades').textContent = metrics.totalTrades + t('metricSubTrades');
 
     $('m-mdd').textContent = '-' + (metrics.maxDrawdown * 100).toFixed(2) + '%';
 
@@ -236,6 +238,15 @@
         debouncedSim();
       });
     });
+
+    var atrSlider = $('atr-slider');
+    updateSliderFill(atrSlider);
+    atrSlider.addEventListener('input', function () {
+      state.atrMultiplier = parseFloat(this.value);
+      $('atr-val').textContent = parseFloat(this.value).toFixed(1);
+      updateSliderFill(this);
+      debouncedSim();
+    });
   }
 
   function initLeverage() {
@@ -276,6 +287,7 @@
     $('ma-slider').value = state.maPeriod; $('ma-val').textContent = state.maPeriod; updateSliderFill($('ma-slider'));
     $('ob-slider').value = state.rsiOverbought; $('ob-val').textContent = state.rsiOverbought; updateSliderFill($('ob-slider'));
     $('os-slider').value = state.rsiOversold; $('os-val').textContent = state.rsiOversold; updateSliderFill($('os-slider'));
+    $('atr-slider').value = state.atrMultiplier; $('atr-val').textContent = parseFloat(state.atrMultiplier).toFixed(1); updateSliderFill($('atr-slider'));
     $('lev-input').value = state.leverage; $('lev-val').textContent = state.leverage + 'x';
 
     if (state.dataMode === 'LIVE') {
@@ -307,7 +319,16 @@
       .catch(function () {});
   }
 
+  function initLangToggle() {
+    $('lang-toggle').addEventListener('click', function () {
+      var next = I18n.getLang() === 'en' ? 'zh' : 'en';
+      I18n.setLang(next);
+    });
+  }
+
   function init() {
+    I18n.setLang(I18n.getLang());
+
     ChartManager.initMainChart($('main-chart'));
     ChartManager.initRsiChart($('rsi-chart'));
     initModeToggle();
@@ -316,6 +337,13 @@
     initLeverage();
     initClock();
     initSaveButton();
+    initLangToggle();
+
+    window.onLangChange = function () {
+      $('btn-save').querySelector('.save-btn-text').textContent = t('btnSave');
+      runSimulation();
+    };
+
     loadConfigFromCloud().then(function () { runSimulation(); });
   }
 

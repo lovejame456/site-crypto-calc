@@ -1,9 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quant Terminal — MA+RSI 双因子模拟器</title>
+  <title>Quant Terminal — BOLL+MACD+ATR Triple Factor Backtester</title>
+  <meta name="description" content="Free crypto quant backtesting terminal. Bollinger Bands + MACD + ATR triple-factor strategy simulator with live Binance data. Test BTC, ETH, SOL strategies instantly." />
+  <meta name="keywords" content="crypto backtester, bitcoin strategy, trading simulator, bollinger bands, MACD, ATR, quantitative trading, BTC, ETH, SOL" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Quant Terminal — Triple Factor Crypto Backtester" />
+  <meta property="og:description" content="Free BOLL+MACD+ATR strategy simulator. Live Binance data. Test your crypto trading edge in seconds." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://site-crypto-calc.vercel.app" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230a0b10'/><text x='6' y='23' font-family='monospace' font-size='18' font-weight='bold' fill='%2312b5c5'>Q</text></svg>" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -28,41 +37,55 @@
         <span class="font-mono text-sm tracking-wider text-[#12b5c5]">QUANT</span>
         <span class="font-mono text-sm tracking-wider text-[#6b7a8d]">TERMINAL</span>
       </div>
-      <div class="font-mono text-xs text-[#7d8a9e]" id="clock"></div>
+      <div class="flex items-center gap-4">
+        <button id="lang-toggle" class="lang-toggle-btn">中文</button>
+        <div class="font-mono text-xs text-[#7d8a9e]" id="clock"></div>
+      </div>
     </header>
+
+    <!-- Ad Slot: Top Banner (728x90) -->
+    <div class="ad-slot ad-slot-banner" id="ad-top">
+      <div class="ad-placeholder">
+        <span>ADVERTISEMENT</span>
+      </div>
+      <!-- Insert Google AdSense code here:
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXX" data-ad-slot="XXXXXXX" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+    </div>
 
     <div class="flex-1 flex flex-col p-4 gap-4 max-w-[1600px] mx-auto w-full">
 
       <section class="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <div class="glass metric-card p-4 animate-in animate-delay-1" data-role="return">
-          <div class="metric-label">累计收益率</div>
+          <div class="metric-label" data-i18n="metricReturn">Total Return</div>
           <div class="metric-value positive" id="m-return">+0.00%</div>
           <div class="metric-sub mt-1" id="m-equity">$10,000</div>
         </div>
         <div class="glass metric-card p-4 animate-in animate-delay-2" data-role="winrate">
-          <div class="metric-label">开仓胜率</div>
+          <div class="metric-label" data-i18n="metricWinrate">Win Rate</div>
           <div class="metric-value neutral" id="m-winrate">0%</div>
-          <div class="metric-sub mt-1" id="m-trades">0 笔交易</div>
+          <div class="metric-sub mt-1" id="m-trades">0 trades</div>
         </div>
         <div class="glass metric-card p-4 animate-in animate-delay-3" data-role="mdd">
-          <div class="metric-label">最大回撤 MDD</div>
+          <div class="metric-label" data-i18n="metricMdd">Max Drawdown (MDD)</div>
           <div class="metric-value negative" id="m-mdd">-0.00%</div>
-          <div class="metric-sub mt-1">峰值到谷底</div>
+          <div class="metric-sub mt-1" data-i18n="metricSubPeakTrough">Peak to Trough</div>
         </div>
         <div class="glass metric-card p-4 animate-in animate-delay-4" data-role="sharpe">
-          <div class="metric-label">夏普比率</div>
+          <div class="metric-label" data-i18n="metricSharpe">Sharpe Ratio</div>
           <div class="metric-value positive" id="m-sharpe">0.00</div>
-          <div class="metric-sub mt-1">年化风险调整收益</div>
+          <div class="metric-sub mt-1" data-i18n="metricSubSharpe">Annualized Risk-Adj Return</div>
         </div>
       </section>
 
       <section class="flex-1 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-4 min-h-0">
 
-        <aside class="glass p-5 space-y-6 animate-in animate-delay-2 flex flex-col">
+        <aside class="glass p-5 space-y-5 animate-in animate-delay-2 flex flex-col">
 
           <div>
             <div class="config-label mb-2">
-              <span>数据源</span>
+              <span data-i18n="configDataSource">Data Source</span>
               <span class="val" id="mode-label" style="color:#6b7a8d">MOCK</span>
             </div>
             <div class="mode-toggle" id="mode-toggle">
@@ -74,7 +97,7 @@
 
           <div>
             <div class="config-label mb-3">
-              <span>代币</span>
+              <span data-i18n="configToken">Token</span>
             </div>
             <div class="flex gap-2" id="token-group">
               <button class="token-btn active" data-token="BTC">BTC</button>
@@ -85,7 +108,7 @@
 
           <div>
             <div class="config-label">
-              <span>MA 周期</span>
+              <span data-i18n="configMaPeriod">MA Period</span>
               <span class="val" id="ma-val">20</span>
             </div>
             <input type="range" id="ma-slider" min="5" max="60" value="20" step="1" />
@@ -96,7 +119,7 @@
 
           <div>
             <div class="config-label">
-              <span>RSI 超买线</span>
+              <span data-i18n="configRsiOb">RSI Overbought</span>
               <span class="val val-red" id="ob-val">70</span>
             </div>
             <input type="range" class="range-red" id="ob-slider" min="55" max="90" value="70" step="1" />
@@ -107,7 +130,7 @@
 
           <div>
             <div class="config-label">
-              <span>RSI 超卖线</span>
+              <span data-i18n="configRsiOs">RSI Oversold</span>
               <span class="val" id="os-val">30</span>
             </div>
             <input type="range" id="os-slider" min="10" max="45" value="30" step="1" />
@@ -118,7 +141,18 @@
 
           <div>
             <div class="config-label">
-              <span>杠杆倍数</span>
+              <span data-i18n="configAtrMult">ATR Multiplier</span>
+              <span class="val" id="atr-val">2.0</span>
+            </div>
+            <input type="range" class="range-gold" id="atr-slider" min="0.5" max="5" value="2" step="0.1" />
+            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#7d8a9e]">
+              <span>0.5</span><span>5.0</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="config-label">
+              <span data-i18n="configLeverage">Leverage</span>
               <span class="val" style="color:#c0a060" id="lev-val">1x</span>
             </div>
             <input type="number" class="leverage-input" id="lev-input" value="1" min="1" max="100" step="1" />
@@ -132,14 +166,26 @@
           </div>
 
           <button class="save-btn" id="btn-save">
-            <span class="save-btn-text">🔒 SAVE CONFIG TO CLOUD</span>
+            <span class="save-btn-text" data-i18n="btnSave">🔒 SAVE CONFIG TO CLOUD</span>
           </button>
 
+          <!-- Ad Slot: Sidebar (300x250) -->
+          <div class="ad-slot ad-slot-sidebar" id="ad-sidebar">
+            <div class="ad-placeholder">
+              <span>ADVERTISEMENT</span>
+            </div>
+            <!-- Insert Google AdSense code here:
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXX" data-ad-slot="XXXXXXX" data-ad-format="rectangle"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            -->
+          </div>
+
           <div class="mt-auto pt-4 border-t border-white/[0.04]">
-            <div class="font-mono text-[10px] text-[#7d8a9e] leading-relaxed">
-              <div>开多：突破布林下轨 + RSI超卖 + MACD绿柱拉长</div>
-              <div class="mt-1">ATR止损：价格跌破 开仓价−ATR×2 强制平仓</div>
-              <div class="mt-1">平仓：触及布林上轨 或 RSI超买</div>
+            <div class="font-mono text-[10px] text-[#7d8a9e] leading-relaxed strategy-rules">
+              <div class="strategy-rules-title text-[#6b7a8d] mb-1" data-i18n="strategyTitle" style="text-transform:uppercase; letter-spacing:0.06em; font-size:9px;">Strategy Rules</div>
+              <div data-i18n="strategyLong">Long: Bollinger lower breakout + RSI oversold + MACD histogram growing</div>
+              <div class="mt-1" data-i18n="strategyStop">ATR Stop: Force close when price &lt; entry − ATR × multiplier</div>
+              <div class="mt-1" data-i18n="strategyExit">Exit: Bollinger upper band hit OR RSI overbought</div>
             </div>
           </div>
 
@@ -147,11 +193,23 @@
 
         <div class="flex flex-col gap-4 min-h-0">
           <div class="glass p-4 flex-1 animate-in animate-delay-3 flex flex-col">
-            <div class="chart-title">策略收益曲线 + 价格叠加</div>
+            <div class="chart-title" data-i18n="chartMain">Strategy Equity Curve + Price Overlay</div>
             <div class="chart-container flex-1" id="main-chart"></div>
           </div>
+
+          <!-- Ad Slot: Between Charts (728x90) -->
+          <div class="ad-slot ad-slot-banner ad-slot-mid" id="ad-mid">
+            <div class="ad-placeholder">
+              <span>ADVERTISEMENT</span>
+            </div>
+            <!-- Insert Google AdSense code here:
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXX" data-ad-slot="XXXXXXX" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            -->
+          </div>
+
           <div class="glass p-4 animate-in animate-delay-4">
-            <div class="chart-title">RSI 指标</div>
+            <div class="chart-title" data-i18n="chartRsi">RSI Indicator</div>
             <div class="chart-container-sm" id="rsi-chart"></div>
           </div>
         </div>
@@ -160,8 +218,19 @@
 
     </div>
 
-    <footer class="border-t border-white/[0.04] px-6 py-2 text-center font-mono text-[10px] text-[#6b7a8d]">
-      QUANT TERMINAL v1.0 — 模拟数据仅供参考，不构成投资建议
+    <!-- Ad Slot: Bottom Banner (728x90) -->
+    <div class="ad-slot ad-slot-banner ad-slot-bottom" id="ad-bottom">
+      <div class="ad-placeholder">
+        <span>ADVERTISEMENT</span>
+      </div>
+      <!-- Insert Google AdSense code here:
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXX" data-ad-slot="XXXXXXX" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+    </div>
+
+    <footer class="border-t border-white/[0.04] px-6 py-2 text-center font-mono text-[10px] text-[#6b7a8d]" data-i18n="footer">
+      QUANT TERMINAL v1.0 — Simulated data for reference only. Not financial advice. Past performance does not guarantee future results.
     </footer>
 
   </div>
@@ -170,6 +239,7 @@
   <script src="js/mock-data.js"></script>
   <script src="js/strategy.js"></script>
   <script src="js/chart.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
