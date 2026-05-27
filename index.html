@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quant Terminal — MA+RSI 双因子模拟器</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            mono: ['JetBrains Mono', 'monospace'],
+            sans: ['Space Grotesk', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app-root" class="min-h-screen flex flex-col">
+
+    <header class="border-b border-white/[0.04] px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-2 h-2 rounded-full bg-[#00f0ff] animate-pulse"></div>
+        <span class="font-mono text-sm tracking-wider text-[#00f0ff]">QUANT</span>
+        <span class="font-mono text-sm tracking-wider text-[#3d4656]">TERMINAL</span>
+      </div>
+      <div class="font-mono text-xs text-[#2d3548]" id="clock"></div>
+    </header>
+
+    <div class="flex-1 flex flex-col p-4 gap-4 max-w-[1600px] mx-auto w-full">
+
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="glass metric-card p-4 animate-in animate-delay-1">
+          <div class="metric-label">累计收益率</div>
+          <div class="metric-value positive" id="m-return">+0.00%</div>
+          <div class="metric-sub mt-1" id="m-equity">$10,000</div>
+        </div>
+        <div class="glass metric-card p-4 animate-in animate-delay-2">
+          <div class="metric-label">开仓胜率</div>
+          <div class="metric-value neutral" id="m-winrate">0%</div>
+          <div class="metric-sub mt-1" id="m-trades">0 笔交易</div>
+        </div>
+        <div class="glass metric-card p-4 animate-in animate-delay-3">
+          <div class="metric-label">最大回撤 MDD</div>
+          <div class="metric-value negative" id="m-mdd">-0.00%</div>
+          <div class="metric-sub mt-1">峰值到谷底</div>
+        </div>
+        <div class="glass metric-card p-4 animate-in animate-delay-4">
+          <div class="metric-label">夏普比率</div>
+          <div class="metric-value positive" id="m-sharpe">0.00</div>
+          <div class="metric-sub mt-1">年化风险调整收益</div>
+        </div>
+      </section>
+
+      <section class="flex-1 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-4 min-h-0">
+
+        <aside class="glass p-5 space-y-6 animate-in animate-delay-2 flex flex-col">
+
+          <div>
+            <div class="config-label mb-3">
+              <span>代币</span>
+            </div>
+            <div class="flex gap-2" id="token-group">
+              <button class="token-btn active" data-token="BTC">BTC</button>
+              <button class="token-btn" data-token="ETH">ETH</button>
+              <button class="token-btn" data-token="SOL">SOL</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="config-label">
+              <span>MA 周期</span>
+              <span class="val" id="ma-val">20</span>
+            </div>
+            <input type="range" id="ma-slider" min="5" max="60" value="20" step="1" />
+            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#2d3548]">
+              <span>5</span><span>60</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="config-label">
+              <span>RSI 超买线</span>
+              <span class="val val-red" id="ob-val">70</span>
+            </div>
+            <input type="range" class="range-red" id="ob-slider" min="55" max="90" value="70" step="1" />
+            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#2d3548]">
+              <span>55</span><span>90</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="config-label">
+              <span>RSI 超卖线</span>
+              <span class="val" id="os-val">30</span>
+            </div>
+            <input type="range" id="os-slider" min="10" max="45" value="30" step="1" />
+            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#2d3548]">
+              <span>10</span><span>45</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="config-label">
+              <span>杠杆倍数</span>
+              <span class="val" style="color:#7c5cfc" id="lev-val">1x</span>
+            </div>
+            <input type="number" class="leverage-input" id="lev-input" value="1" min="1" max="100" step="1" />
+            <div class="flex gap-2 mt-2">
+              <button class="token-btn text-[10px] py-1 px-2 lev-preset" data-lev="1">1x</button>
+              <button class="token-btn text-[10px] py-1 px-2 lev-preset" data-lev="3">3x</button>
+              <button class="token-btn text-[10px] py-1 px-2 lev-preset" data-lev="5">5x</button>
+              <button class="token-btn text-[10px] py-1 px-2 lev-preset" data-lev="10">10x</button>
+              <button class="token-btn text-[10px] py-1 px-2 lev-preset" data-lev="25">25x</button>
+            </div>
+          </div>
+
+          <button class="save-btn" id="btn-save">
+            <span class="save-btn-text">🔒 SAVE CONFIG TO CLOUD</span>
+          </button>
+
+          <div class="mt-auto pt-4 border-t border-white/[0.04]">
+            <div class="font-mono text-[10px] text-[#2d3548] leading-relaxed">
+              <div>策略：价格上穿 MA + RSI 低于超卖线 → 开多</div>
+              <div class="mt-1">平仓：价格下穿 MA 或 RSI 高于超买线</div>
+            </div>
+          </div>
+
+        </aside>
+
+        <div class="flex flex-col gap-4 min-h-0">
+          <div class="glass p-4 flex-1 animate-in animate-delay-3 flex flex-col">
+            <div class="text-xs text-[#4a5568] mb-2 font-mono tracking-wider">策略收益曲线 + 价格叠加</div>
+            <div class="chart-container flex-1" id="main-chart"></div>
+          </div>
+          <div class="glass p-4 animate-in animate-delay-4">
+            <div class="text-xs text-[#4a5568] mb-2 font-mono tracking-wider">RSI 指标</div>
+            <div class="chart-container-sm" id="rsi-chart"></div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+    <footer class="border-t border-white/[0.04] px-6 py-2 text-center font-mono text-[10px] text-[#1e2536]">
+      QUANT TERMINAL v1.0 — 模拟数据仅供参考，不构成投资建议
+    </footer>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/strategy.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
