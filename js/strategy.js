@@ -123,8 +123,13 @@ var Strategy = (function () {
       var atrVal = atr[i];
 
       if (!inPosition) {
-        var belowLower = price < bollLower;
-        var rsiOversoldSignal = rsiVal < rsiOversold;
+        var lookback = 3;
+        var belowLower = false;
+        var rsiOversoldSignal = false;
+        for (var lb = 0; lb <= lookback && (i - lb) >= warmup; lb++) {
+          if (prices[i - lb] < boll.lower[i - lb]) belowLower = true;
+          if (rsi[i - lb] < rsiOversold) rsiOversoldSignal = true;
+        }
         var momentumReversal = prevMacdHist !== null && macdHist > prevMacdHist;
         if (belowLower && rsiOversoldSignal && momentumReversal) {
           inPosition = true;
