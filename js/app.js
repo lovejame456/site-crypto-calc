@@ -211,6 +211,42 @@
     setInterval(tick, 1000);
   }
 
+  function syncUIFromState() {
+    var btns = $('token-group').querySelectorAll('.token-btn');
+    btns.forEach(function (b) {
+      b.classList.toggle('active', b.dataset.token === state.token);
+    });
+
+    $('ma-slider').value = state.maPeriod;
+    $('ma-val').textContent = state.maPeriod;
+
+    $('ob-slider').value = state.rsiOverbought;
+    $('ob-val').textContent = state.rsiOverbought;
+
+    $('os-slider').value = state.rsiOversold;
+    $('os-val').textContent = state.rsiOversold;
+
+    $('lev-input').value = state.leverage;
+    $('lev-val').textContent = state.leverage + 'x';
+  }
+
+  function loadConfigFromCloud() {
+    return fetch(CLOUD_API + '?siteId=crypto-calc')
+      .then(function (res) { return res.json(); })
+      .then(function (json) {
+        if (json.success && json.data && json.data.config) {
+          var cloud = json.data.config;
+          if (cloud.token) state.token = cloud.token;
+          if (cloud.maPeriod) state.maPeriod = cloud.maPeriod;
+          if (cloud.rsiOverbought) state.rsiOverbought = cloud.rsiOverbought;
+          if (cloud.rsiOversold) state.rsiOversold = cloud.rsiOversold;
+          if (cloud.leverage) state.leverage = cloud.leverage;
+          syncUIFromState();
+        }
+      })
+      .catch(function () {});
+  }
+
   function init() {
     ChartManager.initMainChart($('main-chart'));
     ChartManager.initRsiChart($('rsi-chart'));
@@ -221,7 +257,9 @@
     initClock();
     initSaveButton();
 
-    runSimulation();
+    loadConfigFromCloud().then(function () {
+      runSimulation();
+    });
   }
 
   if (document.readyState === 'loading') {
