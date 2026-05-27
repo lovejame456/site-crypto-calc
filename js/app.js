@@ -2,6 +2,7 @@
   var state = {
     dataMode: 'MOCK',
     token: 'BTC',
+    interval: '1h',
     maPeriod: 20,
     rsiOverbought: 70,
     rsiOversold: 30,
@@ -26,7 +27,7 @@
 
   function fetchBinanceData(token) {
     var symbol = token + 'USDT';
-    var url = BINANCE_BASE + '?symbol=' + symbol + '&interval=15m&limit=500';
+    var url = BINANCE_BASE + '?symbol=' + symbol + '&interval=' + state.interval + '&limit=500';
     return fetch(url).then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.json();
@@ -59,6 +60,7 @@
       $('mode-label').textContent = 'LIVE ⚡';
       $('mode-label').style.color = '#00e5a0';
 
+    updateIntervalCoverage();
     setModeLoading(true);
     fetchBinanceData(state.token)
       .then(function (data) {
@@ -82,6 +84,7 @@
     toggle.querySelector('[data-mode="MOCK"]').classList.add('active');
     $('mode-label').textContent = 'MOCK';
     $('mode-label').style.color = '#6b7a8d';
+    updateIntervalCoverage();
     runSimulation();
   }
 
@@ -111,7 +114,8 @@
         leverage: state.leverage,
         dataMode: state.dataMode,
         atrMultiplier: state.atrMultiplier,
-        initialBalance: state.initialBalance
+        initialBalance: state.initialBalance,
+        interval: state.interval
       }
     };
 
@@ -229,6 +233,37 @@
     });
   }
 
+  function updateIntervalCoverage() {
+    var coverageMap = {
+      '5m': '~42h', '15m': '~5d', '1h': '~21d', '4h': '~83d', '1d': '~1.4y'
+    };
+    var el = $('interval-coverage');
+    if (el) {
+      if (state.dataMode === 'LIVE') {
+        el.textContent = '500 bars · ' + (coverageMap[state.interval] || '');
+        el.style.color = '#00e5a0';
+      } else {
+        el.textContent = t('intervalMock') || '365 days simulated';
+        el.style.color = '#6b7a8d';
+      }
+    }
+  }
+
+  function initIntervalSelector() {
+    var btns = $('interval-group').querySelectorAll('.interval-btn');
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        state.interval = btn.dataset.interval;
+        state.liveData = null;
+        updateIntervalCoverage();
+        debouncedSim();
+      });
+    });
+    updateIntervalCoverage();
+  }
+
   function updateSliderFill(slider) {
     var min = parseFloat(slider.min);
     var max = parseFloat(slider.max);
@@ -330,6 +365,8 @@
   function syncUIFromState() {
     var btns = $('token-group').querySelectorAll('.token-btn');
     btns.forEach(function (b) { b.classList.toggle('active', b.dataset.token === state.token); });
+    var intBtns = $('interval-group').querySelectorAll('.interval-btn');
+    intBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.interval === state.interval); });
     $('ma-slider').value = state.maPeriod; $('ma-val').textContent = state.maPeriod; updateSliderFill($('ma-slider'));
     $('ob-slider').value = state.rsiOverbought; $('ob-val').textContent = state.rsiOverbought; updateSliderFill($('ob-slider'));
     $('os-slider').value = state.rsiOversold; $('os-val').textContent = state.rsiOversold; updateSliderFill($('os-slider'));
@@ -360,7 +397,9 @@
           if (c.leverage) state.leverage = c.leverage;
           if (c.initialBalance) state.initialBalance = c.initialBalance;
           if (c.atrMultiplier) state.atrMultiplier = c.atrMultiplier;
+          if (c.interval) state.interval = c.interval;
           syncUIFromState();
+          updateIntervalCoverage();
           if (c.dataMode === 'LIVE') switchToLIVE();
         }
       })
@@ -381,6 +420,7 @@
     ChartManager.initRsiChart($('rsi-chart'));
     initModeToggle();
     initTokenSelector();
+    initIntervalSelector();
     initSliders();
     initLeverage();
     initBalance();

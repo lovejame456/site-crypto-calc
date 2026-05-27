@@ -16,6 +16,8 @@
 
       configDataSource: 'Data Source',
       configToken: 'Token',
+      configInterval: 'Interval',
+      intervalMock: '365 days simulated',
       configMaPeriod: 'MA Period',
       configRsiOb: 'RSI Overbought',
       configRsiOs: 'RSI Oversold',
@@ -84,6 +86,8 @@
 
       configDataSource: '数据源',
       configToken: '代币',
+      configInterval: '周期',
+      intervalMock: '模拟 365 天',
       configMaPeriod: 'MA 周期',
       configRsiOb: 'RSI 超买线',
       configRsiOs: 'RSI 超卖线',

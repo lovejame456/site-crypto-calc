@@ -250,6 +250,31 @@ input[type="range"].range-red::-moz-range-thumb {
   box-shadow: 0 0 12px rgba(0,212,255,0.10);
 }
 
+.interval-btn {
+  font-family: 'JetBrains Mono', monospace;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: #6b7a8d;
+  transition: all 0.2s;
+}
+
+.interval-btn:hover {
+  border-color: rgba(232,168,56,0.25);
+  color: #8f99a8;
+}
+
+.interval-btn.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(232,168,56,0.08);
+  box-shadow: 0 0 10px rgba(232,168,56,0.10);
+}
+
 .chart-container {
   width: 100%;
   height: 320px;
