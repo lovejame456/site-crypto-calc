@@ -11,7 +11,6 @@
     liveData: null
   };
 
-  var rafId = null;
   var CLOUD_API = 'https://center-backend-eight.vercel.app/api/config';
   var CLOUD_TOKEN = 'Bearer KennyMoney2026';
   var BINANCE_BASE = 'https://api.binance.com/api/v3/klines';
@@ -171,9 +170,13 @@
 
   function flashSimIndicator() {
     var el = $('sim-flash');
-    if (!el) return;
-    el.style.opacity = '1';
-    setTimeout(function () { el.style.opacity = '0'; }, 400);
+    if (el) { el.style.opacity = '1'; setTimeout(function () { el.style.opacity = '0'; }, 600); }
+    var cards = document.querySelectorAll('.metric-card');
+    cards.forEach(function (card) {
+      card.style.transition = 'box-shadow 0.15s';
+      card.style.boxShadow = '0 0 16px rgba(0,212,255,0.15), inset 0 0 8px rgba(0,212,255,0.05)';
+      setTimeout(function () { card.style.boxShadow = ''; }, 500);
+    });
   }
 
   function runSimulation() {
@@ -203,18 +206,14 @@
   }
 
   function debouncedSim() {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(function () {
-      if (state.dataMode === 'LIVE') {
-        setModeLoading(true);
-        fetchBinanceData(state.token)
-          .then(function (data) { state.liveData = data; setModeLoading(false); runSimulation(); })
-          .catch(function () { setModeLoading(false); switchToMOCK(); });
-      } else {
-        runSimulation();
-      }
-      rafId = null;
-    });
+    if (state.dataMode === 'LIVE') {
+      setModeLoading(true);
+      fetchBinanceData(state.token)
+        .then(function (data) { state.liveData = data; setModeLoading(false); runSimulation(); })
+        .catch(function () { setModeLoading(false); switchToMOCK(); });
+    } else {
+      runSimulation();
+    }
   }
 
   function initTokenSelector() {
