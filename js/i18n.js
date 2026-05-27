@@ -56,8 +56,8 @@
       t_s2_title: 'Step 2: Adjust parameters',
       t_s2_body: 'Drag the sliders or type values. Each parameter controls a different part of the strategy:\n\n• MA Period → Bollinger Band width (smaller = more signals)\n• RSI Overbought/Oversold → market "extreme" thresholds\n• ATR Multiplier → stop-loss distance (bigger = wider stop)\n• Leverage → amplify gains AND losses\n• Initial Balance → starting capital in USD',
 
-      t_s3_title: 'Step 3: Run the backtest',
-      t_s3_body: 'Click the blue ▶ RUN BACKTEST button — or just drag any slider, the simulation auto-reruns. The four metric cards at the top will flash blue briefly to confirm the recalculation finished.',
+      t_s3_title: 'Step 3: See results instantly',
+      t_s3_body: 'Every time you drag a slider or change a coin, the simulation re-runs automatically. No need to click anything — the four metric cards flash blue briefly to confirm recalculation. Just adjust and watch.',
 
       t_s4_title: 'Step 4: Read the results',
       t_s4_body: '• Total Return — overall profit/loss %\n• Win Rate — % of trades that made money\n• Max Drawdown — worst peak-to-trough drop (risk gauge)\n• Sharpe Ratio — risk-adjusted return (above 1 = good)\n\nOn the main chart, the GOLD line is your equity curve. If it goes up, the strategy makes money.',
@@ -124,8 +124,8 @@
       t_s2_title: '第二步：调节参数',
       t_s2_body: '拖动滑块或直接输入数值。每个参数控制策略的不同部分：\n\n• MA 周期 → 布林带宽度（越小信号越多）\n• RSI 超买/超卖线 → 市场"极端"的阈值\n• ATR 倍数 → 止损距离（越大止损越宽）\n• 杠杆倍数 → 放大收益和亏损\n• 初始本金 → 起始资金（美元）',
 
-      t_s3_title: '第三步：运行回测',
-      t_s3_body: '点击蓝色的 ▶ RUN BACKTEST 按钮——或者直接拖动任意滑块，系统会自动重新计算。顶部四张指标卡会短暂闪烁蓝色光晕，确认重算完成。',
+      t_s3_title: '第三步：实时查看结果',
+      t_s3_body: '每次拖动滑块或切换币种，模拟会自动重新运行，无需点击任何按钮。顶部四张指标卡会短暂闪烁蓝色光晕确认计算完成。调一下就能看到变化。',
 
       t_s4_title: '第四步：查看结果',
       t_s4_body: '• 累计收益率 — 总盈亏百分比\n• 开仓胜率 — 盈利交易占比\n• 最大回撤 — 最严重的峰值到谷底跌幅（风险指标）\n• 夏普比率 — 风险调整后收益（大于 1 算及格）\n\n主图上的金色曲线就是你的净值曲线——上升代表赚钱。',

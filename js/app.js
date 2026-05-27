@@ -388,31 +388,6 @@
     initSaveButton();
     initLangToggle();
 
-    $('btn-run').addEventListener('click', function () {
-      var btn = $('btn-run');
-      btn.style.background = 'rgba(0,212,255,0.15)';
-      btn.style.borderColor = '#00d4ff';
-      btn.style.boxShadow = '0 0 20px rgba(0,212,255,0.25)';
-      btn.textContent = '⏳ RUNNING...';
-      btn.disabled = true;
-
-      setTimeout(function () {
-        runSimulation();
-        btn.style.background = 'rgba(0,229,160,0.15)';
-        btn.style.borderColor = '#00e5a0';
-        btn.style.boxShadow = '0 0 20px rgba(0,229,160,0.25)';
-        btn.textContent = '✓ DONE';
-
-        setTimeout(function () {
-          btn.style.background = '';
-          btn.style.borderColor = '';
-          btn.style.boxShadow = '';
-          btn.textContent = '▶ RUN BACKTEST';
-          btn.disabled = false;
-        }, 1200);
-      }, 50);
-    });
-
     window.onLangChange = function () {
       $('btn-save').querySelector('.save-btn-text').textContent = t('btnSave');
       runSimulation();
