@@ -16,9 +16,16 @@ var MockData = (function () {
 
   function generatePriceSeries(config) {
     var rng = seededRandom(config.seed);
+    var hlRng = seededRandom(config.seed + 777);
     var prices = [config.startPrice];
+    var highs = [];
+    var lows = [];
     var volatility = config.baseVol;
     var trend = 0;
+
+    var sp0 = config.startPrice * 0.003;
+    highs.push(Math.round((config.startPrice + hlRng() * sp0) * 100) / 100);
+    lows.push(Math.round((config.startPrice - hlRng() * sp0) * 100) / 100);
 
     var events = config.events || [];
 
@@ -42,9 +49,15 @@ var MockData = (function () {
       var shock = gaussianRandom(rng) * dailyVol + trend;
       var newPrice = prices[i - 1] * (1 + shock);
       newPrice = Math.max(newPrice, config.startPrice * 0.15);
-      prices.push(parseFloat(newPrice.toFixed(2)));
+      var close = parseFloat(newPrice.toFixed(2));
+      prices.push(close);
+
+      var barSpread = close * (0.002 + hlRng() * 0.004);
+      highs.push(Math.round((close + hlRng() * barSpread + barSpread * 0.3) * 100) / 100);
+      lows.push(Math.round((close - hlRng() * barSpread - barSpread * 0.3) * 100) / 100);
     }
-    return prices;
+
+    return { prices: prices, highs: highs, lows: lows };
   }
 
   function generateDates(days) {
@@ -61,11 +74,8 @@ var MockData = (function () {
   var DAYS = 365;
   var dates = generateDates(DAYS);
 
-  var btcPrices = generatePriceSeries({
-    seed: 42,
-    startPrice: 42150,
-    baseVol: 0.022,
-    days: DAYS,
+  var btc = generatePriceSeries({
+    seed: 42, startPrice: 42150, baseVol: 0.022, days: DAYS,
     events: [
       { start: 15, end: 80, volMult: 1.4, trend: 0.004 },
       { start: 85, end: 110, volMult: 2.2, trend: -0.008 },
@@ -79,11 +89,8 @@ var MockData = (function () {
     ]
   });
 
-  var ethPrices = generatePriceSeries({
-    seed: 137,
-    startPrice: 2280,
-    baseVol: 0.028,
-    days: DAYS,
+  var eth = generatePriceSeries({
+    seed: 137, startPrice: 2280, baseVol: 0.028, days: DAYS,
     events: [
       { start: 15, end: 80, volMult: 1.5, trend: 0.005 },
       { start: 85, end: 115, volMult: 2.4, trend: -0.010 },
@@ -97,11 +104,8 @@ var MockData = (function () {
     ]
   });
 
-  var solPrices = generatePriceSeries({
-    seed: 999,
-    startPrice: 105,
-    baseVol: 0.038,
-    days: DAYS,
+  var sol = generatePriceSeries({
+    seed: 999, startPrice: 105, baseVol: 0.038, days: DAYS,
     events: [
       { start: 10, end: 75, volMult: 1.8, trend: 0.007 },
       { start: 80, end: 120, volMult: 3.0, trend: -0.014 },
@@ -116,9 +120,9 @@ var MockData = (function () {
   });
 
   var data = {
-    BTC: { label: 'BTC / USDT', prices: btcPrices, dates: dates },
-    ETH: { label: 'ETH / USDT', prices: ethPrices, dates: dates },
-    SOL: { label: 'SOL / USDT', prices: solPrices, dates: dates }
+    BTC: { label: 'BTC / USDT', prices: btc.prices, highs: btc.highs, lows: btc.lows, dates: dates },
+    ETH: { label: 'ETH / USDT', prices: eth.prices, highs: eth.highs, lows: eth.lows, dates: dates },
+    SOL: { label: 'SOL / USDT', prices: sol.prices, highs: sol.highs, lows: sol.lows, dates: dates }
   };
 
   return {

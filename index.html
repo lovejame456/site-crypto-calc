@@ -61,6 +61,18 @@
         <aside class="glass p-5 space-y-6 animate-in animate-delay-2 flex flex-col">
 
           <div>
+            <div class="config-label mb-2">
+              <span>数据源</span>
+              <span class="val" id="mode-label" style="color:#3d4656">MOCK</span>
+            </div>
+            <div class="mode-toggle" id="mode-toggle">
+              <div class="toggle-indicator"></div>
+              <span class="toggle-option active" data-mode="MOCK">MOCK</span>
+              <span class="toggle-option" data-mode="LIVE">LIVE ⚡</span>
+            </div>
+          </div>
+
+          <div>
             <div class="config-label mb-3">
               <span>代币</span>
             </div>
@@ -125,8 +137,9 @@
 
           <div class="mt-auto pt-4 border-t border-white/[0.04]">
             <div class="font-mono text-[10px] text-[#2d3548] leading-relaxed">
-              <div>策略：价格上穿 MA + RSI 低于超卖线 → 开多</div>
-              <div class="mt-1">平仓：价格下穿 MA 或 RSI 高于超买线</div>
+              <div>开多：突破布林下轨 + RSI超卖 + MACD绿柱拉长</div>
+              <div class="mt-1">ATR止损：价格跌破 开仓价−ATR×2 强制平仓</div>
+              <div class="mt-1">平仓：触及布林上轨 或 RSI超买</div>
             </div>
           </div>
 
