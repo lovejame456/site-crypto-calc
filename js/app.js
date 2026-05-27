@@ -3,6 +3,7 @@
     dataMode: 'MOCK',
     token: 'BTC',
     interval: '1h',
+    strategy: 'triple',
     maPeriod: 20,
     rsiOverbought: 70,
     rsiOversold: 30,
@@ -115,7 +116,8 @@
         dataMode: state.dataMode,
         atrMultiplier: state.atrMultiplier,
         initialBalance: state.initialBalance,
-        interval: state.interval
+        interval: state.interval,
+        strategy: state.strategy
       }
     };
 
@@ -186,7 +188,7 @@
   function runSimulation() {
     try {
       var data = getCurrentData();
-      var result = Strategy.runBacktest({
+      var opts = {
         prices: data.prices,
         highs: data.highs,
         lows: data.lows,
@@ -196,7 +198,16 @@
         leverage: state.leverage,
         atrMultiplier: state.atrMultiplier,
         initialCapital: state.initialBalance
-      });
+      };
+
+      var result;
+      if (state.strategy === 'macross') {
+        result = Strategy.runBacktestMACross(opts);
+      } else if (state.strategy === 'rsirev') {
+        result = Strategy.runBacktestRSIRev(opts);
+      } else {
+        result = Strategy.runBacktest(opts);
+      }
 
       updateMetrics(result.metrics);
       ChartManager.updateMainChart(data.dates, data.prices, result.boll, result.equity);
@@ -262,6 +273,36 @@
       });
     });
     updateIntervalCoverage();
+  }
+
+  function initStrategySelector() {
+    var btns = $('strategy-group').querySelectorAll('.strategy-btn');
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        state.strategy = btn.dataset.strategy;
+        var descEl = $('strategy-desc');
+        descEl.textContent = t('strategy' + btn.dataset.strategy.charAt(0).toUpperCase() + btn.dataset.strategy.slice(1) + 'Desc') || '';
+        debouncedSim();
+      });
+    });
+  }
+
+  function initCustomToken() {
+    var input = $('custom-token');
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        var val = input.value.trim().toUpperCase();
+        if (!val) return;
+        var presetBtns = $('token-group').querySelectorAll('.token-btn');
+        presetBtns.forEach(function (b) { b.classList.remove('active'); });
+        state.token = val;
+        state.liveData = null;
+        if (state.dataMode === 'MOCK') switchToLIVE();
+        debouncedSim();
+      }
+    });
   }
 
   function updateSliderFill(slider) {
@@ -367,6 +408,8 @@
     btns.forEach(function (b) { b.classList.toggle('active', b.dataset.token === state.token); });
     var intBtns = $('interval-group').querySelectorAll('.interval-btn');
     intBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.interval === state.interval); });
+    var stratBtns = $('strategy-group').querySelectorAll('.strategy-btn');
+    stratBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.strategy === state.strategy); });
     $('ma-slider').value = state.maPeriod; $('ma-val').textContent = state.maPeriod; updateSliderFill($('ma-slider'));
     $('ob-slider').value = state.rsiOverbought; $('ob-val').textContent = state.rsiOverbought; updateSliderFill($('ob-slider'));
     $('os-slider').value = state.rsiOversold; $('os-val').textContent = state.rsiOversold; updateSliderFill($('os-slider'));
@@ -398,6 +441,7 @@
           if (c.initialBalance) state.initialBalance = c.initialBalance;
           if (c.atrMultiplier) state.atrMultiplier = c.atrMultiplier;
           if (c.interval) state.interval = c.interval;
+          if (c.strategy) state.strategy = c.strategy;
           syncUIFromState();
           updateIntervalCoverage();
           if (c.dataMode === 'LIVE') switchToLIVE();
@@ -421,6 +465,8 @@
     initModeToggle();
     initTokenSelector();
     initIntervalSelector();
+    initStrategySelector();
+    initCustomToken();
     initSliders();
     initLeverage();
     initBalance();

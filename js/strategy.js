@@ -186,8 +186,203 @@ var Strategy = (function () {
     };
   }
 
+  function runBacktestMACross(opts) {
+    var prices = opts.prices;
+    var highs = opts.highs || prices;
+    var lows = opts.lows || prices;
+    var shortPeriod = Math.max(5, Math.floor(opts.maPeriod / 2));
+    var longPeriod = opts.maPeriod;
+    var leverage = opts.leverage;
+    var atrMultiplier = opts.atrMultiplier || 2;
+    var initialCapital = opts.initialCapital || 10000;
+
+    var shortMA = calcMA(prices, shortPeriod);
+    var longMA = calcMA(prices, longPeriod);
+    var atr = calcATR(highs, lows, prices, 14);
+
+    var equity = [initialCapital];
+    var capital = initialCapital;
+    var inPosition = false;
+    var entryPrice = 0;
+    var stopPrice = 0;
+    var trades = [];
+    var peak = initialCapital;
+    var maxDrawdown = 0;
+    var atrStopCount = 0;
+    var warmup = longPeriod + 1;
+
+    for (var i = 1; i < prices.length; i++) {
+      if (shortMA[i] === null || longMA[i] === null || atr[i] === null || i < warmup) {
+        equity.push(capital);
+        continue;
+      }
+
+      var price = prices[i];
+      var low = lows[i];
+
+      if (!inPosition) {
+        var goldenCross = shortMA[i] > longMA[i] && shortMA[i - 1] <= longMA[i - 1];
+        if (goldenCross) {
+          inPosition = true;
+          entryPrice = price;
+          stopPrice = price - atrMultiplier * atr[i];
+        }
+      }
+
+      if (inPosition) {
+        if (low <= stopPrice) {
+          var pnlStop = ((stopPrice - entryPrice) / entryPrice) * leverage;
+          capital = capital * (1 + pnlStop);
+          trades.push({ entry: entryPrice, exit: stopPrice, return: pnlStop, reason: 'ATR_STOP' });
+          atrStopCount++;
+          inPosition = false;
+        } else {
+          var deathCross = shortMA[i] < longMA[i] && shortMA[i - 1] >= longMA[i - 1];
+          if (deathCross) {
+            var pnlExit = ((price - entryPrice) / entryPrice) * leverage;
+            capital = capital * (1 + pnlExit);
+            trades.push({ entry: entryPrice, exit: price, return: pnlExit, reason: 'DEATH_CROSS' });
+            inPosition = false;
+          } else {
+            var newStop = price - atrMultiplier * atr[i];
+            if (newStop > stopPrice) stopPrice = newStop;
+          }
+        }
+      }
+
+      if (inPosition && entryPrice > 0) {
+        equity.push(capital * (1 + ((price - entryPrice) / entryPrice) * leverage));
+      } else {
+        equity.push(capital);
+      }
+      if (equity[equity.length - 1] > peak) peak = equity[equity.length - 1];
+      var dd = (peak - equity[equity.length - 1]) / peak;
+      if (dd > maxDrawdown) maxDrawdown = dd;
+    }
+
+    var finalEquity = equity[equity.length - 1];
+    var totalReturn = (finalEquity - initialCapital) / initialCapital;
+    var winTrades = trades.filter(function (t) { return t.return > 0; });
+    var winRate = trades.length > 0 ? winTrades.length / trades.length : 0;
+    var dailyReturns = [];
+    for (var d = 1; d < equity.length; d++) dailyReturns.push((equity[d] - equity[d - 1]) / equity[d - 1]);
+    var meanReturn = dailyReturns.reduce(function (a, b) { return a + b; }, 0) / dailyReturns.length;
+    var variance = dailyReturns.reduce(function (s, r) { return s + Math.pow(r - meanReturn, 2); }, 0) / dailyReturns.length;
+    var stdReturn = Math.sqrt(variance);
+    var sharpe = stdReturn > 0 ? (meanReturn / stdReturn) * Math.sqrt(252) : 0;
+
+    var boll = calcBOLL(prices, longPeriod);
+    var rsi = calcRSI(prices, 14);
+    var macd = calcMACD(prices, 12, 26, 9);
+
+    return {
+      equity: equity, boll: boll, rsi: rsi, macd: macd, atr: atr, trades: trades,
+      metrics: {
+        totalReturn: totalReturn, winRate: winRate, maxDrawdown: maxDrawdown,
+        sharpe: sharpe, totalTrades: trades.length, finalEquity: finalEquity, atrStopCount: atrStopCount
+      }
+    };
+  }
+
+  function runBacktestRSIRev(opts) {
+    var prices = opts.prices;
+    var highs = opts.highs || prices;
+    var lows = opts.lows || prices;
+    var rsiOverbought = opts.rsiOverbought;
+    var rsiOversold = opts.rsiOversold;
+    var leverage = opts.leverage;
+    var atrMultiplier = opts.atrMultiplier || 2;
+    var initialCapital = opts.initialCapital || 10000;
+
+    var rsi = calcRSI(prices, 14);
+    var atr = calcATR(highs, lows, prices, 14);
+    var maFilter = calcMA(prices, opts.maPeriod || 20);
+
+    var equity = [initialCapital];
+    var capital = initialCapital;
+    var inPosition = false;
+    var entryPrice = 0;
+    var stopPrice = 0;
+    var trades = [];
+    var peak = initialCapital;
+    var maxDrawdown = 0;
+    var atrStopCount = 0;
+    var warmup = 15;
+
+    for (var i = 1; i < prices.length; i++) {
+      if (rsi[i] === null || atr[i] === null || i < warmup) {
+        equity.push(capital);
+        continue;
+      }
+
+      var price = prices[i];
+      var low = lows[i];
+      var rsiVal = rsi[i];
+      var prevRsi = rsi[i - 1];
+
+      if (!inPosition) {
+        var oversoldBounce = prevRsi < rsiOversold && rsiVal >= rsiOversold;
+        var deepOversold = rsiVal < rsiOversold * 0.7;
+        if (oversoldBounce || deepOversold) {
+          inPosition = true;
+          entryPrice = price;
+          stopPrice = price - atrMultiplier * atr[i];
+        }
+      }
+
+      if (inPosition) {
+        if (low <= stopPrice) {
+          var pnlStop = ((stopPrice - entryPrice) / entryPrice) * leverage;
+          capital = capital * (1 + pnlStop);
+          trades.push({ entry: entryPrice, exit: stopPrice, return: pnlStop, reason: 'ATR_STOP' });
+          atrStopCount++;
+          inPosition = false;
+        } else if (rsiVal > rsiOverbought) {
+          var pnlTarget = ((price - entryPrice) / entryPrice) * leverage;
+          capital = capital * (1 + pnlTarget);
+          trades.push({ entry: entryPrice, exit: price, return: pnlTarget, reason: 'OVERBOUGHT' });
+          inPosition = false;
+        } else {
+          var newStop = price - atrMultiplier * atr[i];
+          if (newStop > stopPrice) stopPrice = newStop;
+        }
+      }
+
+      if (inPosition && entryPrice > 0) {
+        equity.push(capital * (1 + ((price - entryPrice) / entryPrice) * leverage));
+      } else {
+        equity.push(capital);
+      }
+      if (equity[equity.length - 1] > peak) peak = equity[equity.length - 1];
+      var dd = (peak - equity[equity.length - 1]) / peak;
+      if (dd > maxDrawdown) maxDrawdown = dd;
+    }
+
+    var finalEquity = equity[equity.length - 1];
+    var totalReturn = (finalEquity - initialCapital) / initialCapital;
+    var winTrades = trades.filter(function (t) { return t.return > 0; });
+    var winRate = trades.length > 0 ? winTrades.length / trades.length : 0;
+    var dailyReturns = [];
+    for (var d = 1; d < equity.length; d++) dailyReturns.push((equity[d] - equity[d - 1]) / equity[d - 1]);
+    var meanReturn = dailyReturns.reduce(function (a, b) { return a + b; }, 0) / dailyReturns.length;
+    var variance = dailyReturns.reduce(function (s, r) { return s + Math.pow(r - meanReturn, 2); }, 0) / dailyReturns.length;
+    var stdReturn = Math.sqrt(variance);
+    var sharpe = stdReturn > 0 ? (meanReturn / stdReturn) * Math.sqrt(252) : 0;
+
+    var boll = calcBOLL(prices, opts.maPeriod || 20);
+
+    return {
+      equity: equity, boll: boll, rsi: rsi, macd: calcMACD(prices, 12, 26, 9), atr: atr, trades: trades,
+      metrics: {
+        totalReturn: totalReturn, winRate: winRate, maxDrawdown: maxDrawdown,
+        sharpe: sharpe, totalTrades: trades.length, finalEquity: finalEquity, atrStopCount: atrStopCount
+      }
+    };
+  }
+
   return {
     calcMA: calcMA, calcEMA: calcEMA, calcBOLL: calcBOLL,
-    calcRSI: calcRSI, calcMACD: calcMACD, calcATR: calcATR, runBacktest: runBacktest
+    calcRSI: calcRSI, calcMACD: calcMACD, calcATR: calcATR,
+    runBacktest: runBacktest, runBacktestMACross: runBacktestMACross, runBacktestRSIRev: runBacktestRSIRev
   };
 })();

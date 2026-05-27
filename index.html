@@ -99,31 +99,17 @@
 
           <div>
             <div class="config-label mb-3">
-              <span data-i18n="configToken">Token</span>
+              <span data-i18n="configStrategy">Strategy</span>
             </div>
-            <div class="flex gap-2" id="token-group">
-              <button class="token-btn active" data-token="BTC">BTC</button>
-              <button class="token-btn" data-token="ETH">ETH</button>
-              <button class="token-btn" data-token="SOL">SOL</button>
+            <div class="flex gap-2" id="strategy-group">
+              <button class="strategy-btn active" data-strategy="triple">TRIPLE</button>
+              <button class="strategy-btn" data-strategy="macross">MA CROSS</button>
+              <button class="strategy-btn" data-strategy="rsirev">RSI REV</button>
             </div>
+            <div class="strategy-desc" id="strategy-desc" data-i18n="strategyTripleDesc">BOLL + MACD + ATR triple factor</div>
           </div>
 
           <div>
-            <div class="config-label mb-3">
-              <span data-i18n="configInterval">Interval</span>
-              <span class="val" id="interval-coverage" style="color:#6b7a8d"></span>
-            </div>
-            <div class="flex gap-2" id="interval-group">
-              <button class="interval-btn" data-interval="5m">5m</button>
-              <button class="interval-btn" data-interval="15m">15m</button>
-              <button class="interval-btn active" data-interval="1h">1h</button>
-              <button class="interval-btn" data-interval="4h">4h</button>
-              <button class="interval-btn" data-interval="1d">1d</button>
-            </div>
-          </div>
-
-          <div>
-            <div class="config-label">
               <span data-i18n="configMaPeriod">MA Period</span>
               <span class="val" id="ma-val">20</span>
             </div>

@@ -119,10 +119,122 @@ var MockData = (function () {
     ]
   });
 
+  var bnb = generatePriceSeries({
+    seed: 256, startPrice: 305, baseVol: 0.026, days: DAYS,
+    events: [
+      { start: 15, end: 80, volMult: 1.5, trend: 0.004 },
+      { start: 85, end: 115, volMult: 2.3, trend: -0.009 },
+      { start: 130, end: 160, volMult: 3.6, trend: -0.016 },
+      { start: 155, end: 168, volMult: 5.2, trend: -0.038 },
+      { start: 168, end: 205, volMult: 2.0, trend: 0.007 },
+      { start: 210, end: 275, volMult: 1.6, trend: 0.005 },
+      { start: 280, end: 310, volMult: 2.8, trend: -0.008 },
+      { start: 320, end: 350, volMult: 1.4, trend: 0.003 },
+      { start: 352, end: 365, volMult: 2.1, trend: -0.005 }
+    ]
+  });
+
+  var xrp = generatePriceSeries({
+    seed: 512, startPrice: 0.52, baseVol: 0.032, days: DAYS,
+    events: [
+      { start: 10, end: 70, volMult: 1.6, trend: 0.005 },
+      { start: 75, end: 110, volMult: 2.5, trend: -0.011 },
+      { start: 120, end: 155, volMult: 4.0, trend: -0.020 },
+      { start: 150, end: 165, volMult: 6.0, trend: -0.045 },
+      { start: 165, end: 200, volMult: 2.5, trend: 0.009 },
+      { start: 205, end: 270, volMult: 1.8, trend: 0.006 },
+      { start: 275, end: 315, volMult: 3.2, trend: -0.010 },
+      { start: 320, end: 350, volMult: 1.5, trend: 0.003 },
+      { start: 350, end: 365, volMult: 2.3, trend: -0.006 }
+    ]
+  });
+
+  var ada = generatePriceSeries({
+    seed: 777, startPrice: 0.45, baseVol: 0.035, days: DAYS,
+    events: [
+      { start: 12, end: 75, volMult: 1.7, trend: 0.006 },
+      { start: 80, end: 115, volMult: 2.8, trend: -0.013 },
+      { start: 125, end: 158, volMult: 4.2, trend: -0.024 },
+      { start: 152, end: 168, volMult: 6.2, trend: -0.048 },
+      { start: 168, end: 208, volMult: 2.6, trend: 0.010 },
+      { start: 212, end: 278, volMult: 1.9, trend: 0.007 },
+      { start: 282, end: 318, volMult: 3.4, trend: -0.011 },
+      { start: 322, end: 352, volMult: 1.5, trend: 0.004 },
+      { start: 352, end: 365, volMult: 2.4, trend: -0.007 }
+    ]
+  });
+
+  var doge = generatePriceSeries({
+    seed: 1337, startPrice: 0.082, baseVol: 0.045, days: DAYS,
+    events: [
+      { start: 8, end: 65, volMult: 2.0, trend: 0.008 },
+      { start: 70, end: 105, volMult: 3.5, trend: -0.018 },
+      { start: 110, end: 150, volMult: 5.5, trend: -0.030 },
+      { start: 145, end: 165, volMult: 8.0, trend: -0.060 },
+      { start: 165, end: 210, volMult: 3.0, trend: 0.012 },
+      { start: 215, end: 280, volMult: 2.2, trend: 0.009 },
+      { start: 285, end: 325, volMult: 4.0, trend: -0.015 },
+      { start: 328, end: 355, volMult: 1.8, trend: 0.005 },
+      { start: 355, end: 365, volMult: 3.0, trend: -0.010 }
+    ]
+  });
+
+  var avax = generatePriceSeries({
+    seed: 2048, startPrice: 35.5, baseVol: 0.040, days: DAYS,
+    events: [
+      { start: 10, end: 72, volMult: 1.8, trend: 0.006 },
+      { start: 78, end: 112, volMult: 3.0, trend: -0.014 },
+      { start: 118, end: 155, volMult: 4.8, trend: -0.025 },
+      { start: 148, end: 166, volMult: 7.0, trend: -0.055 },
+      { start: 166, end: 205, volMult: 2.8, trend: 0.011 },
+      { start: 210, end: 278, volMult: 2.0, trend: 0.008 },
+      { start: 282, end: 320, volMult: 3.8, trend: -0.013 },
+      { start: 325, end: 355, volMult: 1.6, trend: 0.004 },
+      { start: 355, end: 365, volMult: 2.6, trend: -0.008 }
+    ]
+  });
+
+  var dot = generatePriceSeries({
+    seed: 3141, startPrice: 7.2, baseVol: 0.034, days: DAYS,
+    events: [
+      { start: 14, end: 78, volMult: 1.7, trend: 0.005 },
+      { start: 82, end: 118, volMult: 2.8, trend: -0.012 },
+      { start: 122, end: 158, volMult: 4.4, trend: -0.022 },
+      { start: 152, end: 168, volMult: 6.5, trend: -0.046 },
+      { start: 168, end: 208, volMult: 2.5, trend: 0.010 },
+      { start: 212, end: 278, volMult: 1.8, trend: 0.006 },
+      { start: 282, end: 318, volMult: 3.3, trend: -0.010 },
+      { start: 322, end: 352, volMult: 1.5, trend: 0.003 },
+      { start: 352, end: 365, volMult: 2.2, trend: -0.006 }
+    ]
+  });
+
+  var link = generatePriceSeries({
+    seed: 4096, startPrice: 14.5, baseVol: 0.033, days: DAYS,
+    events: [
+      { start: 11, end: 76, volMult: 1.6, trend: 0.005 },
+      { start: 80, end: 116, volMult: 2.6, trend: -0.011 },
+      { start: 120, end: 156, volMult: 4.0, trend: -0.020 },
+      { start: 150, end: 167, volMult: 6.0, trend: -0.042 },
+      { start: 167, end: 206, volMult: 2.4, trend: 0.009 },
+      { start: 210, end: 276, volMult: 1.7, trend: 0.006 },
+      { start: 280, end: 316, volMult: 3.0, trend: -0.009 },
+      { start: 320, end: 352, volMult: 1.4, trend: 0.003 },
+      { start: 352, end: 365, volMult: 2.0, trend: -0.005 }
+    ]
+  });
+
   var data = {
     BTC: { label: 'BTC / USDT', prices: btc.prices, highs: btc.highs, lows: btc.lows, dates: dates },
     ETH: { label: 'ETH / USDT', prices: eth.prices, highs: eth.highs, lows: eth.lows, dates: dates },
-    SOL: { label: 'SOL / USDT', prices: sol.prices, highs: sol.highs, lows: sol.lows, dates: dates }
+    BNB: { label: 'BNB / USDT', prices: bnb.prices, highs: bnb.highs, lows: bnb.lows, dates: dates },
+    SOL: { label: 'SOL / USDT', prices: sol.prices, highs: sol.highs, lows: sol.lows, dates: dates },
+    XRP: { label: 'XRP / USDT', prices: xrp.prices, highs: xrp.highs, lows: xrp.lows, dates: dates },
+    ADA: { label: 'ADA / USDT', prices: ada.prices, highs: ada.highs, lows: ada.lows, dates: dates },
+    DOGE: { label: 'DOGE / USDT', prices: doge.prices, highs: doge.highs, lows: doge.lows, dates: dates },
+    AVAX: { label: 'AVAX / USDT', prices: avax.prices, highs: avax.highs, lows: avax.lows, dates: dates },
+    DOT: { label: 'DOT / USDT', prices: dot.prices, highs: dot.highs, lows: dot.lows, dates: dates },
+    LINK: { label: 'LINK / USDT', prices: link.prices, highs: link.highs, lows: link.lows, dates: dates }
   };
 
   return {
