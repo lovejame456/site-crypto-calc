@@ -56,8 +56,8 @@
     toggle.classList.add('live');
     toggle.querySelector('[data-mode="MOCK"]').classList.remove('active');
     toggle.querySelector('[data-mode="LIVE"]').classList.add('active');
-    $('mode-label').textContent = 'LIVE ⚡';
-    $('mode-label').style.color = '#228b22';
+      $('mode-label').textContent = 'LIVE ⚡';
+      $('mode-label').style.color = '#00e5a0';
 
     setModeLoading(true);
     fetchBinanceData(state.token)
@@ -296,7 +296,7 @@
       toggle.querySelector('[data-mode="MOCK"]').classList.remove('active');
       toggle.querySelector('[data-mode="LIVE"]').classList.add('active');
       $('mode-label').textContent = 'LIVE ⚡';
-      $('mode-label').style.color = '#228b22';
+    $('mode-label').style.color = '#00e5a0';
     }
   }
 

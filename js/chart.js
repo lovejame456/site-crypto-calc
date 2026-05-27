@@ -4,8 +4,8 @@ var ChartManager = (function () {
 
   var darkTheme = {
     backgroundColor: 'transparent',
-    textStyle: { color: '#6a7282', fontFamily: 'JetBrains Mono, monospace' },
-    title: { textStyle: { color: '#c0c8d8', fontSize: 13, fontWeight: 600 } },
+    textStyle: { color: '#8892a6', fontFamily: 'JetBrains Mono, monospace' },
+    title: { textStyle: { color: '#c8d2e4', fontSize: 13, fontWeight: 600 } },
     grid: {
       top: 40, right: 16, bottom: 24, left: 60,
       borderColor: 'rgba(255,255,255,0.04)'
@@ -14,23 +14,23 @@ var ChartManager = (function () {
       type: 'category',
       axisLine: { lineStyle: { color: 'rgba(255,255,255,0.06)' } },
       axisTick: { show: false },
-      axisLabel: { color: '#4a5568', fontSize: 10, interval: 59 },
+      axisLabel: { color: '#7d8a9e', fontSize: 10, interval: 59 },
       splitLine: { show: false }
     },
     yAxis: {
       type: 'value',
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { color: '#4a5568', fontSize: 10 },
+      axisLabel: { color: '#7d8a9e', fontSize: 10 },
       splitLine: { lineStyle: { color: 'rgba(255,255,255,0.03)' } }
     },
     tooltip: {
       trigger: 'axis',
-      backgroundColor: 'rgba(10,14,23,0.95)',
-      borderColor: 'rgba(18,181,197,0.15)',
+      backgroundColor: 'rgba(8,10,18,0.95)',
+      borderColor: 'rgba(0,212,255,0.15)',
       borderWidth: 1,
-      textStyle: { color: '#c0c8d8', fontSize: 11, fontFamily: 'JetBrains Mono, monospace' },
-      axisPointer: { lineStyle: { color: 'rgba(18,181,197,0.10)' } }
+      textStyle: { color: '#c8d2e4', fontSize: 11, fontFamily: 'JetBrains Mono, monospace' },
+      axisPointer: { lineStyle: { color: 'rgba(0,212,255,0.12)' } }
     },
     dataZoom: [{
       type: 'inside',
@@ -67,9 +67,9 @@ var ChartManager = (function () {
     option.grid.top = 40;
     option.grid.bottom = 24;
     option.legend = {
-      data: ['价格', 'BOLL上轨', 'BOLL下轨', 'BOLL中轨', '策略净值'],
+      data: ['Price', 'BOLL Upper', 'BOLL Lower', 'BOLL Mid', 'Equity'],
       top: 6,
-      textStyle: { color: '#6a7282', fontSize: 11 },
+      textStyle: { color: '#8892a6', fontSize: 11 },
       itemWidth: 14,
       itemHeight: 2
     };
@@ -77,56 +77,56 @@ var ChartManager = (function () {
       {
         type: 'value', scale: true,
         axisLine: { show: false }, axisTick: { show: false },
-        axisLabel: { color: '#6a7282', fontSize: 10, formatter: function (v) { return '$' + v.toLocaleString(); } },
+        axisLabel: { color: '#8892a6', fontSize: 10, formatter: function (v) { return '$' + v.toLocaleString(); } },
         splitLine: { lineStyle: { color: 'rgba(255,255,255,0.03)' } }
       },
       {
         type: 'value', scale: true,
         axisLine: { show: false }, axisTick: { show: false },
-        axisLabel: { color: '#b0a67d', fontSize: 10, formatter: function (v) { return '$' + v.toLocaleString(undefined, { maximumFractionDigits: 0 }); } },
+        axisLabel: { color: '#e8a838', fontSize: 10, formatter: function (v) { return '$' + v.toLocaleString(undefined, { maximumFractionDigits: 0 }); } },
         splitLine: { show: false }
       }
     ];
     option.series = [
       {
-        name: '价格', type: 'line', data: priceData, symbol: 'none',
-        lineStyle: { color: '#12b5c5', width: 1.5 },
+        name: 'Price', type: 'line', data: priceData, symbol: 'none',
+        lineStyle: { color: '#00d4ff', width: 1.5 },
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(18,181,197,0.08)' },
-            { offset: 1, color: 'rgba(18,181,197,0)' }
+            { offset: 0, color: 'rgba(0,212,255,0.10)' },
+            { offset: 1, color: 'rgba(0,212,255,0)' }
           ])
         }
       },
       {
-        name: 'BOLL上轨', type: 'line', data: upperData, symbol: 'none',
-        lineStyle: { color: 'rgba(46,125,50,0.40)', width: 1, type: 'dashed',
-          shadowColor: 'rgba(46,125,50,0.25)', shadowBlur: 4 },
+        name: 'BOLL Upper', type: 'line', data: upperData, symbol: 'none',
+        lineStyle: { color: 'rgba(0,229,160,0.40)', width: 1, type: 'dashed',
+          shadowColor: 'rgba(0,229,160,0.25)', shadowBlur: 4 },
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(46,125,50,0.02)' },
-            { offset: 0.5, color: 'rgba(46,125,50,0)' },
-            { offset: 1, color: 'rgba(46,125,50,0.02)' }
+            { offset: 0, color: 'rgba(0,229,160,0.02)' },
+            { offset: 0.5, color: 'rgba(0,229,160,0)' },
+            { offset: 1, color: 'rgba(0,229,160,0.02)' }
           ])
         }
       },
       {
-        name: 'BOLL下轨', type: 'line', data: lowerData, symbol: 'none',
-        lineStyle: { color: 'rgba(46,125,50,0.40)', width: 1, type: 'dashed',
-          shadowColor: 'rgba(46,125,50,0.25)', shadowBlur: 4 }
+        name: 'BOLL Lower', type: 'line', data: lowerData, symbol: 'none',
+        lineStyle: { color: 'rgba(0,229,160,0.40)', width: 1, type: 'dashed',
+          shadowColor: 'rgba(0,229,160,0.25)', shadowBlur: 4 }
       },
       {
-        name: 'BOLL中轨', type: 'line', data: midData, symbol: 'none',
-        lineStyle: { color: 'rgba(169,68,66,0.50)', width: 1, type: 'dotted' }
+        name: 'BOLL Mid', type: 'line', data: midData, symbol: 'none',
+        lineStyle: { color: 'rgba(255,71,87,0.40)', width: 1, type: 'dotted' }
       },
       {
-        name: '策略净值', type: 'line', yAxisIndex: 1, symbol: 'none',
+        name: 'Equity', type: 'line', yAxisIndex: 1, symbol: 'none',
         data: equity.map(function (v, i) { return [dates[i], v]; }),
-        lineStyle: { color: '#b0a67d', width: 1.8 },
+        lineStyle: { color: '#e8a838', width: 1.8 },
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(176,166,125,0.06)' },
-            { offset: 1, color: 'rgba(176,166,125,0)' }
+            { offset: 0, color: 'rgba(232,168,56,0.08)' },
+            { offset: 1, color: 'rgba(232,168,56,0)' }
           ])
         }
       }
@@ -151,13 +151,13 @@ var ChartManager = (function () {
       max: 100,
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { color: '#4a5568', fontSize: 10 },
+      axisLabel: { color: '#7d8a9e', fontSize: 10 },
       splitLine: { lineStyle: { color: 'rgba(255,255,255,0.03)' } }
     };
     option.legend = {
-      data: ['RSI', '超买', '超卖'],
+      data: ['RSI', 'Overbought', 'Oversold'],
       top: 4,
-      textStyle: { color: '#6a7282', fontSize: 10 },
+      textStyle: { color: '#8892a6', fontSize: 10 },
       itemWidth: 14,
       itemHeight: 2
     };
@@ -167,27 +167,27 @@ var ChartManager = (function () {
         type: 'line',
         data: rsiData,
         symbol: 'none',
-        lineStyle: { color: '#b0a67d', width: 1.2 },
+        lineStyle: { color: '#c9b896', width: 1.2 },
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(176,166,125,0.06)' },
-            { offset: 1, color: 'rgba(176,166,125,0)' }
+            { offset: 0, color: 'rgba(201,184,150,0.08)' },
+            { offset: 1, color: 'rgba(201,184,150,0)' }
           ])
         }
       },
       {
-        name: '超买',
+        name: 'Overbought',
         type: 'line',
         data: obLine,
         symbol: 'none',
-        lineStyle: { color: 'rgba(129,48,48,0.50)', width: 1, type: 'dashed' }
+        lineStyle: { color: 'rgba(255,71,87,0.45)', width: 1, type: 'dashed' }
       },
       {
-        name: '超卖',
+        name: 'Oversold',
         type: 'line',
         data: osLine,
         symbol: 'none',
-        lineStyle: { color: 'rgba(129,48,48,0.50)', width: 1, type: 'dashed' }
+        lineStyle: { color: 'rgba(255,71,87,0.45)', width: 1, type: 'dashed' }
       }
     ];
 
