@@ -40,6 +40,7 @@
       <div class="flex items-center gap-4">
         <span class="sim-indicator font-mono text-[9px] tracking-wider text-[#00e5a0] opacity-0 transition-opacity duration-300" id="sim-flash">● RECLEAR</span>
         <button id="lang-toggle" class="lang-toggle-btn">中文</button>
+        <button class="help-btn" id="btn-help" title="How to use">?</button>
         <div class="font-mono text-xs text-[#7d8a9e]" id="clock"></div>
       </div>
     </header>
@@ -258,6 +259,60 @@
   <script src="js/strategy.js?v=3"></script>
   <script src="js/chart.js?v=3"></script>
   <script src="js/i18n.js?v=3"></script>
+  <script src="js/tutorial.js?v=3"></script>
   <script src="js/app.js?v=3"></script>
+
+  <div class="tutorial-overlay" id="tutorial-overlay">
+    <div class="tutorial-modal">
+      <div class="tutorial-header">
+        <div class="tutorial-title" data-i18n="tutorialTitle">How to Use Quant Terminal</div>
+        <button class="tutorial-close" id="tutorial-close">✕</button>
+      </div>
+
+      <div class="tutorial-body" id="tutorial-body">
+        <div class="tutorial-step active" data-step="0">
+          <div class="step-icon">📊</div>
+          <div class="step-heading" data-i18n="t_s0_title">What is this tool?</div>
+          <div class="step-text" data-i18n="t_s0_body">A crypto strategy backtester. It replays historical price data and simulates trades using the Bollinger Bands + MACD + ATR triple-factor strategy. You adjust parameters, see how the strategy would have performed — without risking real money.</div>
+        </div>
+        <div class="tutorial-step" data-step="1">
+          <div class="step-icon">🪙</div>
+          <div class="step-heading" data-i18n="t_s1_title">Step 1: Pick a coin</div>
+          <div class="step-text" data-i18n="t_s1_body">Click BTC / ETH / SOL to switch the coin. In MOCK mode it uses simulated 365-day data. Click LIVE ⚡ to use real Binance 15-minute candles (500 bars).</div>
+        </div>
+        <div class="tutorial-step" data-step="2">
+          <div class="step-icon">🎛</div>
+          <div class="step-heading" data-i18n="t_s2_title">Step 2: Adjust parameters</div>
+          <div class="step-text" data-i18n="t_s2_body">Drag the sliders or type values. Each parameter controls a different part of the strategy: MA Period = Bollinger Band width, RSI lines = when the market is "oversold" or "overbought", ATR Multiplier = how wide the stop-loss is, Leverage = amplify gains and losses, Initial Balance = your starting capital in USD.</div>
+        </div>
+        <div class="tutorial-step" data-step="3">
+          <div class="step-icon">▶️</div>
+          <div class="step-heading" data-i18n="t_s3_title">Step 3: Run the backtest</div>
+          <div class="step-text" data-i18n="t_s3_body">Click the blue ▶ RUN BACKTEST button (or just drag a slider — it auto-reruns). The charts and metrics update instantly. The metric cards will flash blue briefly to confirm recalculation.</div>
+        </div>
+        <div class="tutorial-step" data-step="4">
+          <div class="step-icon">📈</div>
+          <div class="step-heading" data-i18n="t_s4_title">Step 4: Read the results</div>
+          <div class="step-text" data-i18n="t_s4_body">Total Return — overall profit/loss %. Win Rate — % of profitable trades. Max Drawdown — worst peak-to-trough drop (risk gauge). Sharpe Ratio — risk-adjusted return (above 1 = good). The main chart shows the gold equity curve — if it goes up, the strategy makes money.</div>
+        </div>
+        <div class="tutorial-step" data-step="5">
+          <div class="step-icon">🧠</div>
+          <div class="step-heading" data-i18n="t_s5_title">Strategy Logic</div>
+          <div class="step-text" data-i18n="t_s5_body">BUY when: price dips below Bollinger lower band (cheap) AND RSI signals oversold (panic) AND MACD histogram starts growing (momentum reversing). SELL when: price hits Bollinger upper band (expensive) OR RSI goes overbought OR ATR stop-loss triggered (price dropped too far from entry).</div>
+        </div>
+        <div class="tutorial-step" data-step="6">
+          <div class="step-icon">💡</div>
+          <div class="step-heading" data-i18n="t_s6_title">Pro Tips</div>
+          <div class="step-text" data-i18n="t_s6_body">Try leverage 10x to see amplified results (and amplified risk). Try different coins — each has different volatility patterns. Click LIVE ⚡ to validate with real market data. Click 🔒 SAVE to store your config in the cloud for next visit. This is a simulation tool — past results do not guarantee future performance.</div>
+        </div>
+      </div>
+
+      <div class="tutorial-footer">
+        <button class="tutorial-nav-btn" id="tutorial-prev">← <span data-i18n="tutorialPrev">Previous</span></button>
+        <div class="tutorial-dots" id="tutorial-dots"></div>
+        <button class="tutorial-nav-btn" id="tutorial-next"><span data-i18n="tutorialNext">Next</span> →</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

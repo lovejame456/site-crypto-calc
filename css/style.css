@@ -600,3 +600,186 @@ input[type="range"].range-gold::-moz-range-thumb {
   transform: scale(0.97);
   background: rgba(0,212,255,0.18);
 }
+
+.help-btn {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: #7d8a9e;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-btn:hover {
+  border-color: rgba(0,212,255,0.35);
+  color: #00d4ff;
+  box-shadow: 0 0 8px rgba(0,212,255,0.12);
+}
+
+.tutorial-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4,5,10,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tutorial-overlay.open {
+  display: flex;
+}
+
+.tutorial-modal {
+  background: #0d0f18;
+  border: 1px solid rgba(0,212,255,0.12);
+  border-radius: 16px;
+  max-width: 580px;
+  width: 100%;
+  box-shadow: 0 0 60px rgba(0,212,255,0.08), 0 24px 48px rgba(0,0,0,0.5);
+  animation: tutorialFadeIn 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+
+@keyframes tutorialFadeIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.tutorial-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 0;
+}
+
+.tutorial-title {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e4eaf4;
+  letter-spacing: -0.01em;
+}
+
+.tutorial-close {
+  background: none;
+  border: none;
+  color: #4a5568;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.tutorial-close:hover {
+  color: #e4eaf4;
+  background: rgba(255,255,255,0.06);
+}
+
+.tutorial-body {
+  padding: 20px 24px;
+  min-height: 200px;
+}
+
+.tutorial-step {
+  display: none;
+}
+
+.tutorial-step.active {
+  display: block;
+  animation: tutorialStepIn 0.25s ease;
+}
+
+@keyframes tutorialStepIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.step-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.step-heading {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #c8d2e4;
+  margin-bottom: 10px;
+}
+
+.step-text {
+  font-size: 0.82rem;
+  color: #8f99a8;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.tutorial-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px 20px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.tutorial-nav-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: #7d8a9e;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tutorial-nav-btn:hover {
+  border-color: rgba(0,212,255,0.3);
+  color: #c8d2e4;
+}
+
+.tutorial-nav-btn.primary {
+  border-color: rgba(0,212,255,0.35);
+  background: rgba(0,212,255,0.08);
+  color: #00d4ff;
+}
+
+.tutorial-nav-btn.primary:hover {
+  background: rgba(0,212,255,0.15);
+  box-shadow: 0 0 10px rgba(0,212,255,0.10);
+}
+
+.tutorial-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.tutorial-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.25s;
+}
+
+.tutorial-dot.active {
+  background: #00d4ff;
+  box-shadow: 0 0 6px rgba(0,212,255,0.4);
+}

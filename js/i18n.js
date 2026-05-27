@@ -40,7 +40,33 @@
       alertBinanceError: 'Binance API error: ',
       alertBinanceFallback: '\nAuto-switched to MOCK mode',
 
-      langLabel: 'EN'
+      langLabel: 'EN',
+
+      tutorialTitle: 'How to Use Quant Terminal',
+      tutorialPrev: 'Prev',
+      tutorialNext: 'Next',
+      tutorialDone: "Got it! Let's go",
+
+      t_s0_title: 'What is this tool?',
+      t_s0_body: 'A crypto strategy backtester. It replays historical price data and simulates trades using the Bollinger Bands + MACD + ATR triple-factor strategy. You adjust parameters, see how the strategy would have performed — without risking real money.',
+
+      t_s1_title: 'Step 1: Pick a coin',
+      t_s1_body: 'Click BTC / ETH / SOL to switch the coin. In MOCK mode it uses simulated 365-day data. Click LIVE ⚡ to use real Binance 15-minute candles (500 bars).',
+
+      t_s2_title: 'Step 2: Adjust parameters',
+      t_s2_body: 'Drag the sliders or type values. Each parameter controls a different part of the strategy:\n\n• MA Period → Bollinger Band width (smaller = more signals)\n• RSI Overbought/Oversold → market "extreme" thresholds\n• ATR Multiplier → stop-loss distance (bigger = wider stop)\n• Leverage → amplify gains AND losses\n• Initial Balance → starting capital in USD',
+
+      t_s3_title: 'Step 3: Run the backtest',
+      t_s3_body: 'Click the blue ▶ RUN BACKTEST button — or just drag any slider, the simulation auto-reruns. The four metric cards at the top will flash blue briefly to confirm the recalculation finished.',
+
+      t_s4_title: 'Step 4: Read the results',
+      t_s4_body: '• Total Return — overall profit/loss %\n• Win Rate — % of trades that made money\n• Max Drawdown — worst peak-to-trough drop (risk gauge)\n• Sharpe Ratio — risk-adjusted return (above 1 = good)\n\nOn the main chart, the GOLD line is your equity curve. If it goes up, the strategy makes money.',
+
+      t_s5_title: 'Strategy Logic',
+      t_s5_body: 'BUY when ALL three are true:\n  ① Price below Bollinger lower band (cheap)\n  ② RSI signals oversold (market panic)\n  ③ MACD histogram growing (momentum reversing)\n\nSELL when ANY triggers:\n  • Price hits Bollinger upper band\n  • RSI goes overbought\n  • ATR stop-loss hit (price dropped too far)',
+
+      t_s6_title: 'Pro Tips',
+      t_s6_body: '• Try leverage 10x to see amplified results (and amplified risk)\n• Different coins have different volatility patterns\n• Click LIVE ⚡ to validate with real market data\n• Click 🔒 SAVE to store your config in the cloud\n• Click the ? button in the header to reopen this tutorial\n\n⚠️ This is a simulation tool — past results do not guarantee future performance.'
     },
     zh: {
       pageTitle: '量化终端 — 布林+MACD+ATR 三因子回测系统',
@@ -82,7 +108,33 @@
       alertBinanceError: '币安接口异常：',
       alertBinanceFallback: '\n自动切回 MOCK 模式',
 
-      langLabel: '中文'
+      langLabel: '中文',
+
+      tutorialTitle: '如何使用量化终端',
+      tutorialPrev: '上一步',
+      tutorialNext: '下一步',
+      tutorialDone: '明白了，开始使用',
+
+      t_s0_title: '这个工具是做什么的？',
+      t_s0_body: '一个加密货币策略回测器。它会用历史价格数据模拟交易，使用布林带 + MACD + ATR 三因子策略。你调整参数，看策略的表现——不用冒真金白银的风险。',
+
+      t_s1_title: '第一步：选择币种',
+      t_s1_body: '点击 BTC / ETH / SOL 切换币种。MOCK 模式使用模拟的 365 天数据。点击 LIVE ⚡ 使用币安真实 15 分钟 K 线（500 根）。',
+
+      t_s2_title: '第二步：调节参数',
+      t_s2_body: '拖动滑块或直接输入数值。每个参数控制策略的不同部分：\n\n• MA 周期 → 布林带宽度（越小信号越多）\n• RSI 超买/超卖线 → 市场"极端"的阈值\n• ATR 倍数 → 止损距离（越大止损越宽）\n• 杠杆倍数 → 放大收益和亏损\n• 初始本金 → 起始资金（美元）',
+
+      t_s3_title: '第三步：运行回测',
+      t_s3_body: '点击蓝色的 ▶ RUN BACKTEST 按钮——或者直接拖动任意滑块，系统会自动重新计算。顶部四张指标卡会短暂闪烁蓝色光晕，确认重算完成。',
+
+      t_s4_title: '第四步：查看结果',
+      t_s4_body: '• 累计收益率 — 总盈亏百分比\n• 开仓胜率 — 盈利交易占比\n• 最大回撤 — 最严重的峰值到谷底跌幅（风险指标）\n• 夏普比率 — 风险调整后收益（大于 1 算及格）\n\n主图上的金色曲线就是你的净值曲线——上升代表赚钱。',
+
+      t_s5_title: '策略逻辑',
+      t_s5_body: '买入条件（三个同时满足）：\n  ① 价格跌破布林下轨（便宜了）\n  ② RSI 显示超卖（市场恐慌）\n  ③ MACD 绿柱拉长（动量开始反转）\n\n卖出条件（任一触发）：\n  • 价格触及布林上轨\n  • RSI 超买\n  • ATR 止损触发（价格跌破止损线）',
+
+      t_s6_title: '进阶技巧',
+      t_s6_body: '• 试试 10x 杠杆看放大效果（风险也放大了）\n• 不同币种波动规律不同，多试试\n• 点击 LIVE ⚡ 用真实行情验证策略\n• 点击 🔒 SAVE 把参数存到云端\n• 点击右上角 ? 按钮随时重看本教程\n\n⚠️ 这是模拟工具——历史表现不代表未来收益。'
     }
   };
 
