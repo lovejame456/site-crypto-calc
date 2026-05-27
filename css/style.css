@@ -58,14 +58,78 @@ body::after {
 
 #app-root { position: relative; z-index: 1; }
 
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .logo-icon {
   flex-shrink: 0;
   transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), filter 0.3s;
 }
 
 .logo-icon:hover {
-  transform: rotate(30deg) scale(1.08);
-  filter: drop-shadow(0 0 8px rgba(0,212,255,0.35));
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 10px rgba(0,212,255,0.35));
+}
+
+.header-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.brand-name {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #e4eaf4;
+}
+
+.brand-dot {
+  font-size: 18px;
+  color: #00d4ff;
+  font-weight: 300;
+}
+
+.brand-sub {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  color: #8f99a8;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.sim-indicator {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: #00e5a0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.header-clock {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #6b7a8d;
+  letter-spacing: 0.02em;
 }
 
 .glass {

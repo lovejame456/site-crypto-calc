@@ -12,7 +12,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://site-crypto-calc.vercel.app" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='8' fill='%230c0e18'/><path d='M20 5L34 13V29L20 37L6 29V13Z' stroke='%2300d4ff' stroke-width='2' fill='none'/><path d='M14 20H26' stroke='%2300d4ff' stroke-width='2.5' stroke-linecap='round'/><path d='M20 14V26' stroke='%2300d4ff' stroke-width='2.5' stroke-linecap='round'/><circle cx='20' cy='20' r='3' fill='%2300d4ff' opacity='0.6'/></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='10' fill='%230c0e18'/><rect x='10' y='26' width='6' height='12' rx='1' fill='%2300d4ff'/><rect x='21' y='18' width='6' height='20' rx='1' fill='%2300d4ff' opacity='0.7'/><rect x='32' y='10' width='6' height='28' rx='1' fill='%2300d4ff' opacity='0.5'/></svg>" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -31,26 +31,25 @@
 <body>
   <div id="app-root" class="min-h-screen flex flex-col">
 
-    <header class="border-b border-white/[0.04] px-6 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <svg class="logo-icon" width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="40" height="40" rx="8" fill="#0c0e18"/>
-          <path d="M20 5L34 13V29L20 37L6 29V13Z" stroke="#00d4ff" stroke-width="2" fill="none"/>
-          <path d="M20 12L28 16.5V25.5L20 30L12 25.5V16.5Z" fill="#00d4ff" opacity="0.1"/>
-          <path d="M14 20H26" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M20 14V26" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="20" cy="20" r="3" fill="#00d4ff" opacity="0.6"/>
+    <header class="site-header">
+      <div class="header-left">
+        <svg class="logo-icon" width="34" height="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="48" rx="10" fill="#0c0e18"/>
+          <rect x="10" y="26" width="6" height="12" rx="1.5" fill="#00d4ff"/>
+          <rect x="21" y="18" width="6" height="20" rx="1.5" fill="#00d4ff" opacity="0.7"/>
+          <rect x="32" y="10" width="6" height="28" rx="1.5" fill="#00d4ff" opacity="0.45"/>
         </svg>
-        <div class="flex flex-col leading-none">
-          <span class="font-mono text-[11px] font-bold tracking-[0.12em] text-[#00d4ff]">QUANT</span>
-          <span class="font-mono text-[8px] tracking-[0.18em] text-[#4a5568] mt-0.5">TERMINAL</span>
+        <div class="header-brand">
+          <span class="brand-name">QUANT</span>
+          <span class="brand-dot">·</span>
+          <span class="brand-sub">TERMINAL</span>
         </div>
       </div>
-      <div class="flex items-center gap-4">
-        <span class="sim-indicator font-mono text-[9px] tracking-wider text-[#00e5a0] opacity-0 transition-opacity duration-300" id="sim-flash">● RECLEAR</span>
+      <div class="header-right">
+        <span class="sim-indicator" id="sim-flash">● RECALC</span>
         <button id="lang-toggle" class="lang-toggle-btn">中文</button>
         <button class="help-btn" id="btn-help" title="How to use">?</button>
-        <div class="font-mono text-xs text-[#7d8a9e]" id="clock"></div>
+        <div class="header-clock" id="clock"></div>
       </div>
     </header>
 
