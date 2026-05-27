@@ -99,6 +99,43 @@
 
           <div>
             <div class="config-label mb-3">
+              <span data-i18n="configToken">Token</span>
+            </div>
+            <div class="coin-grid" id="token-group">
+              <button class="token-btn active" data-token="BTC">BTC</button>
+              <button class="token-btn" data-token="ETH">ETH</button>
+              <button class="token-btn" data-token="BNB">BNB</button>
+              <button class="token-btn" data-token="SOL">SOL</button>
+              <button class="token-btn" data-token="XRP">XRP</button>
+              <button class="token-btn" data-token="ADA">ADA</button>
+              <button class="token-btn" data-token="DOGE">DOGE</button>
+              <button class="token-btn" data-token="AVAX">AVAX</button>
+              <button class="token-btn" data-token="DOT">DOT</button>
+              <button class="token-btn" data-token="LINK">LINK</button>
+            </div>
+            <div class="custom-token-row">
+              <span class="custom-token-label" data-i18n="configCustomToken">Custom</span>
+              <input type="text" class="custom-token-input" id="custom-token" placeholder="e.g. MATIC" maxlength="10" />
+              <span class="custom-token-suffix">USDT</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="config-label mb-3">
+              <span data-i18n="configInterval">Interval</span>
+              <span class="val" id="interval-coverage" style="color:#6b7a8d"></span>
+            </div>
+            <div class="flex gap-2" id="interval-group">
+              <button class="interval-btn" data-interval="5m">5m</button>
+              <button class="interval-btn" data-interval="15m">15m</button>
+              <button class="interval-btn active" data-interval="1h">1h</button>
+              <button class="interval-btn" data-interval="4h">4h</button>
+              <button class="interval-btn" data-interval="1d">1d</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="config-label mb-3">
               <span data-i18n="configStrategy">Strategy</span>
             </div>
             <div class="flex gap-2" id="strategy-group">
@@ -110,6 +147,7 @@
           </div>
 
           <div>
+            <div class="config-label">
               <span data-i18n="configMaPeriod">MA Period</span>
               <span class="val" id="ma-val">20</span>
             </div>
