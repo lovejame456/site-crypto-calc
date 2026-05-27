@@ -169,6 +169,13 @@
     elSharpe.className = 'metric-value ' + (metrics.sharpe >= 1 ? 'positive' : metrics.sharpe >= 0 ? 'neutral' : 'negative');
   }
 
+  function flashSimIndicator() {
+    var el = $('sim-flash');
+    if (!el) return;
+    el.style.opacity = '1';
+    setTimeout(function () { el.style.opacity = '0'; }, 400);
+  }
+
   function runSimulation() {
     var data = getCurrentData();
     var result = Strategy.runBacktest({
@@ -186,6 +193,7 @@
     updateMetrics(result.metrics);
     ChartManager.updateMainChart(data.dates, data.prices, result.boll, result.equity);
     ChartManager.updateRsiChart(data.dates, result.rsi, state.rsiOverbought, state.rsiOversold);
+    flashSimIndicator();
   }
 
   function debouncedSim() {
