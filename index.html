@@ -26,9 +26,9 @@
       <div class="flex items-center gap-3">
         <div class="w-2 h-2 rounded-full bg-[#12b5c5] animate-pulse"></div>
         <span class="font-mono text-sm tracking-wider text-[#12b5c5]">QUANT</span>
-        <span class="font-mono text-sm tracking-wider text-[#3d4656]">TERMINAL</span>
+        <span class="font-mono text-sm tracking-wider text-[#6b7a8d]">TERMINAL</span>
       </div>
-      <div class="font-mono text-xs text-[#4a5568]" id="clock"></div>
+      <div class="font-mono text-xs text-[#7d8a9e]" id="clock"></div>
     </header>
 
     <div class="flex-1 flex flex-col p-4 gap-4 max-w-[1600px] mx-auto w-full">
@@ -63,7 +63,7 @@
           <div>
             <div class="config-label mb-2">
               <span>数据源</span>
-              <span class="val" id="mode-label" style="color:#3d4656">MOCK</span>
+              <span class="val" id="mode-label" style="color:#6b7a8d">MOCK</span>
             </div>
             <div class="mode-toggle" id="mode-toggle">
               <div class="toggle-indicator"></div>
@@ -89,7 +89,7 @@
               <span class="val" id="ma-val">20</span>
             </div>
             <input type="range" id="ma-slider" min="5" max="60" value="20" step="1" />
-            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#4a5568]">
+            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#7d8a9e]">
               <span>5</span><span>60</span>
             </div>
           </div>
@@ -100,7 +100,7 @@
               <span class="val val-red" id="ob-val">70</span>
             </div>
             <input type="range" class="range-red" id="ob-slider" min="55" max="90" value="70" step="1" />
-            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#4a5568]">
+            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#7d8a9e]">
               <span>55</span><span>90</span>
             </div>
           </div>
@@ -111,7 +111,7 @@
               <span class="val" id="os-val">30</span>
             </div>
             <input type="range" id="os-slider" min="10" max="45" value="30" step="1" />
-            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#4a5568]">
+            <div class="flex justify-between mt-1 font-mono text-[10px] text-[#7d8a9e]">
               <span>10</span><span>45</span>
             </div>
           </div>
@@ -136,7 +136,7 @@
           </button>
 
           <div class="mt-auto pt-4 border-t border-white/[0.04]">
-            <div class="font-mono text-[10px] text-[#4a5568] leading-relaxed">
+            <div class="font-mono text-[10px] text-[#7d8a9e] leading-relaxed">
               <div>开多：突破布林下轨 + RSI超卖 + MACD绿柱拉长</div>
               <div class="mt-1">ATR止损：价格跌破 开仓价−ATR×2 强制平仓</div>
               <div class="mt-1">平仓：触及布林上轨 或 RSI超买</div>
@@ -160,7 +160,7 @@
 
     </div>
 
-    <footer class="border-t border-white/[0.04] px-6 py-2 text-center font-mono text-[10px] text-[#4a5568]">
+    <footer class="border-t border-white/[0.04] px-6 py-2 text-center font-mono text-[10px] text-[#6b7a8d]">
       QUANT TERMINAL v1.0 — 模拟数据仅供参考，不构成投资建议
     </footer>
 

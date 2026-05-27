@@ -115,14 +115,14 @@ body::after {
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #6a7282;
+  color: #8f99a8;
   margin-bottom: 6px;
 }
 
 .metric-sub {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem;
-  color: #4a5568;
+  color: #7d8a9e;
 }
 
 input[type="range"] {
@@ -192,7 +192,7 @@ input[type="range"].range-red::-moz-range-thumb {
 
 .config-label span:first-child {
   font-size: 0.75rem;
-  color: #6a7282;
+  color: #8f99a8;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -232,13 +232,13 @@ input[type="range"].range-red::-moz-range-thumb {
   letter-spacing: 0.04em;
   border: 1px solid var(--border);
   background: transparent;
-  color: #6a7282;
+  color: #7d8a9e;
   transition: all 0.2s;
 }
 
 .token-btn:hover {
   border-color: rgba(18,181,197,0.25);
-  color: #8a929e;
+  color: #a8b2be;
 }
 
 .token-btn.active {
@@ -267,7 +267,7 @@ input[type="range"].range-red::-moz-range-thumb {
   align-items: center;
   gap: 8px;
   font-size: 0.72rem;
-  color: #4a5568;
+  color: #7d8a9e;
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -413,7 +413,7 @@ input[type="range"].range-red::-moz-range-thumb {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 5px 0;
-  color: #3d4656;
+  color: #6b7a8d;
   position: relative;
   z-index: 1;
   transition: color 0.3s;

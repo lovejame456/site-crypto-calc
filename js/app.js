@@ -79,7 +79,7 @@
     toggle.querySelector('[data-mode="LIVE"]').classList.remove('active');
     toggle.querySelector('[data-mode="MOCK"]').classList.add('active');
     $('mode-label').textContent = 'MOCK';
-    $('mode-label').style.color = '#3d4656';
+    $('mode-label').style.color = '#6b7a8d';
     runSimulation();
   }
 
