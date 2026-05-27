@@ -278,7 +278,16 @@ input[type="range"].range-red::-moz-range-thumb {
 .coin-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
+  gap: 5px;
+}
+
+.coin-grid .token-btn {
+  padding: 5px 4px;
+  font-size: 0.62rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .strategy-btn {
@@ -319,20 +328,20 @@ input[type="range"].range-red::-moz-range-thumb {
 .custom-token-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 8px;
+  gap: 5px;
+  margin-top: 6px;
 }
 
 .custom-token-label {
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   color: #4a5568;
   flex-shrink: 0;
 }
 
 .custom-token-input {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  padding: 4px 8px;
+  font-size: 0.68rem;
+  padding: 4px 6px;
   border-radius: 4px;
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.03);
@@ -350,11 +359,12 @@ input[type="range"].range-red::-moz-range-thumb {
 
 .custom-token-input::placeholder {
   color: #3a4556;
+  font-size: 0.62rem;
 }
 
 .custom-token-suffix {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   color: #4a5568;
   flex-shrink: 0;
 }
