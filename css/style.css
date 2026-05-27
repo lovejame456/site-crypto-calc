@@ -58,6 +58,16 @@ body::after {
 
 #app-root { position: relative; z-index: 1; }
 
+.logo-icon {
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), filter 0.3s;
+}
+
+.logo-icon:hover {
+  transform: rotate(30deg) scale(1.08);
+  filter: drop-shadow(0 0 8px rgba(0,212,255,0.35));
+}
+
 .glass {
   background: var(--surface);
   border: 1px solid var(--border);
