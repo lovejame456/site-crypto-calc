@@ -151,7 +151,7 @@ var Strategy = (function () {
           entryPrice = price;
           entryBar = i;
           stopPrice = price - atrMultiplier * atrVal;
-          log.push({ type: 'open', date: fmtDate(dates, i), price: price, signals: (belowLower ? 'BOLL下轨突破 ' : '') + (rsiOversoldSignal ? 'RSI超卖 ' : '') + (momentumReversal ? 'MACD动量反转' : '') });
+          log.push({ type: 'open', date: fmtDate(dates, i), price: price, signals: (belowLower ? 'BOLL Lower Break ' : '') + (rsiOversoldSignal ? 'RSI Oversold ' : '') + (momentumReversal ? 'MACD Momentum Reversal' : '') });
         }
       }
 
@@ -160,13 +160,13 @@ var Strategy = (function () {
           var pnlStop = ((stopPrice - entryPrice) / entryPrice) * leverage;
           capital = capital * (1 + pnlStop);
           trades.push({ entry: entryPrice, exit: stopPrice, return: pnlStop, reason: 'ATR_STOP' });
-          log.push({ type: 'close-loss', date: fmtDate(dates, i), price: stopPrice, pnl: pnlStop, reason: 'ATR动态止损触发' });
+          log.push({ type: 'close-loss', date: fmtDate(dates, i), price: stopPrice, pnl: pnlStop, reason: 'ATR Stop-loss Triggered' });
           atrStopCount++;
           inPosition = false;
         } else if (price >= bollUpper || rsiVal > rsiOverbought) {
           var pnlTarget = ((price - entryPrice) / entryPrice) * leverage;
           capital = capital * (1 + pnlTarget);
-          var exitReason = price >= bollUpper ? '触及布林上轨' : 'RSI超买';
+          var exitReason = price >= bollUpper ? 'BOLL Upper Band Hit' : 'RSI Overbought';
           trades.push({ entry: entryPrice, exit: price, return: pnlTarget, reason: 'TARGET' });
           log.push({ type: pnlTarget >= 0 ? 'close-win' : 'close-loss', date: fmtDate(dates, i), price: price, pnl: pnlTarget, reason: exitReason });
           inPosition = false;
@@ -249,7 +249,7 @@ var Strategy = (function () {
           inPosition = true;
           entryPrice = price;
           stopPrice = price - atrMultiplier * atr[i];
-          log.push({ type: 'open', date: fmtDate(dates, i), price: price, signals: 'MA' + shortPeriod + '金叉MA' + longPeriod });
+          log.push({ type: 'open', date: fmtDate(dates, i), price: price, signals: 'MA' + shortPeriod + ' Golden Cross MA' + longPeriod });
         }
       }
 
@@ -258,7 +258,7 @@ var Strategy = (function () {
           var pnlStop = ((stopPrice - entryPrice) / entryPrice) * leverage;
           capital = capital * (1 + pnlStop);
           trades.push({ entry: entryPrice, exit: stopPrice, return: pnlStop, reason: 'ATR_STOP' });
-          log.push({ type: 'close-loss', date: fmtDate(dates, i), price: stopPrice, pnl: pnlStop, reason: 'ATR动态止损触发' });
+          log.push({ type: 'close-loss', date: fmtDate(dates, i), price: stopPrice, pnl: pnlStop, reason: 'ATR Stop-loss Triggered' });
           atrStopCount++;
           inPosition = false;
         } else {
@@ -267,7 +267,7 @@ var Strategy = (function () {
             var pnlExit = ((price - entryPrice) / entryPrice) * leverage;
             capital = capital * (1 + pnlExit);
             trades.push({ entry: entryPrice, exit: price, return: pnlExit, reason: 'DEATH_CROSS' });
-            log.push({ type: pnlExit >= 0 ? 'close-win' : 'close-loss', date: fmtDate(dates, i), price: price, pnl: pnlExit, reason: 'MA' + shortPeriod + '死叉MA' + longPeriod });
+            log.push({ type: pnlExit >= 0 ? 'close-win' : 'close-loss', date: fmtDate(dates, i), price: price, pnl: pnlExit, reason: 'MA' + shortPeriod + ' Death Cross MA' + longPeriod });
             inPosition = false;
           } else {
             var newStop = price - atrMultiplier * atr[i];
@@ -356,7 +356,7 @@ var Strategy = (function () {
           inPosition = true;
           entryPrice = price;
           stopPrice = price - atrMultiplier * atr[i];
-          var signalDesc = oversoldBounce ? 'RSI超卖反弹(' + prevRsi.toFixed(1) + '→' + rsiVal.toFixed(1) + ')' : 'RSI深度超卖(' + rsiVal.toFixed(1) + ')';
+          var signalDesc = oversoldBounce ? 'RSI Oversold Bounce(' + prevRsi.toFixed(1) + '→' + rsiVal.toFixed(1) + ')' : 'RSI Deep Oversold(' + rsiVal.toFixed(1) + ')';
           log.push({ type: 'open', date: fmtDate(dates, i), price: price, signals: signalDesc });
         }
       }
@@ -366,14 +366,14 @@ var Strategy = (function () {
           var pnlStop = ((stopPrice - entryPrice) / entryPrice) * leverage;
           capital = capital * (1 + pnlStop);
           trades.push({ entry: entryPrice, exit: stopPrice, return: pnlStop, reason: 'ATR_STOP' });
-          log.push({ type: 'close-loss', date: fmtDate(dates, i), price: stopPrice, pnl: pnlStop, reason: 'ATR动态止损触发' });
+          log.push({ type: 'close-loss', date: fmtDate(dates, i), price: stopPrice, pnl: pnlStop, reason: 'ATR Stop-loss Triggered' });
           atrStopCount++;
           inPosition = false;
         } else if (rsiVal > rsiOverbought) {
           var pnlTarget = ((price - entryPrice) / entryPrice) * leverage;
           capital = capital * (1 + pnlTarget);
           trades.push({ entry: entryPrice, exit: price, return: pnlTarget, reason: 'OVERBOUGHT' });
-          log.push({ type: pnlTarget >= 0 ? 'close-win' : 'close-loss', date: fmtDate(dates, i), price: price, pnl: pnlTarget, reason: 'RSI超买退出(' + rsiVal.toFixed(1) + ')' });
+          log.push({ type: pnlTarget >= 0 ? 'close-win' : 'close-loss', date: fmtDate(dates, i), price: price, pnl: pnlTarget, reason: 'RSI Overbought Exit(' + rsiVal.toFixed(1) + ')' });
           inPosition = false;
         } else {
           var newStop = price - atrMultiplier * atr[i];
