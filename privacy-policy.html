@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Quant Terminal</title>
+  <meta name="description" content="Privacy policy for Quant Terminal — crypto backtesting tool. Learn how we handle data, cookies, and third-party services." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='10' fill='%230c0e18'/><rect x='10' y='26' width='6' height='12' rx='1' fill='%2300d4ff'/><rect x='21' y='18' width='6' height='20' rx='1' fill='%2300d4ff' opacity='0.7'/><rect x='32' y='10' width='6' height='28' rx='1' fill='%2300d4ff' opacity='0.5'/></svg>" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
+  <style>
+    .policy-section { margin-bottom: 32px; }
+    .policy-section h2 { font-size: 1.1rem; font-weight: 700; color: #e4eaf4; margin-bottom: 10px; border-left: 3px solid #00d4ff; padding-left: 12px; }
+    .policy-section p { color: #c8d2e4; line-height: 1.75; margin-bottom: 12px; font-size: 0.92rem; }
+    .policy-section ul { color: #c8d2e4; padding-left: 20px; margin-bottom: 12px; font-size: 0.92rem; line-height: 1.75; }
+    .policy-section li { margin-bottom: 6px; }
+    .back-link { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #8f99a8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); transition: all 0.2s; }
+    .back-link:hover { color: #00d4ff; border-color: rgba(0,212,255,0.2); }
+    .nav-link { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #a0aab8; text-decoration: none; padding: 5px 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); transition: all 0.2s; }
+    .nav-link:hover { color: #00d4ff; border-color: rgba(0,212,255,0.2); }
+  </style>
+</head>
+<body>
+  <div id="app-root" class="min-h-screen flex flex-col">
+
+    <header class="site-header">
+      <div class="header-left">
+        <a href="index.html" class="flex items-center gap-3 no-underline">
+          <svg width="34" height="34" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="10" fill="#0c0e18"/><rect x="10" y="26" width="6" height="12" rx="1.5" fill="#00d4ff"/><rect x="21" y="18" width="6" height="20" rx="1.5" fill="#00d4ff" opacity="0.7"/><rect x="32" y="10" width="6" height="28" rx="1.5" fill="#00d4ff" opacity="0.45"/></svg>
+          <div class="header-brand">
+            <span class="brand-name">QUANT</span>
+            <span class="brand-dot">·</span>
+            <span class="brand-sub">TERMINAL</span>
+          </div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="index.html" class="back-link">← Terminal</a>
+        <a href="strategy-guide.html" class="nav-link">Strategy Guide</a>
+      </div>
+    </header>
+
+    <div class="flex-1 max-w-[800px] mx-auto w-full px-6 py-8">
+
+      <h1 style="font-size:1.6rem; font-weight:800; color:#e4eaf4; margin-bottom:6px;">Privacy Policy</h1>
+      <p style="font-size:0.82rem; color:#6b7a8d; margin-bottom:32px;">Last updated: May 28, 2026</p>
+
+      <div class="policy-section">
+        <h2>Overview</h2>
+        <p>Quant Terminal ("we", "our", "the site") is a free educational backtesting tool for cryptocurrency trading strategies. This privacy policy explains what data we collect, how we use it, and what third-party services are involved.</p>
+        <p>We are committed to protecting your privacy. We do not collect personal identification information unless you explicitly choose to share it.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Information We Collect</h2>
+        <p><strong>We do not collect personal data.</strong> Our tool operates entirely in your browser. We do not require account registration, email addresses, or any form of personal identification.</p>
+        <p>The data processed by our tool includes:</p>
+        <ul>
+          <li><strong>Market data</strong> — Public price data fetched from the Binance API (open, high, low, close prices). This is publicly available market information.</li>
+          <li><strong>Strategy parameters</strong> — Your chosen settings (MA period, RSI thresholds, leverage, etc.) stored in your browser's localStorage for convenience.</li>
+          <li><strong>Saved configurations</strong> — If you use the "Save Config to Cloud" feature, your strategy parameters are stored in our cloud database with no personally identifiable information attached.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2>Cookies and Local Storage</h2>
+        <p>We use browser <strong>localStorage</strong> (not traditional cookies) to remember your preferences between visits:</p>
+        <ul>
+          <li><code>quant-lang</code> — Your preferred language</li>
+          <li><code>quant-tutorial-dismissed</code> — Whether you've completed the tutorial</li>
+          <li><code>quant-config</code> — Your last used strategy parameters</li>
+        </ul>
+        <p>These are stored locally on your device. We do not have access to this data, and it is never transmitted to our servers unless you explicitly use the cloud save feature.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Third-Party Services</h2>
+        <p><strong>Binance API</strong> — When you switch to LIVE mode, market data is fetched directly from Binance's public API (<code>api.binance.com</code>). This is a read-only public endpoint. No API keys or account information is required or stored.</p>
+        <p><strong>Google AdSense</strong> — We may display advertisements through Google AdSense. Google may use cookies to serve ads based on your prior visits to this and other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" style="color:#00d4ff;">Google's Ads Settings</a>.</p>
+        <p><strong>Google Analytics</strong> — We may use Google Analytics to understand site traffic patterns. This collects anonymous data such as page views, time on site, and general geographic region. No personally identifiable information is collected.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Data Security</h2>
+        <p>All data processing happens in your browser. Strategy calculations run client-side using JavaScript. No trading activity is executed — this is a simulation tool only. We do not connect to any exchange accounts, wallets, or trading APIs.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Children's Privacy</h2>
+        <p>This tool is not directed at children under 13. We do not knowingly collect information from children under 13.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Changes to This Policy</h2>
+        <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated revision date.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Contact</h2>
+        <p>If you have questions about this privacy policy, contact us at: <strong style="color:#00d4ff;">quant.terminal@example.com</strong></p>
+      </div>
+
+    </div>
+
+    <footer class="border-t border-white/[0.04] px-6 py-4 text-center font-mono text-[11px] text-[#7d8a9e]">
+      <a href="index.html" style="color:#8f99a8;">Quant Terminal</a> · <a href="strategy-guide.html" style="color:#8f99a8;">Strategy Guide</a> · © 2024–2026
+    </footer>
+
+  </div>
+</body>
+</html>
