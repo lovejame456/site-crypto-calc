@@ -234,6 +234,35 @@
             <span class="save-btn-text" data-i18n="btnSave">🔒 SAVE CONFIG TO CLOUD</span>
           </button>
 
+          <div class="share-btns">
+            <button class="share-btn" id="btn-copy-link" data-i18n="btnCopyLink">📋 Copy Link</button>
+            <button class="share-btn" id="btn-config-code" data-i18n="btnConfigCode">🔑 Config Code</button>
+          </div>
+
+          <div class="config-modal-overlay" id="config-modal">
+            <div class="config-modal">
+              <div class="config-modal-header">
+                <span data-i18n="configModalTitle">Import / Export Config</span>
+                <button class="config-modal-close" id="config-modal-close">✕</button>
+              </div>
+              <div class="config-modal-section">
+                <div class="config-modal-label" data-i18n="configExportLabel">Your Config Code</div>
+                <div class="config-modal-row">
+                  <input type="text" class="config-code-field" id="config-code-out" readonly />
+                  <button class="config-code-btn" id="btn-copy-code" data-i18n="btnCopy">Copy</button>
+                </div>
+              </div>
+              <div class="config-modal-divider"></div>
+              <div class="config-modal-section">
+                <div class="config-modal-label" data-i18n="configImportLabel">Paste Config Code</div>
+                <div class="config-modal-row">
+                  <input type="text" class="config-code-field" id="config-code-in" placeholder="KENNY-QUANT-..." />
+                  <button class="config-code-btn config-code-btn-primary" id="btn-load-code" data-i18n="btnLoad">Load</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Ad Slot: Sidebar (300x250) -->
           <div class="ad-slot ad-slot-sidebar" id="ad-sidebar">
             <div class="ad-placeholder">

@@ -147,6 +147,149 @@
     $('btn-save').addEventListener('click', saveConfigToCloud);
   }
 
+  function getStateParams() {
+    return {
+      token: state.token,
+      strategy: state.strategy,
+      interval: state.interval,
+      ma: state.maPeriod,
+      ob: state.rsiOverbought,
+      os: state.rsiOversold,
+      atr: state.atrMultiplier,
+      lev: state.leverage,
+      bal: state.initialBalance
+    };
+  }
+
+  function applyParams(p) {
+    if (p.token) state.token = p.token;
+    if (p.strategy) state.strategy = p.strategy;
+    if (p.interval) state.interval = p.interval;
+    if (p.ma) state.maPeriod = parseInt(p.ma);
+    if (p.ob) state.rsiOverbought = parseInt(p.ob);
+    if (p.os) state.rsiOversold = parseInt(p.os);
+    if (p.atr) state.atrMultiplier = parseFloat(p.atr);
+    if (p.lev) state.leverage = parseInt(p.lev);
+    if (p.bal) state.initialBalance = parseFloat(p.bal);
+    syncUIFromState();
+    updateIntervalCoverage();
+    runSimulation();
+  }
+
+  function buildShareURL() {
+    var p = getStateParams();
+    var base = window.location.origin + window.location.pathname;
+    var q = '?token=' + p.token + '&strategy=' + p.strategy + '&ma=' + p.ma + '&ob=' + p.ob + '&os=' + p.os + '&atr=' + p.atr + '&lev=' + p.lev + '&bal=' + p.bal;
+    return base + q;
+  }
+
+  function buildConfigCode() {
+    var p = getStateParams();
+    var json = JSON.stringify(p);
+    var encoded = btoa(unescape(encodeURIComponent(json)));
+    return 'KENNY-QUANT-' + encoded;
+  }
+
+  function parseConfigCode(code) {
+    code = code.trim();
+    if (!code.startsWith('KENNY-QUANT-')) return null;
+    var encoded = code.substring('KENNY-QUANT-'.length);
+    try {
+      var json = decodeURIComponent(escape(atob(encoded)));
+      return JSON.parse(json);
+    } catch (e) { return null; }
+  }
+
+  function flashBtn(btn) {
+    btn.classList.add('flash');
+    setTimeout(function () { btn.classList.remove('flash'); }, 1200);
+  }
+
+  function initShareButtons() {
+    $('btn-copy-link').addEventListener('click', function () {
+      var url = buildShareURL();
+      navigator.clipboard.writeText(url).then(function () {
+        flashBtn($('btn-copy-link'));
+      }).catch(function () {
+        var ta = document.createElement('textarea');
+        ta.value = url;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        flashBtn($('btn-copy-link'));
+      });
+    });
+
+    $('btn-config-code').addEventListener('click', function () {
+      $('config-code-out').value = buildConfigCode();
+      $('config-code-in').value = '';
+      $('config-modal').classList.add('open');
+    });
+
+    $('config-modal-close').addEventListener('click', function () {
+      $('config-modal').classList.remove('open');
+    });
+
+    $('config-modal').addEventListener('click', function (e) {
+      if (e.target === $('config-modal')) $('config-modal').classList.remove('open');
+    });
+
+    $('btn-copy-code').addEventListener('click', function () {
+      var code = $('config-code-out').value;
+      navigator.clipboard.writeText(code).then(function () {
+        flashBtn($('btn-copy-code'));
+      }).catch(function () {
+        $('config-code-out').select();
+        document.execCommand('copy');
+        flashBtn($('btn-copy-code'));
+      });
+    });
+
+    $('btn-load-code').addEventListener('click', function () {
+      var code = $('config-code-in').value;
+      var p = parseConfigCode(code);
+      if (p) {
+        applyParams(p);
+        $('config-modal').classList.remove('open');
+        flashBtn($('btn-load-code'));
+      } else {
+        $('config-code-in').style.borderColor = '#ff4757';
+        setTimeout(function () { $('config-code-in').style.borderColor = ''; }, 1500);
+      }
+    });
+
+    $('config-code-in').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') $('btn-load-code').click();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && $('config-modal').classList.contains('open')) {
+        $('config-modal').classList.remove('open');
+      }
+    });
+  }
+
+  function loadFromURLParams() {
+    var params = new URLSearchParams(window.location.search);
+    var p = {};
+    if (params.has('token')) p.token = params.get('token');
+    if (params.has('strategy')) p.strategy = params.get('strategy');
+    if (params.has('interval')) p.interval = params.get('interval');
+    if (params.has('ma')) p.ma = params.get('ma');
+    if (params.has('ob')) p.ob = params.get('ob');
+    if (params.has('os')) p.os = params.get('os');
+    if (params.has('atr')) p.atr = params.get('atr');
+    if (params.has('lev')) p.lev = params.get('lev');
+    if (params.has('bal')) p.bal = params.get('bal');
+    if (Object.keys(p).length > 0) {
+      applyParams(p);
+      window.history.replaceState({}, '', window.location.pathname);
+      return true;
+    }
+    return false;
+  }
+
   function animateValue(el, targetText) {
     el.style.transition = 'opacity 0.15s';
     el.style.opacity = '0.3';
@@ -477,6 +620,7 @@
     initBalance();
     initClock();
     initSaveButton();
+    initShareButtons();
     initLangToggle();
 
     window.onLangChange = function () {
@@ -484,7 +628,11 @@
       runSimulation();
     };
 
-    loadConfigFromCloud().then(function () { runSimulation(); });
+    if (!loadFromURLParams()) {
+      loadConfigFromCloud().then(function () { runSimulation(); });
+    } else {
+      runSimulation();
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
