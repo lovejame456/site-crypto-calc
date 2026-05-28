@@ -13,26 +13,323 @@
   <meta property="og:url" content="https://site-crypto-calc.vercel.app/strategy-guide.html" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='10' fill='%230c0e18'/><rect x='10' y='26' width='6' height='12' rx='1' fill='%2300d4ff'/><rect x='21' y='18' width='6' height='20' rx='1' fill='%2300d4ff' opacity='0.7'/><rect x='32' y='10' width='6' height='28' rx='1' fill='%2300d4ff' opacity='0.5'/></svg>" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/style.css?v=9" />
+  <link rel="stylesheet" href="css/style.css?v=10" />
   <style>
-    .article-card { cursor: pointer; }
-    .article-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1), padding 0.3s; padding: 0 0; }
-    .article-card.open .article-body { max-height: 5000px; padding: 20px 0 0; }
-    .article-toggle { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #00d4ff; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap');
+
+    body {
+      background: #080a12;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,212,255,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 100%, rgba(0,229,160,0.04) 0%, transparent 50%);
+    }
+
+    .sg-hero {
+      position: relative;
+      padding: 48px 0 36px;
+      overflow: hidden;
+    }
+    .sg-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 500px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
+    }
+    .sg-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 280px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.12), transparent);
+    }
+    .sg-hero h1 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #e4eaf4;
+      letter-spacing: -0.03em;
+      margin: 0 0 10px;
+    }
+    .sg-hero .tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #00d4ff;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 4px;
+      border: 1px solid rgba(0,212,255,0.2);
+      background: rgba(0,212,255,0.06);
+      margin-bottom: 16px;
+    }
+    .sg-hero .desc {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1rem;
+      color: #8f99a8;
+      line-height: 1.75;
+      max-width: 640px;
+    }
+    .sg-hero .desc em { color: #a0aab8; font-style: normal; text-decoration: underline; text-decoration-color: rgba(0,212,255,0.3); text-underline-offset: 3px; }
+
+    .sg-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .sg-stat {
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    .sg-stat .val {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #00d4ff;
+    }
+    .sg-stat .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: #5a6a7e;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .article-card {
+      background: rgba(14,17,28,0.6);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 14px;
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      position: relative;
+    }
+    .article-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,0.4), rgba(0,212,255,0));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .article-card:hover {
+      border-color: rgba(0,212,255,0.18);
+      box-shadow: 0 4px 32px rgba(0,212,255,0.05);
+      transform: translateY(-2px);
+    }
+    .article-card:hover::before { opacity: 1; }
+    .article-card.open {
+      border-color: rgba(0,212,255,0.2);
+      box-shadow: 0 8px 40px rgba(0,212,255,0.06);
+      transform: none;
+    }
+    .article-card.open::before { opacity: 1; }
+
+    .article-header {
+      padding: 24px 28px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .article-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .article-icon.boll { background: rgba(0,212,255,0.08); border-color: rgba(0,212,255,0.15); }
+    .article-icon.rsi { background: rgba(0,229,160,0.08); border-color: rgba(0,229,160,0.15); }
+    .article-icon.macd { background: rgba(232,168,56,0.08); border-color: rgba(232,168,56,0.15); }
+    .article-icon.atr { background: rgba(255,71,87,0.08); border-color: rgba(255,71,87,0.15); }
+    .article-icon.risk { background: rgba(168,130,255,0.08); border-color: rgba(168,130,255,0.15); }
+    .article-icon.back { background: rgba(0,212,255,0.08); border-color: rgba(0,212,255,0.15); }
+
+    .article-meta { flex: 1; min-width: 0; }
+    .article-meta h2 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #e4eaf4;
+      margin: 0 0 6px;
+      line-height: 1.4;
+    }
+    .article-meta .excerpt {
+      font-size: 0.84rem;
+      color: #7d8a9e;
+      line-height: 1.6;
+    }
+    .article-meta .tag-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .article-meta .atag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: #5a6a7e;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .article-toggle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #00d4ff;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 28px 20px;
+      transition: color 0.2s;
+    }
     .article-toggle:hover { color: #00e5a0; }
-    .article-toggle .arrow { display: inline-block; transition: transform 0.3s; }
+    .article-toggle .arrow {
+      display: inline-block;
+      transition: transform 0.3s;
+      font-size: 0.6rem;
+    }
     .article-card.open .article-toggle .arrow { transform: rotate(90deg); }
-    .article-body h3 { font-size: 1.05rem; font-weight: 700; color: #e4eaf4; margin: 24px 0 10px; }
-    .article-body h3:first-child { margin-top: 0; }
-    .article-body p { color: #c8d2e4; line-height: 1.75; margin-bottom: 14px; font-size: 0.92rem; }
-    .article-body strong { color: #e4eaf4; font-weight: 600; }
-    .article-body code { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; background: rgba(0,212,255,0.08); color: #00d4ff; padding: 2px 6px; border-radius: 3px; }
-    .article-body ul, .article-body ol { color: #c8d2e4; padding-left: 20px; margin-bottom: 14px; font-size: 0.92rem; line-height: 1.75; }
-    .article-body li { margin-bottom: 6px; }
-    .back-link { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #8f99a8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); transition: all 0.2s; }
+
+    .article-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .article-card.open .article-body { max-height: 6000px; }
+
+    .article-inner {
+      padding: 0 28px 28px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      margin: 0 16px;
+      padding-top: 20px;
+    }
+    .article-inner h3 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #d0d8e8;
+      margin: 24px 0 10px;
+    }
+    .article-inner h3:first-child { margin-top: 0; }
+    .article-inner p {
+      font-family: 'IBM Plex Sans', sans-serif;
+      color: #a0aab8;
+      line-height: 1.8;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+    }
+    .article-inner strong { color: #d0d8e8; font-weight: 600; }
+    .article-inner code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      background: rgba(0,212,255,0.08);
+      color: #00d4ff;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .article-inner ul, .article-inner ol {
+      color: #a0aab8;
+      padding-left: 0;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      list-style: none;
+    }
+    .article-inner li {
+      padding: 4px 0 4px 20px;
+      position: relative;
+    }
+    .article-inner li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: rgba(0,212,255,0.4);
+      font-size: 0.75rem;
+    }
+    .article-inner a {
+      color: #00d4ff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,212,255,0.2);
+      transition: border-color 0.2s;
+    }
+    .article-inner a:hover { border-color: #00d4ff; }
+
+    .article-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,212,255,0.2);
+      background: rgba(0,212,255,0.06);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #00d4ff;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .article-cta:hover {
+      background: rgba(0,212,255,0.12);
+      border-color: rgba(0,212,255,0.3);
+    }
+
+    .back-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #8f99a8;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.2s;
+    }
     .back-link:hover { color: #00d4ff; border-color: rgba(0,212,255,0.2); }
-    .nav-link { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #a0aab8; text-decoration: none; padding: 5px 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); transition: all 0.2s; }
+    .nav-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #a0aab8;
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.2s;
+    }
     .nav-link:hover { color: #00d4ff; border-color: rgba(0,212,255,0.2); }
+
+    .sg-footer {
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 16px 24px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #5a6a7e;
+    }
+    .sg-footer a { color: #6b7a8d; text-decoration: none; transition: color 0.2s; }
+    .sg-footer a:hover { color: #00d4ff; }
+
+    @media (max-width: 768px) {
+      .sg-hero h1 { font-size: 1.7rem; }
+      .sg-stats { flex-wrap: wrap; gap: 16px; }
+      .article-header { padding: 20px 20px 16px; }
+      .article-toggle { padding: 0 20px 16px; }
+      .article-inner { margin: 0 8px; padding: 16px 16px 20px; }
+    }
   </style>
 </head>
 <body>
@@ -55,188 +352,228 @@
       </div>
     </header>
 
-    <div class="flex-1 max-w-[1100px] mx-auto w-full px-6 py-8">
+    <div class="flex-1 max-w-[1100px] mx-auto w-full px-5">
 
-      <div class="mb-10">
-        <h1 style="font-size:1.8rem; font-weight:800; color:#e4eaf4; letter-spacing:-0.02em; margin-bottom:8px;">Strategy Guide</h1>
-        <p style="font-size:0.95rem; color:#a0aab8; line-height:1.7; max-width:640px;">Practical guides on the indicators and risk management principles behind our backtesting engine. Written for traders who want to understand <em>why</em> a signal fires — not just <em>when</em>.</p>
+      <div class="sg-hero">
+        <div class="tag">Educational Series</div>
+        <h1>Strategy Guide</h1>
+        <p class="desc">Practical guides on the indicators and risk management principles behind our backtesting engine. Written for traders who want to understand <em>why</em> a signal fires — not just <em>when</em>.</p>
+        <div class="sg-stats">
+          <div class="sg-stat"><div class="val">6</div><div class="label">Articles</div></div>
+          <div class="sg-stat"><div class="val">4</div><div class="label">Indicators</div></div>
+          <div class="sg-stat"><div class="val">3</div><div class="label">Strategies</div></div>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pb-12">
 
-        <!-- Article 1: Bollinger Bands -->
-        <div class="glass p-5 article-card" onclick="toggleArticle(this)">
-          <div class="text-2xl mb-2">📈</div>
-          <h2 style="font-size:1.05rem; font-weight:700; color:#e4eaf4; margin-bottom:6px;">Understanding Bollinger Bands: The Volatility Squeeze</h2>
-          <p style="font-size:0.82rem; color:#8f99a8; line-height:1.6;">How to read band width as a leading indicator of explosive moves — and why the "squeeze" is where the money hides.</p>
-          <div class="article-toggle mt-3"><span class="arrow">▶</span> <span class="toggle-text">Read more</span></div>
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon boll">📈</div>
+            <div class="article-meta">
+              <h2>Understanding Bollinger Bands: The Volatility Squeeze</h2>
+              <p class="excerpt">How to read band width as a leading indicator of explosive moves — and why the "squeeze" is where the money hides.</p>
+              <div class="tag-row"><span class="atag">Volatility</span><span class="atag">TRIPLE</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
           <div class="article-body">
-            <p><strong>Bollinger Bands</strong> were developed by John Bollinger in the 1980s and remain one of the most widely used volatility indicators in crypto trading. At their core, they answer a simple question: <em>Is price relatively high or relatively low right now?</em></p>
-            <h3>How They're Calculated</h3>
-            <p>The middle band is a <strong>20-period Simple Moving Average (SMA)</strong>. The upper band sits at <code>Middle + (2 × σ)</code> and the lower band at <code>Middle − (2 × σ)</code>, where σ is the standard deviation of price over the same 20 periods. In our tool, you control the period with the <strong>MA Period</strong> slider.</p>
-            <p>What makes this powerful is that the bands are dynamic. When BTC goes from a boring $28,000–$29,000 range into a wild $31,000–$36,000 breakout week, the bands expand. When it settles back into a tight range, they contract. This contraction is called the <strong>Bollinger Squeeze</strong>.</p>
-            <h3>Reading the Squeeze</h3>
-            <p>A squeeze happens when volatility compresses to a local minimum. The bands narrow, price hugs the middle line, and volume often dries up. Historically, squeezes tend to resolve with a sharp directional move — the question is which direction.</p>
-            <p>In our <strong>TRIPLE strategy</strong>, we wait for price to break <em>below</em> the lower band during a period of elevated volatility. This means price has moved so far, so fast, that it's statistically extreme — a potential capitulation event. Combined with RSI and MACD confirmation, this becomes a high-probability entry.</p>
-            <h3>Practical Tips for Crypto</h3>
-            <ul>
-              <li><strong>Shorter periods</strong> (10–15) work better on 4h and 1d charts for crypto's higher volatility</li>
-              <li><strong>W-Bottoms</strong> at the lower band are more reliable than single touches — wait for the second bounce</li>
-              <li>When price <strong>walks the upper band</strong>, the trend is strong. Don't short just because it "looks overbought"</li>
-              <li>Band width (Upper − Lower) is a standalone volatility metric. Track it.</li>
-            </ul>
-            <p>Try it yourself: on the <a href="index.html" style="color:#00d4ff;">Quant Terminal</a>, set MA Period to 14, switch to a volatile coin like SOL or DOGE, and watch how many trades fire compared to the default 20.</p>
+            <div class="article-inner">
+              <p><strong>Bollinger Bands</strong> were developed by John Bollinger in the 1980s and remain one of the most widely used volatility indicators in crypto trading. At their core, they answer a simple question: <em>Is price relatively high or relatively low right now?</em></p>
+              <h3>How They're Calculated</h3>
+              <p>The middle band is a <strong>20-period Simple Moving Average (SMA)</strong>. The upper band sits at <code>Middle + (2 × σ)</code> and the lower band at <code>Middle − (2 × σ)</code>, where σ is the standard deviation of price over the same 20 periods. In our tool, you control the period with the <strong>MA Period</strong> slider.</p>
+              <p>What makes this powerful is that the bands are dynamic. When BTC goes from a boring $28,000–$29,000 range into a wild $31,000–$36,000 breakout week, the bands expand. When it settles back into a tight range, they contract. This contraction is called the <strong>Bollinger Squeeze</strong>.</p>
+              <h3>Reading the Squeeze</h3>
+              <p>A squeeze happens when volatility compresses to a local minimum. The bands narrow, price hugs the middle line, and volume often dries up. Historically, squeezes tend to resolve with a sharp directional move — the question is which direction.</p>
+              <p>In our <strong>TRIPLE strategy</strong>, we wait for price to break <em>below</em> the lower band during a period of elevated volatility. This means price has moved so far, so fast, that it's statistically extreme — a potential capitulation event. Combined with RSI and MACD confirmation, this becomes a high-probability entry.</p>
+              <h3>Practical Tips for Crypto</h3>
+              <ul>
+                <li><strong>Shorter periods</strong> (10–15) work better on 4h and 1d charts for crypto's higher volatility</li>
+                <li><strong>W-Bottoms</strong> at the lower band are more reliable than single touches — wait for the second bounce</li>
+                <li>When price <strong>walks the upper band</strong>, the trend is strong. Don't short just because it "looks overbought"</li>
+                <li>Band width (Upper − Lower) is a standalone volatility metric. Track it.</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
           </div>
         </div>
 
-        <!-- Article 2: RSI -->
-        <div class="glass p-5 article-card" onclick="toggleArticle(this)">
-          <div class="text-2xl mb-2">📊</div>
-          <h2 style="font-size:1.05rem; font-weight:700; color:#e4eaf4; margin-bottom:6px;">RSI Deep Dive: Beyond Overbought and Oversold</h2>
-          <p style="font-size:0.82rem; color:#8f99a8; line-height:1.6;">Why the default 70/30 lines mislead more traders than they help — and how to actually use RSI in crypto markets.</p>
-          <div class="article-toggle mt-3"><span class="arrow">▶</span> <span class="toggle-text">Read more</span></div>
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon rsi">📊</div>
+            <div class="article-meta">
+              <h2>RSI Deep Dive: Beyond Overbought and Oversold</h2>
+              <p class="excerpt">Why the default 70/30 lines mislead more traders than they help — and how to actually use RSI in crypto markets.</p>
+              <div class="tag-row"><span class="atag">Momentum</span><span class="atag">RSI REV</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
           <div class="article-body">
-            <p>The <strong>Relative Strength Index (RSI)</strong> measures the speed and magnitude of recent price changes. Created by J. Welles Wilder in 1978, it oscillates between 0 and 100 and is calculated as <code>RSI = 100 − (100 / (1 + RS))</code> where RS is the average gain divided by the average loss over N periods (typically 14).</p>
-            <h3>The 70/30 Trap</h3>
-            <p>Most tutorials say "sell when RSI hits 70, buy when it hits 30." This is dangerously oversimplified. In a strong crypto uptrend, RSI can stay above 70 for weeks. During the 2024 BTC rally from $42K to $73K, RSI spent 23 out of 67 days above 70. If you sold every time RSI crossed 70, you'd have missed most of the move.</p>
-            <p>The problem is that RSI measures <em>relative</em> strength — it compares recent gains to recent losses. In a trending market, gains consistently outweigh losses, so RSI stays elevated. This is normal, not a sell signal.</p>
-            <h3>What Actually Works</h3>
-            <p><strong>Divergences</strong> are the most reliable RSI signal. A <em>bearish divergence</em> occurs when price makes a higher high but RSI makes a lower high — momentum is fading even though price is rising. A <em>bullish divergence</em> is the opposite: price makes a lower low but RSI makes a higher low.</p>
-            <p>In our <strong>RSI REV strategy</strong>, we look for something more specific: an <strong>oversold bounce</strong>. This happens when RSI drops below the oversold threshold (e.g., 30) and then crosses back above it. The key insight is that the <em>cross back above</em> is the signal — not the initial drop below. We're waiting for confirmation that selling pressure has exhausted itself.</p>
-            <h3>Adjusting the Thresholds</h3>
-            <p>For crypto, consider these adjustments:</p>
-            <ul>
-              <li><strong>Bull market</strong>: Raise oversold to 35–40, raise overbought to 75–80</li>
-              <li><strong>Bear market</strong>: Keep 30/70 but focus on short-side signals</li>
-              <li><strong>High volatility coins</strong> (DOGE, SHIB): Use wider bands like 25/75</li>
-              <li><strong>Low volatility coins</strong> (stablecoin pairs): Tighten to 35/65</li>
-            </ul>
-            <p>Experiment with the RSI Overbought and RSI Oversold sliders on the <a href="index.html" style="color:#00d4ff;">Quant Terminal</a> to see how different thresholds change your win rate across different coins.</p>
+            <div class="article-inner">
+              <p>The <strong>Relative Strength Index (RSI)</strong> measures the speed and magnitude of recent price changes. Created by J. Welles Wilder in 1978, it oscillates between 0 and 100 and is calculated as <code>RSI = 100 − (100 / (1 + RS))</code> where RS is the average gain divided by the average loss over N periods (typically 14).</p>
+              <h3>The 70/30 Trap</h3>
+              <p>Most tutorials say "sell when RSI hits 70, buy when it hits 30." This is dangerously oversimplified. In a strong crypto uptrend, RSI can stay above 70 for weeks. During the 2024 BTC rally from $42K to $73K, RSI spent 23 out of 67 days above 70. If you sold every time RSI crossed 70, you'd have missed most of the move.</p>
+              <p>The problem is that RSI measures <em>relative</em> strength — it compares recent gains to recent losses. In a trending market, gains consistently outweigh losses, so RSI stays elevated. This is normal, not a sell signal.</p>
+              <h3>What Actually Works</h3>
+              <p><strong>Divergences</strong> are the most reliable RSI signal. A <em>bearish divergence</em> occurs when price makes a higher high but RSI makes a lower high — momentum is fading even though price is rising. A <em>bullish divergence</em> is the opposite: price makes a lower low but RSI makes a higher low.</p>
+              <p>In our <strong>RSI REV strategy</strong>, we look for something more specific: an <strong>oversold bounce</strong>. This happens when RSI drops below the oversold threshold (e.g., 30) and then crosses back above it. The key insight is that the <em>cross back above</em> is the signal — not the initial drop below. We're waiting for confirmation that selling pressure has exhausted itself.</p>
+              <h3>Adjusting the Thresholds</h3>
+              <ul>
+                <li><strong>Bull market</strong>: Raise oversold to 35–40, raise overbought to 75–80</li>
+                <li><strong>Bear market</strong>: Keep 30/70 but focus on short-side signals</li>
+                <li><strong>High volatility coins</strong> (DOGE, SHIB): Use wider bands like 25/75</li>
+                <li><strong>Low volatility coins</strong> (stablecoin pairs): Tighten to 35/65</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
           </div>
         </div>
 
-        <!-- Article 3: MACD -->
-        <div class="glass p-5 article-card" onclick="toggleArticle(this)">
-          <div class="text-2xl mb-2">⚡</div>
-          <h2 style="font-size:1.05rem; font-weight:700; color:#e4eaf4; margin-bottom:6px;">MACD: Reading Momentum Like a Pro</h2>
-          <p style="font-size:0.82rem; color:#8f99a8; line-height:1.6;">Why the histogram matters more than the crossover — and how we use it as a momentum confirmation filter.</p>
-          <div class="article-toggle mt-3"><span class="arrow">▶</span> <span class="toggle-text">Read more</span></div>
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon macd">⚡</div>
+            <div class="article-meta">
+              <h2>MACD: Reading Momentum Like a Pro</h2>
+              <p class="excerpt">Why the histogram matters more than the crossover — and how we use it as a momentum confirmation filter.</p>
+              <div class="tag-row"><span class="atag">Trend</span><span class="atag">TRIPLE</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
           <div class="article-body">
-            <p>The <strong>Moving Average Convergence Divergence (MACD)</strong> is a momentum oscillator that tracks the relationship between two exponential moving averages. The standard settings are <code>12-period EMA − 26-period EMA</code> for the MACD line, with a <code>9-period EMA of MACD</code> as the signal line.</p>
-            <h3>The Histogram Is the Real Signal</h3>
-            <p>Most traders focus on MACD/Signal crossovers. But the <strong>histogram</strong> — the difference between the MACD line and the signal line — is actually the more useful metric. The histogram shows you the <em>rate of change of momentum</em>.</p>
-            <p>When the histogram is growing (bars getting taller), momentum is accelerating. When it's shrinking, momentum is decelerating. A crossover is just the moment when the histogram crosses zero — which is often <em>late</em>.</p>
-            <p>In our <strong>TRIPLE strategy</strong>, we use MACD as a <em>confirmation filter</em>, not a trigger. We look for the histogram to be <strong>growing</strong> (current bar taller than previous bar). This means even if MACD is still negative, the momentum is shifting from bearish to less bearish — the first step toward a reversal.</p>
-            <h3>Zero-Line Context</h3>
-            <p>Where MACD sits relative to zero matters:</p>
-            <ul>
-              <li><strong>Above zero</strong>: The 12 EMA is above the 26 EMA. Short-term momentum is bullish.</li>
-              <li><strong>Below zero</strong>: Short-term momentum is bearish.</li>
-              <li><strong>Crossing above zero</strong>: Confirmation that trend has shifted bullish.</li>
-              <li><strong>Crossing below zero</strong>: Trend has shifted bearish.</li>
-            </ul>
-            <h3>Why We Don't Use MACD Alone</h3>
-            <p>MACD is a lagging indicator — it's derived from moving averages, which by definition look backward. In crypto's fast-moving markets, a pure MACD strategy will enter late and exit late. That's why we combine it with Bollinger Bands (which react faster to price extremes) and RSI (which captures momentum independently of moving averages).</p>
-            <p>The three together form a system where: <strong>Bollinger</strong> identifies the price extreme, <strong>RSI</strong> confirms the momentum condition, and <strong>MACD</strong> confirms the momentum shift is actually happening. All three must agree before we enter.</p>
+            <div class="article-inner">
+              <p>The <strong>Moving Average Convergence Divergence (MACD)</strong> is a momentum oscillator that tracks the relationship between two exponential moving averages. The standard settings are <code>12-period EMA − 26-period EMA</code> for the MACD line, with a <code>9-period EMA of MACD</code> as the signal line.</p>
+              <h3>The Histogram Is the Real Signal</h3>
+              <p>Most traders focus on MACD/Signal crossovers. But the <strong>histogram</strong> — the difference between the MACD line and the signal line — is actually the more useful metric. The histogram shows you the <em>rate of change of momentum</em>.</p>
+              <p>When the histogram is growing (bars getting taller), momentum is accelerating. When it's shrinking, momentum is decelerating. A crossover is just the moment when the histogram crosses zero — which is often <em>late</em>.</p>
+              <p>In our <strong>TRIPLE strategy</strong>, we use MACD as a <em>confirmation filter</em>, not a trigger. We look for the histogram to be <strong>growing</strong> (current bar taller than previous bar). This means even if MACD is still negative, the momentum is shifting from bearish to less bearish — the first step toward a reversal.</p>
+              <h3>Zero-Line Context</h3>
+              <ul>
+                <li><strong>Above zero</strong>: The 12 EMA is above the 26 EMA. Short-term momentum is bullish.</li>
+                <li><strong>Below zero</strong>: Short-term momentum is bearish.</li>
+                <li><strong>Crossing above zero</strong>: Confirmation that trend has shifted bullish.</li>
+                <li><strong>Crossing below zero</strong>: Trend has shifted bearish.</li>
+              </ul>
+              <h3>Why We Don't Use MACD Alone</h3>
+              <p>MACD is a lagging indicator — it's derived from moving averages, which by definition look backward. In crypto's fast-moving markets, a pure MACD strategy will enter late and exit late. That's why we combine it with Bollinger Bands (which react faster to price extremes) and RSI (which captures momentum independently of moving averages).</p>
+              <p>The three together form a system where: <strong>Bollinger</strong> identifies the price extreme, <strong>RSI</strong> confirms the momentum condition, and <strong>MACD</strong> confirms the momentum shift is actually happening. All three must agree before we enter.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
           </div>
         </div>
 
-        <!-- Article 4: ATR -->
-        <div class="glass p-5 article-card" onclick="toggleArticle(this)">
-          <div class="text-2xl mb-2">🛡</div>
-          <h2 style="font-size:1.05rem; font-weight:700; color:#e4eaf4; margin-bottom:6px;">ATR Stop-Loss: Why Fixed Stops Fail in Crypto</h2>
-          <p style="font-size:0.82rem; color:#8f99a8; line-height:1.6;">A 5% stop might work on Apple stock. On crypto, it gets chewed up by normal volatility. Here's how ATR fixes this.</p>
-          <div class="article-toggle mt-3"><span class="arrow">▶</span> <span class="toggle-text">Read more</span></div>
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon atr">🛡</div>
+            <div class="article-meta">
+              <h2>ATR Stop-Loss: Why Fixed Stops Fail in Crypto</h2>
+              <p class="excerpt">A 5% stop might work on Apple stock. On crypto, it gets chewed up by normal volatility. Here's how ATR fixes this.</p>
+              <div class="tag-row"><span class="atag">Stop-Loss</span><span class="atag">All Strategies</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
           <div class="article-body">
-            <p>The <strong>Average True Range (ATR)</strong> measures market volatility by calculating the average of true ranges over N periods. True Range is the greatest of: current high − current low, |current high − previous close|, or |current low − previous close|.</p>
-            <p>The default period is 14. For BTC on a daily timeframe, ATR might be $1,500 — meaning BTC typically moves about $1,500 per day. For DOGE, ATR might be $0.015. These numbers tell you how much "noise" to expect.</p>
-            <h3>The Problem with Fixed-Percentage Stops</h3>
-            <p>Let's say you buy BTC at $65,000 and set a 3% stop-loss at $63,050. Sounds reasonable. But BTC regularly moves 3% in a single 4-hour candle during volatile periods. Your stop gets hit not because the trade was wrong, but because <em>that's just how much BTC moves</em>.</p>
-            <p>This is called <strong>volatility drag</strong>. Fixed stops don't account for the fact that different assets have different "normal" ranges. A 3% move in BTC is a quiet Tuesday. A 3% move in a stablecoin pair would be a catastrophic event.</p>
-            <h3>How ATR Stops Work</h3>
-            <p>Instead of a fixed percentage, we set the stop at <code>Entry Price − (ATR × Multiplier)</code>. With a 2x multiplier and BTC's ATR at $1,500, the stop would be $3,000 below entry — roughly 4.6% on a $65,000 BTC. This is wide enough to survive normal volatility, but tight enough to catch genuine trend reversals.</p>
-            <h3>Choosing the Right Multiplier</h3>
-            <ul>
-              <li><strong>1.5x ATR</strong>: Tight stops. More trades stopped out, but smaller losses per trade. Better for scalping.</li>
-              <li><strong>2.0x ATR</strong> (default): Balanced. The sweet spot for most swing trades.</li>
-              <li><strong>3.0x ATR</strong>: Wide stops. Fewer false exits, but larger losses when they hit. Better for volatile coins.</li>
-              <li><strong>4-5x ATR</strong>: Very wide. Only for long-term positions where you want to ride through major pullbacks.</li>
-            </ul>
-            <h3>Trailing ATR Stops</h3>
-            <p>Our strategies use <strong>trailing stops</strong>: as price moves up, the stop moves up too (to <code>Current Price − ATR × Multiplier</code>), but it never moves down. This locks in profits as the trade goes your way while still giving the position room to breathe.</p>
-            <p>Try adjusting the ATR Multiplier slider on the <a href="index.html" style="color:#00d4ff;">Quant Terminal</a> and watch how it dramatically changes your win rate and total return — especially on volatile coins like DOGE and SOL.</p>
+            <div class="article-inner">
+              <p>The <strong>Average True Range (ATR)</strong> measures market volatility by calculating the average of true ranges over N periods. True Range is the greatest of: current high − current low, |current high − previous close|, or |current low − previous close|.</p>
+              <p>The default period is 14. For BTC on a daily timeframe, ATR might be $1,500 — meaning BTC typically moves about $1,500 per day. For DOGE, ATR might be $0.015. These numbers tell you how much "noise" to expect.</p>
+              <h3>The Problem with Fixed-Percentage Stops</h3>
+              <p>Let's say you buy BTC at $65,000 and set a 3% stop-loss at $63,050. Sounds reasonable. But BTC regularly moves 3% in a single 4-hour candle during volatile periods. Your stop gets hit not because the trade was wrong, but because <em>that's just how much BTC moves</em>.</p>
+              <p>This is called <strong>volatility drag</strong>. Fixed stops don't account for the fact that different assets have different "normal" ranges. A 3% move in BTC is a quiet Tuesday. A 3% move in a stablecoin pair would be a catastrophic event.</p>
+              <h3>How ATR Stops Work</h3>
+              <p>Instead of a fixed percentage, we set the stop at <code>Entry Price − (ATR × Multiplier)</code>. With a 2x multiplier and BTC's ATR at $1,500, the stop would be $3,000 below entry — roughly 4.6% on a $65,000 BTC. This is wide enough to survive normal volatility, but tight enough to catch genuine trend reversals.</p>
+              <h3>Choosing the Right Multiplier</h3>
+              <ul>
+                <li><strong>1.5x ATR</strong>: Tight stops. More trades stopped out, but smaller losses per trade. Better for scalping.</li>
+                <li><strong>2.0x ATR</strong> (default): Balanced. The sweet spot for most swing trades.</li>
+                <li><strong>3.0x ATR</strong>: Wide stops. Fewer false exits, but larger losses when they hit. Better for volatile coins.</li>
+                <li><strong>4-5x ATR</strong>: Very wide. Only for long-term positions where you want to ride through major pullbacks.</li>
+              </ul>
+              <h3>Trailing ATR Stops</h3>
+              <p>Our strategies use <strong>trailing stops</strong>: as price moves up, the stop moves up too (to <code>Current Price − ATR × Multiplier</code>), but it never moves down. This locks in profits as the trade goes your way while still giving the position room to breathe.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
           </div>
         </div>
 
-        <!-- Article 5: Risk Management -->
-        <div class="glass p-5 article-card" onclick="toggleArticle(this)">
-          <div class="text-2xl mb-2">⚖</div>
-          <h2 style="font-size:1.05rem; font-weight:700; color:#e4eaf4; margin-bottom:6px;">Risk Management: Position Sizing, Drawdown, and the Leverage Trap</h2>
-          <p style="font-size:0.82rem; color:#8f99a8; line-height:1.6;">Entry signals get all the attention. But position sizing and drawdown management determine whether you survive long enough to be profitable.</p>
-          <div class="article-toggle mt-3"><span class="arrow">▶</span> <span class="toggle-text">Read more</span></div>
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon risk">⚖</div>
+            <div class="article-meta">
+              <h2>Risk Management: Position Sizing, Drawdown, and the Leverage Trap</h2>
+              <p class="excerpt">Entry signals get all the attention. But position sizing and drawdown management determine whether you survive long enough to be profitable.</p>
+              <div class="tag-row"><span class="atag">Risk</span><span class="atag">Essential</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
           <div class="article-body">
-            <p>Here's an uncomfortable truth: a strategy with a 60% win rate can still lose money if your losses are bigger than your wins. Risk management — not signal quality — is the #1 determinant of long-term trading success.</p>
-            <h3>Max Drawdown: The Metric That Matters Most</h3>
-            <p><strong>Maximum Drawdown (MDD)</strong> measures the worst peak-to-trough decline in your portfolio. If you start with $10,000, grow to $14,000, then drop to $8,400 — that's a 40% drawdown from the $14,000 peak.</p>
-            <p>Why does this matter? Because the math of recovery is brutal. A 50% drawdown requires a 100% gain to break even. A 75% drawdown needs 300%. This is why leverage without risk management is a death spiral.</p>
-            <h3>The Sharpe Ratio</h3>
-            <p>The <strong>Sharpe Ratio</strong> measures risk-adjusted return: <code>(Mean Return − Risk-Free Rate) / Standard Deviation of Returns</code>. In our tool, we annualize it using √252 (trading days per year).</p>
-            <ul>
-              <li><strong>Below 0</strong>: You'd be better off holding cash</li>
-              <li><strong>0 to 1</strong>: Positive return, but high volatility relative to gains</li>
-              <li><strong>1 to 2</strong>: Good. Solid returns for the risk taken</li>
-              <li><strong>Above 2</strong>: Excellent. Rare in practice without leverage</li>
-            </ul>
-            <h3>The Leverage Trap</h3>
-            <p>Leverage amplifies both gains <em>and</em> losses. With 10x leverage, a 10% price drop means you lose 100% of your capital — you're liquidated. Even worse, leverage magnifies drawdowns disproportionately.</p>
-            <p>Consider this: with 5x leverage on a strategy that has 20% MDD unleveraged, your leveraged MDD becomes roughly 100%. You'd be wiped out. The relationship isn't perfectly linear because of how compounding works, but the principle holds: <strong>leverage turns manageable drawdowns into account-ending events</strong>.</p>
-            <h3>Practical Guidelines</h3>
-            <ul>
-              <li><strong>Never risk more than 1-2% of your capital on a single trade</strong></li>
-              <li><strong>Target a Sharpe Ratio above 1</strong> before considering leverage</li>
-              <li><strong>If MDD exceeds 25% unleveraged, the strategy needs work</strong> — don't try to fix it with leverage</li>
-              <li><strong>Start with 1x leverage</strong>. Only increase after you've validated the strategy on multiple coins and timeframes</li>
-            </ul>
-            <p>Use the <a href="index.html" style="color:#00d4ff;">Quant Terminal</a> to experiment: run the same strategy at 1x, 3x, 5x, and 10x leverage. Watch how MDD scales faster than total return. That asymmetry is the leverage trap.</p>
+            <div class="article-inner">
+              <p>Here's an uncomfortable truth: a strategy with a 60% win rate can still lose money if your losses are bigger than your wins. Risk management — not signal quality — is the #1 determinant of long-term trading success.</p>
+              <h3>Max Drawdown: The Metric That Matters Most</h3>
+              <p><strong>Maximum Drawdown (MDD)</strong> measures the worst peak-to-trough decline in your portfolio. If you start with $10,000, grow to $14,000, then drop to $8,400 — that's a 40% drawdown from the $14,000 peak.</p>
+              <p>Why does this matter? Because the math of recovery is brutal. A 50% drawdown requires a 100% gain to break even. A 75% drawdown needs 300%. This is why leverage without risk management is a death spiral.</p>
+              <h3>The Sharpe Ratio</h3>
+              <p>The <strong>Sharpe Ratio</strong> measures risk-adjusted return: <code>(Mean Return − Risk-Free Rate) / Standard Deviation of Returns</code>. In our tool, we annualize it using √252 (trading days per year).</p>
+              <ul>
+                <li><strong>Below 0</strong>: You'd be better off holding cash</li>
+                <li><strong>0 to 1</strong>: Positive return, but high volatility relative to gains</li>
+                <li><strong>1 to 2</strong>: Good. Solid returns for the risk taken</li>
+                <li><strong>Above 2</strong>: Excellent. Rare in practice without leverage</li>
+              </ul>
+              <h3>The Leverage Trap</h3>
+              <p>Leverage amplifies both gains <em>and</em> losses. With 10x leverage, a 10% price drop means you lose 100% of your capital — you're liquidated. Even worse, leverage magnifies drawdowns disproportionately.</p>
+              <p>Consider this: with 5x leverage on a strategy that has 20% MDD unleveraged, your leveraged MDD becomes roughly 100%. You'd be wiped out. The relationship isn't perfectly linear because of how compounding works, but the principle holds: <strong>leverage turns manageable drawdowns into account-ending events</strong>.</p>
+              <h3>Practical Guidelines</h3>
+              <ul>
+                <li><strong>Never risk more than 1-2% of your capital on a single trade</strong></li>
+                <li><strong>Target a Sharpe Ratio above 1</strong> before considering leverage</li>
+                <li><strong>If MDD exceeds 25% unleveraged, the strategy needs work</strong> — don't try to fix it with leverage</li>
+                <li><strong>Start with 1x leverage</strong>. Only increase after you've validated the strategy on multiple coins and timeframes</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
           </div>
         </div>
 
-        <!-- Article 6: Backtesting -->
-        <div class="glass p-5 article-card" onclick="toggleArticle(this)">
-          <div class="text-2xl mb-2">🧪</div>
-          <h2 style="font-size:1.05rem; font-weight:700; color:#e4eaf4; margin-bottom:6px;">Backtesting 101: Validate Your Strategy Without Losing Money</h2>
-          <p style="font-size:0.82rem; color:#8f99a8; line-height:1.6;">How backtesting works, the pitfalls that catch almost everyone, and why "past performance" really doesn't guarantee future results.</p>
-          <div class="article-toggle mt-3"><span class="arrow">▶</span> <span class="toggle-text">Read more</span></div>
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon back">🧪</div>
+            <div class="article-meta">
+              <h2>Backtesting 101: Validate Your Strategy Without Losing Money</h2>
+              <p class="excerpt">How backtesting works, the pitfalls that catch almost everyone, and why "past performance" really doesn't guarantee future results.</p>
+              <div class="tag-row"><span class="atag">Methodology</span><span class="atag">Beginner</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
           <div class="article-body">
-            <p><strong>Backtesting</strong> is the process of applying a trading strategy to historical price data to see how it would have performed. It's the quant trader's equivalent of a flight simulator — you get to crash without consequences.</p>
-            <h3>How Our Backtester Works</h3>
-            <p>Our engine takes historical OHLC data (either simulated 365-day data or real Binance candles), applies your chosen strategy rules, and tracks what would have happened. For each trade, it records the entry price, exit price, return, and exit reason (target hit, stop-loss, or signal reversal).</p>
-            <p>The output is a set of metrics: total return, win rate, maximum drawdown, Sharpe ratio, and a full equity curve showing how your capital would have evolved over time.</p>
-            <h3>The Big Three Pitfalls</h3>
-            <p><strong>1. Overfitting.</strong> This is the most common mistake. If you tweak parameters until the backtest looks perfect, you've probably fitted the strategy to historical noise rather than a real edge. Signs of overfitting: the strategy only works on one coin, or the optimal parameters are suspiciously specific (e.g., MA period of 17, RSI overbought of 73, ATR multiplier of 1.7).</p>
-            <p>A strategy that works across multiple coins with similar parameter ranges is far more trustworthy than one that's been perfectly optimized for a single asset.</p>
-            <p><strong>2. Survivorship Bias.</strong> We only backtest on coins that exist today. The coins that went to zero and were delisted aren't in our dataset. In reality, a basket approach would have included some of those losers. Our tool doesn't account for this, so temper your expectations accordingly.</p>
-            <p><strong>3. Look-Ahead Bias.</strong> This happens when a strategy inadvertently uses future information. Our backtester processes bars sequentially — each bar only sees data from previous bars. But be careful if you modify the strategy code: even a subtle bug like using the current bar's close price for entry (instead of the next bar's open) can create unrealistic results.</p>
-            <h3>Reading the Metrics</h3>
-            <ul>
-              <li><strong>Total Return</strong>: The bottom line. If it's negative, the strategy loses money in this historical period.</li>
-              <li><strong>Win Rate</strong>: What percentage of trades were profitable. A 40% win rate can still be profitable if winners are much larger than losers.</li>
-              <li><strong>Max Drawdown</strong>: The worst-case scenario. If this is too deep, the strategy is too risky even if total return is high.</li>
-              <li><strong>Sharpe Ratio</strong>: Return per unit of risk. The single best metric for comparing strategies.</li>
-              <li><strong>Trade Log</strong>: The detailed record of every entry and exit. Look for patterns — are most losses from ATR stops? Are entries clustering in specific market conditions?</li>
-            </ul>
-            <h3>The Golden Rule</h3>
-            <p><strong>Past performance does not guarantee future results.</strong> Backtesting tells you what <em>would have</em> worked. Markets change, correlations shift, and liquidity conditions evolve. Use backtesting as a starting point for understanding a strategy's behavior — not as a guarantee of profitability.</p>
-            <p>Ready to start? Head to the <a href="index.html" style="color:#00d4ff;">Quant Terminal</a> and run your first backtest. Try different coins, different strategies, and different parameters. The more you experiment, the better your intuition for what works — and what doesn't.</p>
+            <div class="article-inner">
+              <p><strong>Backtesting</strong> is the process of applying a trading strategy to historical price data to see how it would have performed. It's the quant trader's equivalent of a flight simulator — you get to crash without consequences.</p>
+              <h3>How Our Backtester Works</h3>
+              <p>Our engine takes historical OHLC data (either simulated 365-day data or real Binance candles), applies your chosen strategy rules, and tracks what would have happened. For each trade, it records the entry price, exit price, return, and exit reason (target hit, stop-loss, or signal reversal).</p>
+              <p>The output is a set of metrics: total return, win rate, maximum drawdown, Sharpe ratio, and a full equity curve showing how your capital would have evolved over time.</p>
+              <h3>The Big Three Pitfalls</h3>
+              <p><strong>1. Overfitting.</strong> This is the most common mistake. If you tweak parameters until the backtest looks perfect, you've probably fitted the strategy to historical noise rather than a real edge. Signs of overfitting: the strategy only works on one coin, or the optimal parameters are suspiciously specific (e.g., MA period of 17, RSI overbought of 73, ATR multiplier of 1.7).</p>
+              <p>A strategy that works across multiple coins with similar parameter ranges is far more trustworthy than one that's been perfectly optimized for a single asset.</p>
+              <p><strong>2. Survivorship Bias.</strong> We only backtest on coins that exist today. The coins that went to zero and were delisted aren't in our dataset. In reality, a basket approach would have included some of those losers. Our tool doesn't account for this, so temper your expectations accordingly.</p>
+              <p><strong>3. Look-Ahead Bias.</strong> This happens when a strategy inadvertently uses future information. Our backtester processes bars sequentially — each bar only sees data from previous bars. But be careful if you modify the strategy code: even a subtle bug like using the current bar's close price for entry (instead of the next bar's open) can create unrealistic results.</p>
+              <h3>Reading the Metrics</h3>
+              <ul>
+                <li><strong>Total Return</strong>: The bottom line. If it's negative, the strategy loses money in this historical period.</li>
+                <li><strong>Win Rate</strong>: What percentage of trades were profitable. A 40% win rate can still be profitable if winners are much larger than losers.</li>
+                <li><strong>Max Drawdown</strong>: The worst-case scenario. If this is too deep, the strategy is too risky even if total return is high.</li>
+                <li><strong>Sharpe Ratio</strong>: Return per unit of risk. The single best metric for comparing strategies.</li>
+                <li><strong>Trade Log</strong>: The detailed record of every entry and exit. Look for patterns — are most losses from ATR stops? Are entries clustering in specific market conditions?</li>
+              </ul>
+              <h3>The Golden Rule</h3>
+              <p><strong>Past performance does not guarantee future results.</strong> Backtesting tells you what <em>would have</em> worked. Markets change, correlations shift, and liquidity conditions evolve. Use backtesting as a starting point for understanding a strategy's behavior — not as a guarantee of profitability.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
           </div>
         </div>
 
       </div>
-
     </div>
 
-    <footer class="border-t border-white/[0.04] px-6 py-4 text-center font-mono text-[11px] text-[#7d8a9e]">
-      <a href="index.html" style="color:#8f99a8;">Quant Terminal</a> · <a href="privacy-policy.html" style="color:#8f99a8;">Privacy Policy</a> · Educational content only. Not financial advice.
+    <footer class="sg-footer">
+      <a href="index.html">Quant Terminal</a> · <a href="privacy-policy.html">Privacy Policy</a> · Educational content only. Not financial advice.
     </footer>
 
   </div>
@@ -246,7 +583,7 @@
       var isOpen = card.classList.contains('open');
       card.classList.toggle('open');
       var text = card.querySelector('.toggle-text');
-      if (text) text.textContent = isOpen ? 'Read more' : 'Show less';
+      if (text) text.textContent = isOpen ? 'Read article' : 'Close article';
     }
   </script>
 </body>

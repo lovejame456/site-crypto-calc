@@ -7,17 +7,223 @@
   <meta name="description" content="Privacy policy for Quant Terminal — crypto backtesting tool. Learn how we handle data, cookies, and third-party services." />
   <meta name="robots" content="index, follow" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='10' fill='%230c0e18'/><rect x='10' y='26' width='6' height='12' rx='1' fill='%2300d4ff'/><rect x='21' y='18' width='6' height='20' rx='1' fill='%2300d4ff' opacity='0.7'/><rect x='32' y='10' width='6' height='28' rx='1' fill='%2300d4ff' opacity='0.5'/></svg>" />
-  <link rel="stylesheet" href="css/style.css?v=9" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css?v=10" />
   <style>
-    .policy-section { margin-bottom: 32px; }
-    .policy-section h2 { font-size: 1.1rem; font-weight: 700; color: #e4eaf4; margin-bottom: 10px; border-left: 3px solid #00d4ff; padding-left: 12px; }
-    .policy-section p { color: #c8d2e4; line-height: 1.75; margin-bottom: 12px; font-size: 0.92rem; }
-    .policy-section ul { color: #c8d2e4; padding-left: 20px; margin-bottom: 12px; font-size: 0.92rem; line-height: 1.75; }
-    .policy-section li { margin-bottom: 6px; }
-    .back-link { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #8f99a8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); transition: all 0.2s; }
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap');
+
+    /* ── page background ── */
+    body {
+      background: #080a12;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,212,255,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0,229,160,0.04) 0%, transparent 50%);
+    }
+
+    /* ── hero section ── */
+    .pp-hero {
+      position: relative;
+      padding: 56px 0 40px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .pp-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 420px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.35), transparent);
+    }
+    .pp-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 240px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.15), transparent);
+    }
+    .pp-hero h1 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #e4eaf4;
+      letter-spacing: -0.03em;
+      margin: 0 0 8px;
+    }
+    .pp-hero .subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: #5a6a7e;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .pp-hero .shield-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      border: 1px solid rgba(0,212,255,0.2);
+      background: rgba(0,212,255,0.06);
+      margin-bottom: 20px;
+      animation: shield-pulse 3s ease-in-out infinite;
+    }
+    @keyframes shield-pulse {
+      0%, 100% { box-shadow: 0 0 0 rgba(0,212,255,0); }
+      50% { box-shadow: 0 0 20px rgba(0,212,255,0.1); }
+    }
+
+    /* ── section cards ── */
+    .pp-section {
+      background: rgba(14,17,28,0.7);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 16px;
+      position: relative;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .pp-section:hover {
+      border-color: rgba(0,212,255,0.15);
+      box-shadow: 0 0 30px rgba(0,212,255,0.03);
+    }
+    .pp-section .section-num {
+      position: absolute;
+      top: 28px; right: 28px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: rgba(0,212,255,0.25);
+      letter-spacing: 0.08em;
+    }
+    .pp-section h2 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #e4eaf4;
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pp-section h2 .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.15);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .pp-section p {
+      font-family: 'IBM Plex Sans', sans-serif;
+      color: #a0aab8;
+      line-height: 1.8;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+    .pp-section p:last-child { margin-bottom: 0; }
+    .pp-section strong { color: #d0d8e8; font-weight: 600; }
+    .pp-section ul {
+      color: #a0aab8;
+      padding-left: 0;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      list-style: none;
+    }
+    .pp-section li {
+      padding: 6px 0 6px 20px;
+      position: relative;
+      margin-bottom: 0;
+    }
+    .pp-section li::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 14px;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(0,212,255,0.4);
+    }
+    .pp-section code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      background: rgba(0,212,255,0.08);
+      color: #00d4ff;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .pp-section a {
+      color: #00d4ff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,212,255,0.2);
+      transition: border-color 0.2s;
+    }
+    .pp-section a:hover { border-color: #00d4ff; }
+
+    /* ── fade-in animation ── */
+    .pp-section {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: pp-fade-in 0.5s ease forwards;
+    }
+    .pp-section:nth-child(1) { animation-delay: 0.05s; }
+    .pp-section:nth-child(2) { animation-delay: 0.1s; }
+    .pp-section:nth-child(3) { animation-delay: 0.15s; }
+    .pp-section:nth-child(4) { animation-delay: 0.2s; }
+    .pp-section:nth-child(5) { animation-delay: 0.25s; }
+    .pp-section:nth-child(6) { animation-delay: 0.3s; }
+    .pp-section:nth-child(7) { animation-delay: 0.35s; }
+    @keyframes pp-fade-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── back / nav links ── */
+    .back-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #8f99a8;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.2s;
+    }
     .back-link:hover { color: #00d4ff; border-color: rgba(0,212,255,0.2); }
-    .nav-link { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #a0aab8; text-decoration: none; padding: 5px 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); transition: all 0.2s; }
+    .nav-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #a0aab8;
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.2s;
+    }
     .nav-link:hover { color: #00d4ff; border-color: rgba(0,212,255,0.2); }
+
+    /* ── footer ── */
+    .pp-footer {
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 16px 24px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #5a6a7e;
+    }
+    .pp-footer a { color: #6b7a8d; text-decoration: none; transition: color 0.2s; }
+    .pp-footer a:hover { color: #00d4ff; }
+
+    /* ── responsive ── */
+    @media (max-width: 640px) {
+      .pp-hero h1 { font-size: 1.6rem; }
+      .pp-section { padding: 20px; }
+      .pp-section .section-num { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -40,70 +246,89 @@
       </div>
     </header>
 
-    <div class="flex-1 max-w-[800px] mx-auto w-full px-6 py-8">
+    <div class="flex-1 max-w-[760px] mx-auto w-full px-5">
 
-      <h1 style="font-size:1.6rem; font-weight:800; color:#e4eaf4; margin-bottom:6px;">Privacy Policy</h1>
-      <p style="font-size:0.82rem; color:#6b7a8d; margin-bottom:32px;">Last updated: May 28, 2026</p>
-
-      <div class="policy-section">
-        <h2>Overview</h2>
-        <p>Quant Terminal ("we", "our", "the site") is a free educational backtesting tool for cryptocurrency trading strategies. This privacy policy explains what data we collect, how we use it, and what third-party services are involved.</p>
-        <p>We are committed to protecting your privacy. We do not collect personal identification information unless you explicitly choose to share it.</p>
+      <!-- Hero -->
+      <div class="pp-hero">
+        <div class="shield-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h1>Privacy Policy</h1>
+        <div class="subtitle">Last updated · May 28, 2026</div>
       </div>
 
-      <div class="policy-section">
-        <h2>Information We Collect</h2>
-        <p><strong>We do not collect personal data.</strong> Our tool operates entirely in your browser. We do not require account registration, email addresses, or any form of personal identification.</p>
-        <p>The data processed by our tool includes:</p>
-        <ul>
-          <li><strong>Market data</strong> — Public price data fetched from the Binance API (open, high, low, close prices). This is publicly available market information.</li>
-          <li><strong>Strategy parameters</strong> — Your chosen settings (MA period, RSI thresholds, leverage, etc.) stored in your browser's localStorage for convenience.</li>
-          <li><strong>Saved configurations</strong> — If you use the "Save Config to Cloud" feature, your strategy parameters are stored in our cloud database with no personally identifiable information attached.</li>
-        </ul>
-      </div>
+      <!-- Sections -->
+      <div style="padding-bottom:48px;">
 
-      <div class="policy-section">
-        <h2>Cookies and Local Storage</h2>
-        <p>We use browser <strong>localStorage</strong> (not traditional cookies) to remember your preferences between visits:</p>
-        <ul>
-          <li><code>quant-lang</code> — Your preferred language</li>
-          <li><code>quant-tutorial-dismissed</code> — Whether you've completed the tutorial</li>
-          <li><code>quant-config</code> — Your last used strategy parameters</li>
-        </ul>
-        <p>These are stored locally on your device. We do not have access to this data, and it is never transmitted to our servers unless you explicitly use the cloud save feature.</p>
-      </div>
+        <div class="pp-section">
+          <span class="section-num">§ 01</span>
+          <h2><span class="icon">📋</span> Overview</h2>
+          <p>Quant Terminal ("we", "our", "the site") is a free educational backtesting tool for cryptocurrency trading strategies. This privacy policy explains what data we collect, how we use it, and what third-party services are involved.</p>
+          <p>We are committed to protecting your privacy. We do not collect personal identification information unless you explicitly choose to share it.</p>
+        </div>
 
-      <div class="policy-section">
-        <h2>Third-Party Services</h2>
-        <p><strong>Binance API</strong> — When you switch to LIVE mode, market data is fetched directly from Binance's public API (<code>api.binance.com</code>). This is a read-only public endpoint. No API keys or account information is required or stored.</p>
-        <p><strong>Google AdSense</strong> — We may display advertisements through Google AdSense. Google may use cookies to serve ads based on your prior visits to this and other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" style="color:#00d4ff;">Google's Ads Settings</a>.</p>
-        <p><strong>Google Analytics</strong> — We may use Google Analytics to understand site traffic patterns. This collects anonymous data such as page views, time on site, and general geographic region. No personally identifiable information is collected.</p>
-      </div>
+        <div class="pp-section">
+          <span class="section-num">§ 02</span>
+          <h2><span class="icon">🔍</span> Information We Collect</h2>
+          <p><strong>We do not collect personal data.</strong> Our tool operates entirely in your browser. We do not require account registration, email addresses, or any form of personal identification.</p>
+          <p>The data processed by our tool includes:</p>
+          <ul>
+            <li><strong>Market data</strong> — Public price data fetched from the Binance API (open, high, low, close prices). This is publicly available market information.</li>
+            <li><strong>Strategy parameters</strong> — Your chosen settings (MA period, RSI thresholds, leverage, etc.) stored in your browser's localStorage for convenience.</li>
+            <li><strong>Saved configurations</strong> — If you use the "Save Config to Cloud" feature, your strategy parameters are stored in our cloud database with no personally identifiable information attached.</li>
+          </ul>
+        </div>
 
-      <div class="policy-section">
-        <h2>Data Security</h2>
-        <p>All data processing happens in your browser. Strategy calculations run client-side using JavaScript. No trading activity is executed — this is a simulation tool only. We do not connect to any exchange accounts, wallets, or trading APIs.</p>
-      </div>
+        <div class="pp-section">
+          <span class="section-num">§ 03</span>
+          <h2><span class="icon">🍪</span> Cookies and Local Storage</h2>
+          <p>We use browser <strong>localStorage</strong> (not traditional cookies) to remember your preferences between visits:</p>
+          <ul>
+            <li><code>quant-lang</code> — Your preferred language</li>
+            <li><code>quant-tutorial-dismissed</code> — Whether you've completed the tutorial</li>
+            <li><code>quant-config</code> — Your last used strategy parameters</li>
+          </ul>
+          <p>These are stored locally on your device. We do not have access to this data, and it is never transmitted to our servers unless you explicitly use the cloud save feature.</p>
+        </div>
 
-      <div class="policy-section">
-        <h2>Children's Privacy</h2>
-        <p>This tool is not directed at children under 13. We do not knowingly collect information from children under 13.</p>
-      </div>
+        <div class="pp-section">
+          <span class="section-num">§ 04</span>
+          <h2><span class="icon">🔌</span> Third-Party Services</h2>
+          <p><strong>Binance API</strong> — When you switch to LIVE mode, market data is fetched directly from Binance's public API (<code>api.binance.com</code>). This is a read-only public endpoint. No API keys or account information is required or stored.</p>
+          <p><strong>Google AdSense</strong> — We may display advertisements through Google AdSense. Google may use cookies to serve ads based on your prior visits to this and other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads">Google's Ads Settings</a>.</p>
+          <p><strong>Google Analytics</strong> — We may use Google Analytics to understand site traffic patterns. This collects anonymous data such as page views, time on site, and general geographic region. No personally identifiable information is collected.</p>
+        </div>
 
-      <div class="policy-section">
-        <h2>Changes to This Policy</h2>
-        <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated revision date.</p>
-      </div>
+        <div class="pp-section">
+          <span class="section-num">§ 05</span>
+          <h2><span class="icon">🔐</span> Data Security</h2>
+          <p>All data processing happens in your browser. Strategy calculations run client-side using JavaScript. No trading activity is executed — this is a simulation tool only. We do not connect to any exchange accounts, wallets, or trading APIs.</p>
+        </div>
 
-      <div class="policy-section">
-        <h2>Contact</h2>
-        <p>If you have questions about this privacy policy, contact us at: <strong style="color:#00d4ff;">quant.terminal@example.com</strong></p>
-      </div>
+        <div class="pp-section">
+          <span class="section-num">§ 06</span>
+          <h2><span class="icon">👶</span> Children's Privacy</h2>
+          <p>This tool is not directed at children under 13. We do not knowingly collect information from children under 13.</p>
+        </div>
 
+        <div class="pp-section">
+          <span class="section-num">§ 07</span>
+          <h2><span class="icon">📝</span> Changes to This Policy</h2>
+          <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated revision date.</p>
+        </div>
+
+        <div class="pp-section" style="border-color: rgba(0,212,255,0.12); background: rgba(0,212,255,0.03);">
+          <span class="section-num">§ 08</span>
+          <h2><span class="icon">✉</span> Contact</h2>
+          <p>If you have questions about this privacy policy, contact us at:</p>
+          <p style="font-family:'JetBrains Mono',monospace; font-size:0.88rem; color:#00d4ff; margin-bottom:0;">quant.terminal@example.com</p>
+        </div>
+
+      </div>
     </div>
 
-    <footer class="border-t border-white/[0.04] px-6 py-4 text-center font-mono text-[11px] text-[#7d8a9e]">
-      <a href="index.html" style="color:#8f99a8;">Quant Terminal</a> · <a href="strategy-guide.html" style="color:#8f99a8;">Strategy Guide</a> · © 2024–2026
+    <footer class="pp-footer">
+      <a href="index.html">Quant Terminal</a> · <a href="strategy-guide.html">Strategy Guide</a> · © 2024–2026
     </footer>
 
   </div>
