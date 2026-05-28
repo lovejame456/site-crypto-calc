@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — Quant Terminal</title>
+  <meta name="description" content="Get in touch with the Quant Terminal team. Report bugs, suggest features, or ask questions about our crypto backtesting platform." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Contact Us — Quant Terminal" />
+  <meta property="og:description" content="Reach out to the Quant Terminal team for support, feedback, or partnership inquiries." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://site-crypto-calc.vercel.app/contact.html" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='10' fill='%230c0e18'/><rect x='10' y='26' width='6' height='12' rx='1' fill='%2300d4ff'/><rect x='21' y='18' width='6' height='20' rx='1' fill='%2300d4ff' opacity='0.7'/><rect x='32' y='10' width='6' height='28' rx='1' fill='%2300d4ff' opacity='0.5'/></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css?v=10" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap');
+    body{background:#080a12;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(0,212,255,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(0,229,160,0.04) 0%,transparent 50%)}
+
+    .ct-hero{position:relative;padding:52px 0 36px;text-align:center;overflow:hidden}
+    .ct-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:420px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.35),transparent)}
+    .ct-hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:240px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.15),transparent)}
+    .ct-hero h1{font-family:'IBM Plex Sans',sans-serif;font-size:2.2rem;font-weight:800;color:#e4eaf4;letter-spacing:-0.03em;margin:0 0 8px}
+    .ct-hero .subtitle{font-family:'IBM Plex Sans',sans-serif;font-size:1rem;color:#7d8a9e;line-height:1.7;max-width:500px;margin:0 auto}
+
+    .ct-icon-wrap{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:16px;border:1px solid rgba(0,212,255,0.2);background:rgba(0,212,255,0.06);margin-bottom:20px;animation:shield-pulse 3s ease-in-out infinite}
+    @keyframes shield-pulse{0%,100%{box-shadow:0 0 0 rgba(0,212,255,0)}50%{box-shadow:0 0 20px rgba(0,212,255,0.1)}}
+
+    .ct-card{background:rgba(14,17,28,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:28px 32px;margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s;opacity:0;transform:translateY(16px);animation:ct-in 0.5s ease forwards}
+    .ct-card:nth-child(1){animation-delay:.05s}.ct-card:nth-child(2){animation-delay:.1s}.ct-card:nth-child(3){animation-delay:.15s}
+    @keyframes ct-in{to{opacity:1;transform:translateY(0)}}
+    .ct-card:hover{border-color:rgba(0,212,255,0.15);box-shadow:0 0 30px rgba(0,212,255,0.03)}
+    .ct-card h2{font-family:'IBM Plex Sans',sans-serif;font-size:1rem;font-weight:700;color:#e4eaf4;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+    .ct-card h2 .ic{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);font-size:0.85rem;flex-shrink:0}
+    .ct-card p{font-family:'IBM Plex Sans',sans-serif;color:#a0aab8;line-height:1.8;margin-bottom:12px;font-size:0.9rem}
+    .ct-card strong{color:#d0d8e8;font-weight:600}
+
+    .contact-methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+    .cm-item{background:rgba(14,17,28,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:20px;text-align:center;transition:border-color 0.3s}
+    .cm-item:hover{border-color:rgba(0,212,255,0.15)}
+    .cm-item .cm-icon{font-size:1.4rem;margin-bottom:10px}
+    .cm-item .cm-label{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:#5a6a7e;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px}
+    .cm-item .cm-value{font-family:'IBM Plex Sans',sans-serif;font-size:0.9rem;color:#e4eaf4;font-weight:600}
+
+    .contact-form{margin-top:16px}
+    .form-group{margin-bottom:16px}
+    .form-group label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#a0aab8;letter-spacing:0.04em;margin-bottom:6px;text-transform:uppercase}
+    .form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(8,10,18,0.8);color:#e4eaf4;font-family:'IBM Plex Sans',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box}
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(0,212,255,0.4);box-shadow:0 0 12px rgba(0,212,255,0.08)}
+    .form-group textarea{resize:vertical;min-height:120px}
+    .form-group select option{background:#0c0e18;color:#e4eaf4}
+    .submit-btn{font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:600;color:#080a12;background:#00d4ff;border:none;padding:12px 32px;border-radius:8px;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s}
+    .submit-btn:hover{background:#00e5a0;box-shadow:0 0 20px rgba(0,212,255,0.2)}
+    .form-note{font-size:0.78rem;color:#5a6a7e;margin-top:10px;font-style:italic}
+
+    .back-link{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#8f99a8;text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);transition:all 0.2s}
+    .back-link:hover{color:#00d4ff;border-color:rgba(0,212,255,0.2)}
+    .nav-link{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#a0aab8;text-decoration:none;padding:5px 12px;border-radius:4px;border:1px solid rgba(255,255,255,0.06);transition:all 0.2s}
+    .nav-link:hover{color:#00d4ff;border-color:rgba(0,212,255,0.2)}
+    .pg-footer{border-top:1px solid rgba(255,255,255,0.04);padding:16px 24px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#5a6a7e}
+    .pg-footer a{color:#6b7a8d;text-decoration:none;transition:color 0.2s}
+    .pg-footer a:hover{color:#00d4ff}
+    @media(max-width:640px){.ct-hero h1{font-size:1.6rem}.ct-card{padding:20px}.contact-methods{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div id="app-root" class="min-h-screen flex flex-col">
+
+    <header class="site-header">
+      <div class="header-left">
+        <a href="index.html" class="flex items-center gap-3 no-underline">
+          <svg width="34" height="34" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="10" fill="#0c0e18"/><rect x="10" y="26" width="6" height="12" rx="1.5" fill="#00d4ff"/><rect x="21" y="18" width="6" height="20" rx="1.5" fill="#00d4ff" opacity="0.7"/><rect x="32" y="10" width="6" height="28" rx="1.5" fill="#00d4ff" opacity="0.45"/></svg>
+          <div class="header-brand"><span class="brand-name">QUANT</span><span class="brand-dot">·</span><span class="brand-sub">TERMINAL</span></div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="index.html" class="back-link">← Terminal</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+    </header>
+
+    <div class="flex-1 max-w-[760px] mx-auto w-full px-5">
+
+      <div class="ct-hero">
+        <div class="ct-icon-wrap">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h1>Contact Us</h1>
+        <p class="subtitle">Have a question, found a bug, or want to suggest a feature? We'd love to hear from you.</p>
+      </div>
+
+      <div style="padding-bottom:48px;">
+
+        <div class="ct-card">
+          <h2><span class="ic">📬</span> Get in Touch</h2>
+          <p>Choose the method that works best for you. We typically respond within 24–48 hours.</p>
+          <div class="contact-methods">
+            <div class="cm-item">
+              <div class="cm-icon">✉️</div>
+              <div class="cm-label">Email</div>
+              <div class="cm-value">quant.terminal@example.com</div>
+            </div>
+            <div class="cm-item">
+              <div class="cm-icon">🐦</div>
+              <div class="cm-label">Twitter / X</div>
+              <div class="cm-value">@QuantTerminal</div>
+            </div>
+            <div class="cm-item">
+              <div class="cm-icon">💬</div>
+              <div class="cm-label">Discord</div>
+              <div class="cm-value">Quant Terminal Community</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ct-card">
+          <h2><span class="ic">📝</span> Send Us a Message</h2>
+          <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+          <div class="contact-form">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" placeholder="Enter your name" />
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="you@example.com" />
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <select>
+                <option value="">Select a topic...</option>
+                <option value="bug">Bug Report</option>
+                <option value="feature">Feature Request</option>
+                <option value="question">General Question</option>
+                <option value="strategy">Strategy Question</option>
+                <option value="partnership">Partnership Inquiry</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea placeholder="Tell us what's on your mind..."></textarea>
+            </div>
+            <button class="submit-btn" onclick="showConfirm()">Send Message →</button>
+            <p class="form-note" id="form-confirm" style="display:none;color:#00e5a0;">✓ Message received! We'll get back to you soon.</p>
+          </div>
+        </div>
+
+        <div class="ct-card">
+          <h2><span class="ic">❓</span> Frequently Asked Questions</h2>
+          <p><strong>Is Quant Terminal really free?</strong><br/>Yes, 100% free. No premium tier, no paywalled features, no hidden costs. We cover our expenses through non-intrusive advertising.</p>
+          <p><strong>Do you store my trading data?</strong><br/>No. All strategy calculations run in your browser. We don't have access to your parameters, results, or any personal data. See our <a href="privacy-policy.html" style="color:#00d4ff;text-decoration:none;border-bottom:1px solid rgba(0,212,255,0.2);">Privacy Policy</a> for details.</p>
+          <p><strong>Can I use this for actual trading?</strong><br/>Quant Terminal is a <strong>simulation and education tool</strong>. It does not connect to any exchange, execute trades, or manage real funds. Always do your own research before trading with real money.</p>
+          <p><strong>Can I suggest a new strategy?</strong><br/>Absolutely. Use the form above with "Feature Request" selected and describe the strategy logic. We evaluate all community suggestions for future updates.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="pg-footer">
+      <a href="index.html">Quant Terminal</a> · <a href="strategy-guide.html">Strategy Guide</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="about.html">About</a> · © 2024–2026
+    </footer>
+
+  </div>
+
+  <script>
+    function showConfirm() {
+      var el = document.getElementById('form-confirm');
+      if (el) el.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

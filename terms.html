@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms & Conditions — Quant Terminal</title>
+  <meta name="description" content="Terms of service, disclaimer, and legal notices for Quant Terminal — a free educational crypto backtesting tool. Not financial advice." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Terms & Conditions — Quant Terminal" />
+  <meta property="og:description" content="Legal terms and financial disclaimer for Quant Terminal. This is an educational simulation tool, not financial advice." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://site-crypto-calc.vercel.app/terms.html" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='10' fill='%230c0e18'/><rect x='10' y='26' width='6' height='12' rx='1' fill='%2300d4ff'/><rect x='21' y='18' width='6' height='20' rx='1' fill='%2300d4ff' opacity='0.7'/><rect x='32' y='10' width='6' height='28' rx='1' fill='%2300d4ff' opacity='0.5'/></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css?v=10" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap');
+    body{background:#080a12;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(0,212,255,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(0,229,160,0.04) 0%,transparent 50%)}
+
+    .tm-hero{position:relative;padding:52px 0 36px;text-align:center;overflow:hidden}
+    .tm-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:420px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.35),transparent)}
+    .tm-hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:240px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.15),transparent)}
+    .tm-hero h1{font-family:'IBM Plex Sans',sans-serif;font-size:2.2rem;font-weight:800;color:#e4eaf4;letter-spacing:-0.03em;margin:0 0 8px}
+    .tm-hero .subtitle{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:#5a6a7e;letter-spacing:0.06em;text-transform:uppercase}
+
+    .tm-card{background:rgba(14,17,28,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:28px 32px;margin-bottom:16px;position:relative;transition:border-color 0.3s,box-shadow 0.3s;opacity:0;transform:translateY(16px);animation:tm-in 0.5s ease forwards}
+    .tm-card:nth-child(1){animation-delay:.05s}.tm-card:nth-child(2){animation-delay:.1s}.tm-card:nth-child(3){animation-delay:.15s}.tm-card:nth-child(4){animation-delay:.2s}.tm-card:nth-child(5){animation-delay:.25s}.tm-card:nth-child(6){animation-delay:.3s}.tm-card:nth-child(7){animation-delay:.35s}.tm-card:nth-child(8){animation-delay:.4s}.tm-card:nth-child(9){animation-delay:.45s}
+    @keyframes tm-in{to{opacity:1;transform:translateY(0)}}
+    .tm-card:hover{border-color:rgba(0,212,255,0.15);box-shadow:0 0 30px rgba(0,212,255,0.03)}
+    .tm-card .section-num{position:absolute;top:28px;right:28px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:rgba(0,212,255,0.25);letter-spacing:0.08em}
+    .tm-card h2{font-family:'IBM Plex Sans',sans-serif;font-size:1rem;font-weight:700;color:#e4eaf4;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+    .tm-card h2 .ic{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);font-size:0.85rem;flex-shrink:0}
+    .tm-card p{font-family:'IBM Plex Sans',sans-serif;color:#a0aab8;line-height:1.8;margin-bottom:12px;font-size:0.9rem}
+    .tm-card p:last-child{margin-bottom:0}
+    .tm-card strong{color:#d0d8e8;font-weight:600}
+    .tm-card ul{color:#a0aab8;padding-left:0;list-style:none;font-size:0.9rem;line-height:1.8;margin-bottom:12px}
+    .tm-card li{padding:4px 0 4px 20px;position:relative}
+    .tm-card li::before{content:'';position:absolute;left:4px;top:13px;width:5px;height:5px;border-radius:50%;background:rgba(0,212,255,0.4)}
+
+    .disclaimer-box{border-color:rgba(255,71,87,0.2)!important;background:rgba(255,71,87,0.04)!important}
+    .disclaimer-box h2 .ic{background:rgba(255,71,87,0.08)!important;border-color:rgba(255,71,87,0.15)!important}
+
+    .back-link{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#8f99a8;text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);transition:all 0.2s}
+    .back-link:hover{color:#00d4ff;border-color:rgba(0,212,255,0.2)}
+    .nav-link{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#a0aab8;text-decoration:none;padding:5px 12px;border-radius:4px;border:1px solid rgba(255,255,255,0.06);transition:all 0.2s}
+    .nav-link:hover{color:#00d4ff;border-color:rgba(0,212,255,0.2)}
+    .pg-footer{border-top:1px solid rgba(255,255,255,0.04);padding:16px 24px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#5a6a7e}
+    .pg-footer a{color:#6b7a8d;text-decoration:none;transition:color 0.2s}
+    .pg-footer a:hover{color:#00d4ff}
+    @media(max-width:640px){.tm-hero h1{font-size:1.6rem}.tm-card{padding:20px}.tm-card .section-num{display:none}}
+  </style>
+</head>
+<body>
+  <div id="app-root" class="min-h-screen flex flex-col">
+
+    <header class="site-header">
+      <div class="header-left">
+        <a href="index.html" class="flex items-center gap-3 no-underline">
+          <svg width="34" height="34" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="10" fill="#0c0e18"/><rect x="10" y="26" width="6" height="12" rx="1.5" fill="#00d4ff"/><rect x="21" y="18" width="6" height="20" rx="1.5" fill="#00d4ff" opacity="0.7"/><rect x="32" y="10" width="6" height="28" rx="1.5" fill="#00d4ff" opacity="0.45"/></svg>
+          <div class="header-brand"><span class="brand-name">QUANT</span><span class="brand-dot">·</span><span class="brand-sub">TERMINAL</span></div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="index.html" class="back-link">← Terminal</a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+    </header>
+
+    <div class="flex-1 max-w-[760px] mx-auto w-full px-5">
+
+      <div class="tm-hero">
+        <h1>Terms & Conditions</h1>
+        <div class="subtitle">Last updated · May 28, 2026</div>
+      </div>
+
+      <div style="padding-bottom:48px;">
+
+        <div class="tm-card disclaimer-box">
+          <span class="section-num">⚠ Critical</span>
+          <h2><span class="ic">🚫</span> Financial Disclaimer</h2>
+          <p><strong>Quant Terminal is an educational simulation tool. It is NOT financial advice, investment advice, or trading advice.</strong></p>
+          <p>The backtesting results displayed on this website are based on historical data and do not guarantee or predict future performance. Cryptocurrency trading involves substantial risk of loss. You should not treat any output from this tool as a recommendation to buy, sell, or hold any cryptocurrency or financial instrument.</p>
+          <p><strong>Always consult a qualified financial advisor before making investment decisions. Never invest more than you can afford to lose.</strong></p>
+        </div>
+
+        <div class="tm-card">
+          <span class="section-num">§ 01</span>
+          <h2><span class="ic">📋</span> Acceptance of Terms</h2>
+          <p>By accessing and using Quant Terminal ("the Site"), you accept and agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use the Site.</p>
+          <p>These terms apply to all visitors, users, and others who access or use the Site. We reserve the right to modify these terms at any time. Your continued use of the Site after any changes constitutes acceptance of the new terms.</p>
+        </div>
+
+        <div class="tm-card">
+          <span class="section-num">§ 02</span>
+          <h2><span class="ic">🎯</span> Purpose of the Tool</h2>
+          <p>Quant Terminal is a <strong>browser-based educational tool</strong> designed to help users understand quantitative trading concepts through interactive backtesting simulations. Specifically:</p>
+          <ul>
+            <li>All strategy calculations run locally in your browser using JavaScript</li>
+            <li>Historical price data is either simulated or fetched from public APIs for educational purposes</li>
+            <li>No real trades are executed, no exchange accounts are connected, and no real funds are involved</li>
+            <li>The tool does not connect to any cryptocurrency exchange, wallet, or trading platform</li>
+            <li>Results shown are hypothetical and based on past data — they do not represent actual trading results</li>
+          </ul>
+        </div>
+
+        <div class="tm-card">
+          <span class="section-num">§ 03</span>
+          <h2><span class="ic">🚫</span> Not Financial Advice</h2>
+          <p>Nothing on this website constitutes financial, investment, legal, or tax advice. The content is provided for <strong>general informational and educational purposes only</strong>.</p>
+          <p>You should not act on any information provided without first seeking professional advice from a qualified financial advisor, tax professional, or legal counsel. The strategies, indicators, and results discussed on this Site are educational examples and should not be interpreted as recommendations.</p>
+          <p>Cryptocurrency markets are highly volatile and unpredictable. Historical backtesting results do not guarantee, predict, or imply future profitability. Many factors — including market conditions, liquidity, slippage, transaction fees, and regulatory changes — are not fully captured by our simulation and can materially affect real-world trading outcomes.</p>
+        </div>
+
+        <div class="tm-card">
+          <span class="section-num">§ 04</span>
+          <h2><span class="ic">📊</span> Data Accuracy</h2>
+          <p>While we strive to provide accurate and useful information, we make no warranties or representations about the accuracy, completeness, or reliability of:</p>
+          <ul>
+            <li>Simulated market data used in MOCK mode</li>
+            <li>Historical price data fetched from third-party APIs (e.g., Binance)</li>
+            <li>Backtesting results, performance metrics, or trade logs generated by the tool</li>
+            <li>Educational content in the Strategy Guide</li>
+          </ul>
+          <p>Any reliance you place on such information is strictly at your own risk. We are not liable for any losses, damages, or decisions made based on information provided by this tool.</p>
+        </div>
+
+        <div class="tm-card">
+          <span class="section-num">§ 05</span>
+          <h2><span class="ic">👤</span> User Responsibilities</h2>
+          <p>By using this Site, you agree that:</p>
+          <ul>
+            <li>You are at least 18 years of age</li>
+            <li>You will not use this tool as the sole basis for any financial decision</li>
+            <li>You understand that cryptocurrency trading carries significant risk of loss</li>
+            <li>You will not hold Quant Terminal liable for any trading losses or financial decisions</li>
+            <li>You will not attempt to reverse-engineer, exploit, or abuse the Site's infrastructure</li>
+            <li>You will not use the Site for any illegal or unauthorized purpose</li>
+          </ul>
+        </div>
+
+        <div class="tm-card">
+          <span class="section-num">§ 06</span>
+          <h2><span class="ic">🔐</span> Privacy</h2>
+          <p>Your use of the Site is also governed by our <a href="privacy-policy.html" style="color:#00d4ff;text-decoration:none;border-bottom:1px solid rgba(0,212,255,0.2);">Privacy Policy</a>, which explains how we handle data, localStorage, and third-party services.</p>
+        </div>
+
+        <div class="tm-card">
+          <span class="section-num">§ 07</span>
+          <h2><span class="ic">⚖</span> Limitation of Liability</h2>
+          <p>To the fullest extent permitted by applicable law, Quant Terminal and its team shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:</p>
+          <ul>
+            <li>Loss of profits, data, or investment capital</li>
+            <li>Damages arising from trading decisions based on tool output</li>
+            <li>Interruption of service, data errors, or technical failures</li>
+            <li>Any unauthorized access to or alteration of your data</li>
+          </ul>
+          <p>This limitation applies regardless of the legal theory under which such damages are sought, whether in contract, tort, strict liability, or otherwise.</p>
+        </div>
+
+        <div class="tm-card">
+          <span class="section-num">§ 08</span>
+          <h2><span class="ic">📡</span> Third-Party Services</h2>
+          <p>The Site may integrate with or display content from third-party services including Binance API, Google AdSense, and Google Analytics. These services are governed by their own terms and privacy policies. We are not responsible for the practices of these third parties.</p>
+        </div>
+
+        <div class="tm-card">
+          <span class="section-num">§ 09</span>
+          <h2><span class="ic">✉</span> Contact</h2>
+          <p>Questions about these terms? Contact us at <strong style="color:#00d4ff;">quant.terminal@example.com</strong> or visit our <a href="contact.html" style="color:#00d4ff;text-decoration:none;border-bottom:1px solid rgba(0,212,255,0.2);">Contact page</a>.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="pg-footer">
+      <a href="index.html">Quant Terminal</a> · <a href="strategy-guide.html">Strategy Guide</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · © 2024–2026
+    </footer>
+
+  </div>
+</body>
+</html>

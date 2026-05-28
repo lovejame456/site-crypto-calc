@@ -359,7 +359,7 @@
         <h1>Strategy Guide</h1>
         <p class="desc">Practical guides on the indicators and risk management principles behind our backtesting engine. Written for traders who want to understand <em>why</em> a signal fires — not just <em>when</em>.</p>
         <div class="sg-stats">
-          <div class="sg-stat"><div class="val">6</div><div class="label">Articles</div></div>
+          <div class="sg-stat"><div class="val">20</div><div class="label">Articles</div></div>
           <div class="sg-stat"><div class="val">4</div><div class="label">Indicators</div></div>
           <div class="sg-stat"><div class="val">3</div><div class="label">Strategies</div></div>
         </div>
@@ -569,11 +569,521 @@
           </div>
         </div>
 
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon boll">📉</div>
+            <div class="article-meta">
+              <h2>Moving Averages: SMA vs EMA and When to Use Each</h2>
+              <p class="excerpt">The two most common moving averages look similar on a chart — but they behave very differently when markets move fast.</p>
+              <div class="tag-row"><span class="atag">Trend</span><span class="atag">Beginner</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p><strong>Moving averages</strong> smooth out price data to reveal the underlying trend. They are the foundation of almost every technical indicator — Bollinger Bands, MACD, and many crossover strategies all derive from them. But not all moving averages are created equal.</p>
+              <h3>SMA: The Steady Workhorse</h3>
+              <p>The <strong>Simple Moving Average (SMA)</strong> calculates the arithmetic mean of the last N closing prices. A 20-day SMA adds up the last 20 closes and divides by 20. Every data point gets equal weight. The formula is straightforward: <code>SMA = Σ(Price) / N</code>.</p>
+              <p>The advantage of SMA is stability. Because all prices are weighted equally, a single outlier candle doesn't dramatically shift the average. This makes SMA ideal for identifying long-term trend direction and key support/resistance levels. The widely-watched 50-day and 200-day SMAs are staples of daily chart analysis.</p>
+              <h3>EMA: The Responsive Alternative</h3>
+              <p>The <strong>Exponential Moving Average (EMA)</strong> gives more weight to recent prices. The weighting factor is <code>k = 2 / (N + 1)</code>, and each new EMA value is calculated as <code>EMA = Price × k + EMA_prev × (1 - k)</code>. For a 20-period EMA, k = 0.095 — meaning the most recent price gets 9.5% weight, and older prices decay exponentially.</p>
+              <p>This makes EMA <strong>react faster</strong> to price changes. In crypto, where trends can reverse violently in hours, this responsiveness matters. When BTC drops 8% in a day, the 20 EMA will turn down noticeably faster than the 20 SMA.</p>
+              <h3>Which One Should You Use?</h3>
+              <ul>
+                <li><strong>Long-term trend identification</strong>: SMA (50, 200 period). Less noise, clearer direction</li>
+                <li><strong>Short-term trading signals</strong>: EMA (9, 21 period). Faster response to momentum shifts</li>
+                <li><strong>Crossover systems</strong>: Many traders use a fast EMA crossing a slow SMA — combining responsiveness with stability</li>
+                <li><strong>Bollinger Bands</strong>: Use SMA by default. The standard deviation calculation is based on SMA, so mixing EMA into Bollinger Bands creates inconsistency</li>
+              </ul>
+              <p>The famous <strong>Death Cross</strong> (50 SMA crossing below 200 SMA) and <strong>Golden Cross</strong> (50 SMA crossing above 200 SMA) are SMA-based signals that institutional traders monitor. In crypto, these crosses have historically preceded major trend changes — though with significant lag.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon back">🏔</div>
+            <div class="article-meta">
+              <h2>Support and Resistance Levels in Crypto</h2>
+              <p class="excerpt">Price doesn't move randomly — it bounces off invisible walls. Learning to see those walls is the first skill every trader needs.</p>
+              <div class="tag-row"><span class="atag">Structure</span><span class="atag">Essential</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p><strong>Support</strong> is a price level where buying pressure tends to emerge, preventing further decline. <strong>Resistance</strong> is where selling pressure increases, capping further gains. These aren't magic lines — they represent zones where large orders cluster, where traders have memory of previous reversals, and where psychology shifts.</p>
+              <h3>How to Identify Key Levels</h3>
+              <p>The most reliable levels share several characteristics: they've been tested multiple times, they coincide with round numbers, and they align across different timeframes. A support level visible on both the daily and weekly chart is far stronger than one that only appears on the 15-minute chart.</p>
+              <p>In crypto, <strong>psychological levels</strong> are especially powerful. BTC at $50,000, ETH at $3,000, SOL at $100 — these round numbers attract attention from retail and institutional traders alike. Orders cluster near them, creating genuine supply and demand imbalances.</p>
+              <h3>Role Reversal</h3>
+              <p>One of the most important concepts in technical analysis: <strong>when support breaks, it becomes resistance</strong>. And vice versa. If BTC bounces off $40,000 three times, then finally breaks below it, $40,000 transforms from a floor into a ceiling. Traders who bought at support will want to sell at breakeven, creating selling pressure at exactly that level.</p>
+              <h3>Practical Tips for Crypto</h3>
+              <ul>
+                <li><strong>Use zones, not lines</strong>: Support and resistance are areas, not exact prices. A zone of $39,500–$40,500 is more realistic than $40,000 exactly</li>
+                <li><strong>Volume confirms significance</strong>: A level tested on high volume is more meaningful than one touched during low-volume weekend trading</li>
+                <li><strong>Watch for false breakouts</strong>: Price briefly pierces a level then reverses. These trap early entrants and often lead to sharp moves in the opposite direction</li>
+                <li><strong>Higher timeframe levels override lower ones</strong>: A daily resistance level matters more than a 15-minute support level</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon boll">🕯</div>
+            <div class="article-meta">
+              <h2>How to Read Candlestick Charts</h2>
+              <p class="excerpt">Every candle tells a story about the battle between buyers and sellers. Here's how to decode what they're saying.</p>
+              <div class="tag-row"><span class="atag">Charts</span><span class="atag">Beginner</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p><strong>Candlestick charts</strong> are the standard way to visualize price action in financial markets. Each candle represents a specific time period and shows four data points: open, high, low, and close (OHLC). The body of the candle spans from open to close, while the wicks (or shadows) extend to the high and low.</p>
+              <h3>Anatomy of a Candle</h3>
+              <p>A <strong>green (bullish) candle</strong> means the close was higher than the open — buyers won that session. A <strong>red (bearish) candle</strong> means the close was lower than the open — sellers dominated. The longer the body, the more decisive the move. Long wicks indicate rejection at that price level.</p>
+              <h3>Key Candlestick Patterns</h3>
+              <ul>
+                <li><strong>Doji</strong>: Open and close are nearly equal. Indicates indecision. Often appears at turning points</li>
+                <li><strong>Hammer</strong>: Small body at the top, long lower wick. Sellers pushed price down but buyers absorbed the selling. Bullish reversal signal when appearing at support</li>
+                <li><strong>Engulfing Pattern</strong>: A large candle completely "engulfs" the previous one. A bullish engulfing at support is a strong reversal signal</li>
+                <li><strong>Morning/Evening Star</strong>: Three-candle patterns. Morning star (bullish) = large red candle, small indecision candle, large green candle. Reversal in progress</li>
+              </ul>
+              <h3>Context Matters More Than Patterns</h3>
+              <p>A hammer at support means something. A hammer in the middle of a range means nothing. A doji at all-time highs is a warning. A doji during a quiet weekend is just noise. <strong>Always read candles in context</strong> — where they appear matters more than what shape they take.</p>
+              <p>In crypto, candlestick patterns tend to work better on 4-hour and daily timeframes. On 5-minute charts, there's too much noise and too many false signals. The same patterns that institutional traders watch on daily charts are the ones worth learning.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon rsi">🌀</div>
+            <div class="article-meta">
+              <h2>Fibonacci Retracement in Crypto Markets</h2>
+              <p class="excerpt">A mathematical sequence found in nature also shows up in price charts. Here's why Fib levels work — and when they don't.</p>
+              <div class="tag-row"><span class="atag">Levels</span><span class="atag">Intermediate</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p><strong>Fibonacci retracement</strong> levels are horizontal lines drawn at key percentages of a price move. The standard levels are 23.6%, 38.2%, 50%, 61.8%, and 78.6%. Traders use them to predict where pullbacks might find support (in an uptrend) or resistance (in a downtrend).</p>
+              <h3>The Golden Ratio</h3>
+              <p>The 61.8% level — derived from the Fibonacci sequence's golden ratio (1.618) — is considered the most important. Mathematically, it represents the point where a move has given back roughly 62% of its gains. In crypto, deep retracements to the 61.8% level before resuming the trend are surprisingly common.</p>
+              <p>The 38.2% level is the second most watched. Shallow pullbacks to this level in a strong trend often provide entry opportunities before the trend continues.</p>
+              <h3>How to Draw Fibonacci Levels</h3>
+              <p>Identify a significant swing low and swing high (for uptrend analysis). Draw the Fib tool from low to high. The retracement levels automatically appear. For a downtrend, reverse the process — draw from high to low.</p>
+              <p>The key is choosing the <strong>right swing points</strong>. Use the most significant recent move, not minor fluctuations. On a daily BTC chart, a move from $25,000 to $69,000 is the relevant swing — not a random $45,000 to $48,000 blip.</p>
+              <h3>Using Fib with Other Indicators</h3>
+              <ul>
+                <li><strong>Fib + RSI</strong>: If price retraces to 61.8% and RSI shows oversold, the confluence strengthens the signal</li>
+                <li><strong>Fib + Bollinger Bands</strong>: A Fib level near the lower Bollinger Band is a high-probability bounce zone</li>
+                <li><strong>Fib + Volume</strong>: High volume at a Fib level suggests genuine support/resistance, not a coincidence</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon macd">📊</div>
+            <div class="article-meta">
+              <h2>Volume Analysis: The Fuel Behind Every Move</h2>
+              <p class="excerpt">Price shows you what happened. Volume shows you whether anyone actually believed it. Here's why volume is the most underrated indicator.</p>
+              <div class="tag-row"><span class="atag">Volume</span><span class="atag">Intermediate</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p><strong>Volume</strong> is the total amount of an asset traded during a given period. In crypto, it's measured in units of the base currency (e.g., 12,500 BTC traded in 24 hours) or in quote currency (e.g., $850M USDT worth of BTC). Volume is the most direct measure of market conviction.</p>
+              <h3>Volume Confirms Price</h3>
+              <p>A breakout on high volume is far more trustworthy than one on low volume. When BTC breaks above $50,000 on $5 billion in daily volume, the market is committing real capital to the move. When it breaks above on $800 million in volume, it might be a trap.</p>
+              <p>The general rule: <strong>price moves accompanied by increasing volume are more sustainable</strong>. Price moves on declining volume are suspect — they often reverse.</p>
+              <h3>Volume Divergence</h3>
+              <p>A <strong>bearish volume divergence</strong> occurs when price makes new highs but volume is declining with each successive push. Fewer participants are driving the move, suggesting exhaustion. Conversely, a <strong>bullish volume divergence</strong> happens when price makes new lows on decreasing volume — selling pressure is fading.</p>
+              <h3>Volume Spikes and What They Mean</h3>
+              <ul>
+                <li><strong>Spike at support/resistance</strong>: Large institutional orders executing. Often marks a reversal point</li>
+                <li><strong>Spike during a breakout</strong>: Genuine momentum. The move has broad participation</li>
+                <li><strong>Spike at the end of a long trend</strong>: Potential capitulation. Everyone who wanted to sell has sold</li>
+                <li><strong>Low volume during consolidation</strong>: Market is coiling. A big move is likely coming</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon back">🔭</div>
+            <div class="article-meta">
+              <h2>Multi-Timeframe Analysis: Seeing the Big Picture</h2>
+              <p class="excerpt">A buy signal on the 15-minute chart might be a blip on the daily. Why professional traders always zoom out before pulling the trigger.</p>
+              <div class="tag-row"><span class="atag">Methodology</span><span class="atag">Intermediate</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p><strong>Multi-timeframe analysis (MTA)</strong> is the practice of examining the same asset across different time periods before making a trading decision. The idea is simple: the trend on a higher timeframe carries more weight than the trend on a lower one. A 4-hour buy signal aligned with a weekly uptrend is far more reliable than the same signal fighting a weekly downtrend.</p>
+              <h3>Top-Down Analysis</h3>
+              <p>Start with the highest timeframe and work down. For a swing trade, this might mean: check the weekly chart for the macro trend, the daily chart for the intermediate trend and key levels, then the 4-hour chart for entry timing. Each timeframe serves a different purpose.</p>
+              <ul>
+                <li><strong>Weekly</strong>: Macro trend direction, major support/resistance zones, multi-month range context</li>
+                <li><strong>Daily</strong>: Intermediate trend, Bollinger Band positioning, significant moving averages</li>
+                <li><strong>4-Hour</strong>: Entry timing, short-term momentum (RSI, MACD), intraday support/resistance</li>
+                <li><strong>1-Hour or lower</strong>: Precise entry/exit only. Never use for trend direction</li>
+              </ul>
+              <h3>Why Single-Timeframe Trading Fails</h3>
+              <p>If you only look at the 4-hour chart, you might buy what looks like a breakout — but on the weekly chart, price is hitting a major resistance zone that has rejected price three times in the past year. Without that context, you're trading blind. The 4-hour breakout fails because the weekly resistance is stronger.</p>
+              <p>MTA prevents this. By always starting from the highest timeframe, you never enter a trade fighting a larger trend. <strong>Trade with the tide, not against it.</strong></p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon risk">🧠</div>
+            <div class="article-meta">
+              <h2>Trading Psychology: Your Worst Enemy Is You</h2>
+              <p class="excerpt">The market doesn't make you lose money — your emotions do. Understanding cognitive biases is the most profitable skill you'll never see on a chart.</p>
+              <div class="tag-row"><span class="atag">Psychology</span><span class="atag">Essential</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p>Study after study shows that the majority of retail traders lose money — not because their analysis is wrong, but because their <strong>psychology sabotages their execution</strong>. The gap between knowing what to do and actually doing it is where most trading careers end.</p>
+              <h3>The Big Four Biases</h3>
+              <p><strong>FOMO (Fear of Missing Out)</strong> hits when you see a coin pumping 30% and feel compelled to buy. The chart looks like a rocket, Twitter is buzzing, and your rational analysis goes out the window. FOMO entries are almost always near the top. By the time you're feeling it, the smart money is already selling.</p>
+              <p><strong>Revenge Trading</strong> happens after a loss. You're angry, your ego is bruised, and you want to "win it back." So you double your position size, widen your stop, and enter a trade you'd never take with a clear head. Revenge trades almost always result in larger losses than the original.</p>
+              <p><strong>Loss Aversion</strong> means you feel the pain of a $500 loss roughly twice as intensely as the pleasure of a $500 gain. This asymmetry causes traders to hold losers too long (hoping they'll recover) and cut winners too short (grabbing small profits before they disappear).</p>
+              <p><strong>Overtrading</strong> is the urge to always be in a position. If you're not in a trade, you feel like you're missing something. In reality, the best traders spend most of their time waiting — not trading.</p>
+              <h3>How Backtesting Helps</h3>
+              <p>Backtesting removes emotion from the equation. When you can see that a strategy would have produced a 65% win rate over 365 days of historical data, you have <strong>evidence</strong>. This evidence becomes your anchor when emotions flare during live trading. You know the strategy works over a large sample — any single loss is just noise in the data.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon atr">💀</div>
+            <div class="article-meta">
+              <h2>Common Trading Mistakes and How to Avoid Them</h2>
+              <p class="excerpt">These ten mistakes have destroyed more trading accounts than any bear market. Are you making any of them right now?</p>
+              <div class="tag-row"><span class="atag">Mistakes</span><span class="atag">Beginner</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p>Every experienced trader has made these mistakes. The difference between successful and unsuccessful traders isn't talent — it's how quickly you learn to avoid the predictable traps.</p>
+              <h3>The Top 10 Trading Mistakes</h3>
+              <ul>
+                <li><strong>No stop-loss</strong>: The #1 account killer. Without a predetermined exit, small losses become catastrophic ones. Every trade needs a defined maximum loss before entry</li>
+                <li><strong>Overleveraging</strong>: Using 10x-50x leverage turns normal market fluctuations into liquidation events. Most professional traders use 1-3x leverage maximum</li>
+                <li><strong>Chasing pumps</strong>: Buying after a coin is already up 40% in an hour. The move is likely exhausting, and you're buying from the people who bought earlier</li>
+                <li><strong>Ignoring fees</strong>: Trading fees of 0.1% per trade compound fast. At 100 trades per month, you're paying 10% of your capital in fees alone</li>
+                <li><strong>No trading plan</strong>: Entering trades based on gut feeling rather than defined criteria. If you can't explain why you entered, it's gambling</li>
+                <li><strong>Moving your stop-loss</strong>: Widening your stop when the trade goes against you. This turns small losses into big ones</li>
+                <li><strong>Averaging down on losers</strong>: Adding to a losing position hoping for a rebound. This is how a 5% loss becomes a 30% loss</li>
+                <li><strong>Trading too many coins</strong>: Spreading attention across 20 coins means you understand none of them well. Focus on 3-5</li>
+                <li><strong>Ignoring the trend</strong>: Fighting the macro trend because you found a "great setup" on a lower timeframe. The trend is your friend</li>
+                <li><strong>Not keeping records</strong>: If you don't track your trades, you can't improve. A trading journal is mandatory</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon macd">🐂</div>
+            <div class="article-meta">
+              <h2>Bull Market vs Bear Market Strategies</h2>
+              <p class="excerpt">Strategies that print money during a bull run can bleed you dry in a bear market. The key is knowing which regime you're in — and adapting.</p>
+              <div class="tag-row"><span class="atag">Strategy</span><span class="atag">Intermediate</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p>Crypto markets cycle between <strong>bull phases</strong> (sustained uptrends with rising volumes and broad participation) and <strong>bear phases</strong> (declining prices, shrinking volume, and prolonged consolidation). The strategy that works in one environment can be disastrous in the other.</p>
+              <h3>Identifying the Regime</h3>
+              <p>The simplest method: look at the 200-day SMA. If price is above the 200 SMA and the 50 SMA is above the 200 SMA (Golden Cross), you're likely in a bull phase. If price is below the 200 SMA and the 50 SMA is below (Death Cross), you're in bear territory.</p>
+              <p>Volume trends are equally telling. Rising volume on green candles and falling volume on red candles suggests bullish conditions. The opposite pattern — rising volume on reds — signals distribution and bearish sentiment.</p>
+              <h3>Bull Market Adjustments</h3>
+              <ul>
+                <li><strong>Wider stops</strong>: Trends are stronger, normal pullbacks are deeper. Tight stops will get you chopped out</li>
+                <li><strong>Focus on breakout strategies</strong>: MA CROSS performs well when trends are sustained</li>
+                <li><strong>Higher RSI overbought thresholds</strong>: Raise to 75-80. RSI stays elevated in bull markets</li>
+                <li><strong>Longer holding periods</strong>: Let winners run. Don't cut profits short in a strong trend</li>
+              </ul>
+              <h3>Bear Market Adjustments</h3>
+              <ul>
+                <li><strong>Tighter position sizes</strong>: Risk half of what you'd risk in a bull market</li>
+                <li><strong>Mean-reversion strategies</strong>: RSI REV-style oversold bounces work well in range-bound bear markets</li>
+                <li><strong>Lower RSI oversold thresholds</strong>: Drop to 25 or even 20. Oversold can get more oversold in a bear market</li>
+                <li><strong>Quick profit-taking</strong>: Don't hold for large targets. Take 5-10% gains when available</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon back">📓</div>
+            <div class="article-meta">
+              <h2>How to Build a Trading Journal</h2>
+              <p class="excerpt">The one habit that separates consistently profitable traders from everyone else. No indicator, strategy, or tool can replace what a journal teaches.</p>
+              <div class="tag-row"><span class="atag">Methodology</span><span class="atag">Beginner</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p>A <strong>trading journal</strong> is a detailed record of every trade you make, including the reasoning behind it, the outcome, and your emotional state. It's the single most powerful improvement tool available to any trader — and almost nobody does it consistently.</p>
+              <h3>What to Record</h3>
+              <ul>
+                <li><strong>Entry date, price, and size</strong>: The basic facts</li>
+                <li><strong>Exit date, price, and reason</strong>: Target hit? Stop-loss? Signal reversal? Panic?</li>
+                <li><strong>Strategy and parameters</strong>: Which strategy, what MA period, RSI threshold, ATR multiplier</li>
+                <li><strong>Market context</strong>: What was the broader market doing? Was BTC trending up or down?</li>
+                <li><strong>Confidence level</strong>: Rate 1-5 how confident you were before entering. Over time, you'll learn which confident trades actually perform better</li>
+                <li><strong>Emotional state</strong>: Calm, anxious, FOMO, revenge-seeking? This data is gold for identifying self-sabotage patterns</li>
+              </ul>
+              <h3>Using Backtesting as Journal Data</h3>
+              <p>Quant Terminal's trade log gives you a head start. Every trade is already recorded with entry/exit prices, P&L, and the signal that triggered it. Export or screenshot these logs, add your notes, and you have the beginning of a structured journal without manual data entry.</p>
+              <h3>Weekly Review Process</h3>
+              <p>Spend 30 minutes every weekend reviewing the week's trades. Look for patterns: Are you entering too early? Are your stop-losses too tight? Do certain coins consistently produce better results? The journal doesn't lie — and over time, it will show you exactly where your edge is and where you're leaking money.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon rsi">💰</div>
+            <div class="article-meta">
+              <h2>DCA (Dollar Cost Averaging) Strategy Explained</h2>
+              <p class="excerpt">The simplest strategy that works in crypto — buy a fixed amount at regular intervals. No charts, no indicators, no stress. Here's the math behind why it works.</p>
+              <div class="tag-row"><span class="atag">Strategy</span><span class="atag">Beginner</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p><strong>Dollar Cost Averaging (DCA)</strong> means investing a fixed dollar amount at regular intervals, regardless of price. Buy $100 of BTC every Monday. That's it. No analysis, no timing, no emotional decisions. The strategy works because it automatically buys more when prices are low and less when prices are high.</p>
+              <h3>The Mathematical Advantage</h3>
+              <p>Suppose BTC is at $50,000. You invest $1,000 and get 0.02 BTC. Next month, BTC drops to $40,000. Your $1,000 buys 0.025 BTC. The month after, BTC is at $45,000. Your $1,000 buys 0.0222 BTC. Your average cost per BTC is now <code>($50K + $40K + $45K) / 3 = $45,000</code>, but your actual average is even lower because you bought more at $40,000.</p>
+              <p>This is the mathematical edge of DCA: your average cost is always below the simple average price when markets are volatile. And crypto is nothing if not volatile.</p>
+              <h3>When DCA Works Best</h3>
+              <ul>
+                <li><strong>High-volatility markets</strong>: The wilder the swings, the more DCA's averaging effect helps</li>
+                <li><strong>Long-term accumulation</strong>: DCA is for building a position over months and years, not for trading</li>
+                <li><strong>Uncertain market direction</strong>: When you can't tell if BTC is going to $30K or $100K, DCA removes the stress of timing</li>
+              </ul>
+              <h3>When DCA Doesn't Work</h3>
+              <p>DCA underperforms in a steadily rising market (you'd have been better off buying everything upfront). It also doesn't protect against a prolonged bear market where prices decline for years — you'll keep averaging into a falling asset. DCA works best combined with some market awareness: pause DCA during obvious euphoria tops, and increase it during fear-driven capitulation.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon back">🏦</div>
+            <div class="article-meta">
+              <h2>Crypto Exchange Comparison: Where to Trade</h2>
+              <p class="excerpt">Not all exchanges are created equal. Fees, security, liquidity, and available pairs vary wildly. Here's what matters when choosing where to execute your strategies.</p>
+              <div class="tag-row"><span class="atag">Fundamentals</span><span class="atag">Beginner</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p>Your choice of exchange affects your trading results more than most traders realize. Fees eat into profits, poor liquidity causes slippage, and security failures can cost you everything. Here's a breakdown of the major players and what each does well.</p>
+              <h3>The Major Exchanges</h3>
+              <ul>
+                <li><strong>Binance</strong>: Largest volume, most pairs, lowest fees (0.1% maker/taker with BNB discount). Best for altcoin access and futures trading. Serves most countries except the US</li>
+                <li><strong>Coinbase</strong>: US-regulated, beginner-friendly, higher fees (0.6%+ for takers). Best for regulatory compliance and institutional trust. Limited altcoin selection</li>
+                <li><strong>Kraken</strong>: Strong security track record, good liquidity, moderate fees (0.16-0.26%). Excellent for European traders. Supports fiat on/off ramps in many currencies</li>
+                <li><strong>Bybit</strong>: Popular for derivatives, up to 100x leverage (though you shouldn't use it). Good API for automated trading. Growing spot market</li>
+              </ul>
+              <h3>Spot vs Futures Trading</h3>
+              <p><strong>Spot trading</strong> means buying and selling the actual asset. You own the coin. <strong>Futures trading</strong> means trading contracts that track the price — you never own the underlying asset. Futures enable leverage and short selling, but introduce liquidation risk and funding rate costs.</p>
+              <p>For strategies tested on Quant Terminal, <strong>start with spot trading</strong>. The leverage slider in our tool shows what leveraged returns would look like, but real leverage introduces complexities (liquidation mechanics, funding rates, forced closures) that our simulation doesn't fully capture.</p>
+              <h3>Why Fees Matter More Than You Think</h3>
+              <p>A strategy that generates 50 trades per month on Binance at 0.1% per trade costs 10% of your capital annually in fees alone. On Coinbase at 0.6%, that's 60% per year. Your strategy needs to be massively profitable just to cover the fee gap. Always factor trading fees into your backtesting expectations.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon atr">⚡</div>
+            <div class="article-meta">
+              <h2>Understanding Leverage and Margin in Crypto</h2>
+              <p class="excerpt">Leverage can multiply your gains by 10x. It can also wipe out your account in a single candle. Here's how it actually works — mechanically, not hypothetically.</p>
+              <div class="tag-row"><span class="atag">Risk</span><span class="atag">Intermediate</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p><strong>Leverage</strong> means borrowing money to increase your position size. With 10x leverage on a $1,000 account, you control $10,000 worth of BTC. If BTC goes up 5%, you make $500 (50% return on your $1,000). If it goes down 10%, you lose your entire $1,000 — you're <strong>liquidated</strong>.</p>
+              <h3>How Liquidation Actually Works</h3>
+              <p>When your unrealized loss approaches your collateral, the exchange automatically closes your position. With 10x leverage, a 10% adverse move triggers liquidation. But it's worse than that: exchanges liquidate at the <strong>maintenance margin</strong> level, typically around 5-10% before full loss. Add in the liquidation fee (usually 1-5% of position size), and your actual loss exceeds your initial margin.</p>
+              <h3>Cross vs Isolated Margin</h3>
+              <p><strong>Isolated margin</strong> means only the allocated collateral for that specific position is at risk. If you're liquidated, you lose only that amount. <strong>Cross margin</strong> means your entire account balance is used as collateral. A single bad trade can drain everything. For beginners, always use isolated margin.</p>
+              <h3>Leverage and ATR Stops</h3>
+              <p>This is where leverage interacts with our backtesting tool. If your ATR stop is set at 2x ATR, and BTC's ATR is $1,500, your stop is $3,000 below entry. With 1x leverage on a $65,000 BTC, that's a 4.6% move — manageable. With 10x leverage, that same $3,000 move represents a 46% loss on your collateral. Your stop-loss needs to be hit before liquidation, or the stop is meaningless.</p>
+              <ul>
+                <li><strong>1-2x leverage</strong>: ATR stops work normally. Manageable risk</li>
+                <li><strong>3-5x leverage</strong>: Tighter ATR multiplier needed. Higher chance of liquidation during flash crashes</li>
+                <li><strong>10x+ leverage</strong>: Your stop will often be wider than your liquidation price. The position is unmanageable</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon risk">📑</div>
+            <div class="article-meta">
+              <h2>Crypto Tax Basics: What Every Trader Should Know</h2>
+              <p class="excerpt">Ignoring taxes doesn't make them go away. A basic understanding of how crypto is taxed can save you expensive surprises at year-end.</p>
+              <div class="tag-row"><span class="atag">Compliance</span><span class="atag">Beginner</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p>Crypto taxation varies significantly by jurisdiction, but most countries treat cryptocurrency as either property or a financial asset for tax purposes. This means <strong>every trade, swap, or sale is potentially a taxable event</strong> — not just when you cash out to fiat.</p>
+              <h3>General Principles</h3>
+              <p>In the United States, the IRS treats crypto as property. Buying BTC with USD is not taxable. But selling BTC for USD, trading BTC for ETH, or using BTC to buy goods — all of these trigger capital gains or losses. The difference between your purchase price (cost basis) and the sale price determines the gain or loss.</p>
+              <p><strong>Short-term gains</strong> (held less than one year) are taxed at ordinary income rates — up to 37% in the US. <strong>Long-term gains</strong> (held more than one year) get preferential rates — typically 15-20%. This is why holding periods matter beyond just trading strategy.</p>
+              <h3>Key Concepts</h3>
+              <ul>
+                <li><strong>Cost basis tracking</strong>: Every purchase creates a cost basis. When you sell, you need to know which coins you're selling (FIFO, LIFO, or specific identification methods)</li>
+                <li><strong>Wash sales</strong>: Some jurisdictions disallow loss deductions if you repurchase the same asset within 30 days</li>
+                <li><strong>DeFi transactions</strong>: Swapping tokens on Uniswap, providing liquidity, and earning yield are all potentially taxable events</li>
+                <li><strong>Income vs capital gains</strong>: Mining rewards, staking rewards, and airdrops are typically taxed as income at fair market value when received</li>
+              </ul>
+              <h3>Why This Matters for Quant Terminal Users</h3>
+              <p>If you're running 50+ trades per month with our backtesting strategies, you'll have significant bookkeeping obligations. Start tracking from day one — reconstructing a year of trades retroactively is expensive and error-prone. Many crypto tax tools (CoinTracker, Koinly, TaxBit) can import exchange histories automatically.</p>
+              <p><strong>Disclaimer:</strong> This article provides general information only. Tax laws change frequently and vary by jurisdiction. Always consult a qualified tax professional for advice specific to your situation.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon boll">🌊</div>
+            <div class="article-meta">
+              <h2>Order Types Explained: Market, Limit, Stop-Loss, and More</h2>
+              <p class="excerpt">How you enter a trade matters as much as when. Understanding order types can save you from slippage, missed entries, and unnecessary losses.</p>
+              <div class="tag-row"><span class="atag">Execution</span><span class="atag">Beginner</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p>When you click "buy" on an exchange, you're placing an <strong>order</strong>. The type of order you use determines how and when it gets filled. Using the wrong order type can cost you money through slippage, missed entries, or executing at worse prices than intended.</p>
+              <h3>Market Orders</h3>
+              <p>A <strong>market order</strong> buys or sells immediately at the best available price. It guarantees execution but not price. In a fast-moving market, the price you see when you click "buy" might not be the price you get — this difference is called <strong>slippage</strong>. For liquid pairs like BTC/USDT, slippage is usually tiny. For small-cap altcoins, it can be 1-5% or more.</p>
+              <h3>Limit Orders</h3>
+              <p>A <strong>limit order</strong> sets a specific price at which you're willing to buy or sell. It guarantees your price but not execution — the market may never reach your limit price. Limit orders are essential for disciplined trading: instead of chasing price, you place a limit at your desired entry and wait.</p>
+              <h3>Stop-Loss Orders</h3>
+              <p>A <strong>stop-loss order</strong> becomes a market order when price reaches your stop level. If you buy BTC at $65,000 and set a stop-loss at $62,000, the order activates when BTC touches $62,000 and sells at the best available price. Note: in a flash crash, your actual fill might be below $62,000 due to slippage.</p>
+              <ul>
+                <li><strong>Stop-limit orders</strong>: Combines stop and limit. When the stop price is hit, a limit order is placed. Gives price protection but risks not filling during fast moves</li>
+                <li><strong>Trailing stop</strong>: A stop that moves up with price (for longs) but never moves down. Locks in profits as the trade moves your way. This is what our ATR stop mechanism simulates</li>
+                <li><strong>OCO (One-Cancels-Other)</strong>: Places a take-profit and stop-loss simultaneously. When one triggers, the other is cancelled</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon rsi">🔗</div>
+            <div class="article-meta">
+              <h2>On-Chain Analysis: Reading the Blockchain</h2>
+              <p class="excerpt">Unlike traditional markets, crypto transactions are public. On-chain data lets you see exactly what whales, miners, and exchanges are doing with their coins.</p>
+              <div class="tag-row"><span class="atag">Advanced</span><span class="atag">On-Chain</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p><strong>On-chain analysis</strong> is the study of blockchain transaction data to understand market dynamics. Because most public blockchains are transparent, you can track the flow of funds between wallets, monitor exchange inflows and outflows, and measure network activity in ways that are impossible in traditional finance.</p>
+              <h3>Key On-Chain Metrics</h3>
+              <ul>
+                <li><strong>Exchange inflows</strong>: Large BTC transfers to exchanges often precede selling. When whales move 10,000 BTC to Binance, it's a signal they may be preparing to sell</li>
+                <li><strong>Exchange outflows</strong>: Withdrawals to cold storage suggest accumulation and long-term holding. A sustained outflow trend is bullish</li>
+                <li><strong>Active addresses</strong>: The number of unique addresses transacting daily. Rising active addresses = growing network usage = bullish fundamentals</li>
+                <li><strong>Hash rate</strong>: The computational power securing the network. Rising hash rate means miners are investing in infrastructure — a long-term bullish signal</li>
+                <li><strong>MVRV ratio</strong>: Market Value to Realized Value. Compares current market cap to the cap based on what each coin last moved at. High MVRV suggests overvaluation; low MVRV suggests undervaluation</li>
+              </ul>
+              <h3>Limitations</h3>
+              <p>On-chain data has limits. It can't tell you <em>why</em> someone is moving coins — a transfer to an exchange might be for selling, or it might be moving to a different account. Institutional custody solutions and Layer 2 solutions also obscure some flows. Use on-chain metrics as <strong>context</strong> alongside technical analysis, not as standalone signals.</p>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="toggleArticle(this)">
+          <div class="article-header">
+            <div class="article-icon macd">📐</div>
+            <div class="article-meta">
+              <h2>Building a Trading Plan: From Backtest to Execution</h2>
+              <p class="excerpt">A backtest without a plan is just entertainment. Here's how to turn your testing results into a structured, executable trading plan.</p>
+              <div class="tag-row"><span class="atag">Methodology</span><span class="atag">Essential</span></div>
+            </div>
+          </div>
+          <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
+          <div class="article-body">
+            <div class="article-inner">
+              <p>A <strong>trading plan</strong> is a written document that defines exactly how you will enter, manage, and exit trades. It removes ambiguity and emotion from the decision-making process. Without one, you're reacting — not trading.</p>
+              <h3>The Five Components of a Trading Plan</h3>
+              <p><strong>1. Market Selection.</strong> Which coins will you trade? Choose 3-5 that you understand well and that have sufficient liquidity. Trying to trade everything means mastering nothing.</p>
+              <p><strong>2. Strategy Definition.</strong> Which strategy, exactly? TRIPLE, MA CROSS, or RSI REV? What parameters — MA period, RSI thresholds, ATR multiplier? Write these down and commit to them.</p>
+              <p><strong>3. Risk Rules.</strong> Maximum position size per trade (e.g., 2% of portfolio). Maximum total exposure (e.g., 10% across all open trades). Maximum daily loss limit (e.g., 5%). When you hit any limit, you stop trading for the day.</p>
+              <p><strong>4. Entry and Exit Criteria.</strong> Precise conditions for entering and exiting. "I'll enter when Bollinger lower band is broken, RSI is below 30, and MACD histogram is growing." No ambiguity.</p>
+              <p><strong>5. Review Schedule.</strong> Weekly review of all trades. Monthly review of strategy performance. Quarterly review of whether the plan itself needs adjustment.</p>
+              <h3>From Backtest to Plan</h3>
+              <ul>
+                <li>Run your strategy on Quant Terminal across multiple coins and note the average metrics</li>
+                <li>Identify the worst-case scenarios (largest drawdown, longest losing streak)</li>
+                <li>Size your positions so that the worst-case drawdown stays within your risk tolerance</li>
+                <li>Write it all down before you trade — not during</li>
+              </ul>
+              <a href="index.html" class="article-cta">Try it on Quant Terminal →</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
     <footer class="sg-footer">
-      <a href="index.html">Quant Terminal</a> · <a href="privacy-policy.html">Privacy Policy</a> · Educational content only. Not financial advice.
+      <a href="index.html">Quant Terminal</a> · <a href="about.html">About</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · Educational content only. Not financial advice.
     </footer>
 
   </div>

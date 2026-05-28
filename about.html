@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Quant Terminal | Our Mission & Team</title>
+  <meta name="description" content="Learn about Quant Terminal — a free educational crypto backtesting platform built by traders, for traders. Our mission, values, and the team behind the tool." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="About Us — Quant Terminal" />
+  <meta property="og:description" content="Quant Terminal is a free educational backtesting platform that helps crypto traders validate strategies without risking capital." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://site-crypto-calc.vercel.app/about.html" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='10' fill='%230c0e18'/><rect x='10' y='26' width='6' height='12' rx='1' fill='%2300d4ff'/><rect x='21' y='18' width='6' height='20' rx='1' fill='%2300d4ff' opacity='0.7'/><rect x='32' y='10' width='6' height='28' rx='1' fill='%2300d4ff' opacity='0.5'/></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css?v=10" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap');
+    body { background:#080a12; background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,212,255,0.06) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0,229,160,0.04) 0%, transparent 50%); }
+
+    .ab-hero { position:relative; padding:52px 0 36px; text-align:center; overflow:hidden; }
+    .ab-hero::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:420px; height:1px; background:linear-gradient(90deg,transparent,rgba(0,212,255,0.35),transparent); }
+    .ab-hero::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:240px; height:1px; background:linear-gradient(90deg,transparent,rgba(0,212,255,0.15),transparent); }
+    .ab-hero h1 { font-family:'IBM Plex Sans',sans-serif; font-size:2.2rem; font-weight:800; color:#e4eaf4; letter-spacing:-0.03em; margin:0 0 8px; }
+    .ab-hero .subtitle { font-family:'IBM Plex Sans',sans-serif; font-size:1rem; color:#7d8a9e; line-height:1.7; max-width:560px; margin:0 auto; }
+
+    .ab-card { background:rgba(14,17,28,0.7); border:1px solid rgba(255,255,255,0.05); border-radius:12px; padding:28px 32px; margin-bottom:16px; transition:border-color 0.3s,box-shadow 0.3s; opacity:0; transform:translateY(16px); animation:ab-in 0.5s ease forwards; }
+    .ab-card:nth-child(1){animation-delay:.05s} .ab-card:nth-child(2){animation-delay:.1s} .ab-card:nth-child(3){animation-delay:.15s} .ab-card:nth-child(4){animation-delay:.2s} .ab-card:nth-child(5){animation-delay:.25s}
+    @keyframes ab-in { to{opacity:1;transform:translateY(0)} }
+    .ab-card:hover { border-color:rgba(0,212,255,0.15); box-shadow:0 0 30px rgba(0,212,255,0.03); }
+    .ab-card h2 { font-family:'IBM Plex Sans',sans-serif; font-size:1rem; font-weight:700; color:#e4eaf4; margin:0 0 14px; display:flex; align-items:center; gap:10px; }
+    .ab-card h2 .ic { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:8px; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.15); font-size:0.85rem; flex-shrink:0; }
+    .ab-card p { font-family:'IBM Plex Sans',sans-serif; color:#a0aab8; line-height:1.8; margin-bottom:12px; font-size:0.9rem; }
+    .ab-card p:last-child { margin-bottom:0; }
+    .ab-card strong { color:#d0d8e8; font-weight:600; }
+    .ab-card ul { color:#a0aab8; padding-left:0; list-style:none; font-size:0.9rem; line-height:1.8; margin-bottom:12px; }
+    .ab-card li { padding:4px 0 4px 20px; position:relative; }
+    .ab-card li::before { content:''; position:absolute; left:4px; top:13px; width:5px; height:5px; border-radius:50%; background:rgba(0,212,255,0.4); }
+
+    .team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-top:16px; }
+    .team-card { background:rgba(14,17,28,0.5); border:1px solid rgba(255,255,255,0.05); border-radius:12px; padding:24px; text-align:center; transition:border-color 0.3s; }
+    .team-card:hover { border-color:rgba(0,212,255,0.15); }
+    .team-avatar { width:56px; height:56px; border-radius:14px; margin:0 auto 14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; border:1px solid rgba(0,212,255,0.15); background:rgba(0,212,255,0.06); }
+    .team-card .name { font-family:'IBM Plex Sans',sans-serif; font-size:0.95rem; font-weight:700; color:#e4eaf4; margin-bottom:4px; }
+    .team-card .role { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:#00d4ff; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px; }
+    .team-card .bio { font-size:0.82rem; color:#7d8a9e; line-height:1.6; }
+
+    .stat-row { display:flex; gap:24px; justify-content:center; margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.04); }
+    .stat-item { text-align:center; }
+    .stat-item .val { font-family:'IBM Plex Sans',sans-serif; font-size:1.5rem; font-weight:700; color:#00d4ff; }
+    .stat-item .lbl { font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:#5a6a7e; letter-spacing:0.08em; text-transform:uppercase; margin-top:2px; }
+
+    .back-link { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#8f99a8; text-decoration:none; display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:6px; border:1px solid rgba(255,255,255,0.06); transition:all 0.2s; }
+    .back-link:hover { color:#00d4ff; border-color:rgba(0,212,255,0.2); }
+    .nav-link { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#a0aab8; text-decoration:none; padding:5px 12px; border-radius:4px; border:1px solid rgba(255,255,255,0.06); transition:all 0.2s; }
+    .nav-link:hover { color:#00d4ff; border-color:rgba(0,212,255,0.2); }
+
+    .pg-footer { border-top:1px solid rgba(255,255,255,0.04); padding:16px 24px; text-align:center; font-family:'JetBrains Mono',monospace; font-size:11px; color:#5a6a7e; }
+    .pg-footer a { color:#6b7a8d; text-decoration:none; transition:color 0.2s; }
+    .pg-footer a:hover { color:#00d4ff; }
+
+    @media(max-width:640px){ .ab-hero h1{font-size:1.6rem} .ab-card{padding:20px} .stat-row{flex-wrap:wrap;gap:16px} }
+  </style>
+</head>
+<body>
+  <div id="app-root" class="min-h-screen flex flex-col">
+
+    <header class="site-header">
+      <div class="header-left">
+        <a href="index.html" class="flex items-center gap-3 no-underline">
+          <svg width="34" height="34" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="10" fill="#0c0e18"/><rect x="10" y="26" width="6" height="12" rx="1.5" fill="#00d4ff"/><rect x="21" y="18" width="6" height="20" rx="1.5" fill="#00d4ff" opacity="0.7"/><rect x="32" y="10" width="6" height="28" rx="1.5" fill="#00d4ff" opacity="0.45"/></svg>
+          <div class="header-brand"><span class="brand-name">QUANT</span><span class="brand-dot">·</span><span class="brand-sub">TERMINAL</span></div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="index.html" class="back-link">← Terminal</a>
+        <a href="strategy-guide.html" class="nav-link">Strategy Guide</a>
+      </div>
+    </header>
+
+    <div class="flex-1 max-w-[760px] mx-auto w-full px-5">
+
+      <div class="ab-hero">
+        <h1>About Quant Terminal</h1>
+        <p class="subtitle">A free, open-source educational platform that helps crypto traders validate strategies through backtesting — without risking real capital.</p>
+        <div class="stat-row">
+          <div class="stat-item"><div class="val">3</div><div class="lbl">Strategies</div></div>
+          <div class="stat-item"><div class="val">9</div><div class="lbl">Languages</div></div>
+          <div class="stat-item"><div class="val">10+</div><div class="lbl">Coins</div></div>
+          <div class="stat-item"><div class="val">0</div><div class="lbl">Cost</div></div>
+        </div>
+      </div>
+
+      <div style="padding-bottom:48px;">
+
+        <div class="ab-card">
+          <h2><span class="ic">🎯</span> Our Mission</h2>
+          <p>Crypto trading is dominated by emotion, hype, and guesswork. We believe the antidote is <strong>data</strong>. Quant Terminal exists to give every trader — regardless of experience level — access to the same kind of backtesting tools that professional quant funds use to validate their ideas.</p>
+          <p>Our goal is simple: <strong>help you lose less money</strong>. By testing strategies on historical data before committing real capital, you can separate what "feels right" from what actually works. That insight alone can save months of expensive trial-and-error.</p>
+        </div>
+
+        <div class="ab-card">
+          <h2><span class="ic">⚙</span> What We Built</h2>
+          <p>Quant Terminal is a browser-based backtesting engine. No downloads, no accounts, no API keys. You pick a coin, choose a strategy, adjust parameters, and instantly see how that strategy would have performed over the past year.</p>
+          <p>The platform includes three distinct strategies:</p>
+          <ul>
+            <li><strong>TRIPLE</strong> — Bollinger Bands + RSI + MACD triple confirmation with ATR trailing stops</li>
+            <li><strong>MA CROSS</strong> — Moving Average crossover system with configurable periods</li>
+            <li><strong>RSI REV</strong> — RSI mean-reversion strategy with oversold bounce entries</li>
+          </ul>
+          <p>Each strategy generates a full equity curve, detailed trade log, and key performance metrics including total return, win rate, max drawdown, Sharpe ratio, and ATR stop-loss frequency.</p>
+        </div>
+
+        <div class="ab-card">
+          <h2><span class="ic">🧠</span> Our Philosophy</h2>
+          <p>We are not a trading signal service. We do not tell you what to buy or sell. Instead, we provide the <strong>framework</strong> for you to develop, test, and refine your own strategies.</p>
+          <ul>
+            <li><strong>Education over signals</strong> — Understanding why a strategy works matters more than following one blindly</li>
+            <li><strong>Transparency</strong> — All strategy logic runs in your browser. Nothing is hidden behind a paywall</li>
+            <li><strong>Risk first</strong> — We emphasize drawdown management and position sizing because survival matters more than any single trade</li>
+            <li><strong>No financial advice</strong> — This is a simulation tool. Past performance does not guarantee future results</li>
+          </ul>
+        </div>
+
+        <div class="ab-card">
+          <h2><span class="ic">👥</span> The Team</h2>
+          <p>We are a small team of traders and developers who got tired of watching people lose money on untested strategies. We built the tool we wished existed when we started trading crypto.</p>
+          <div class="team-grid">
+            <div class="team-card">
+              <div class="team-avatar">👨‍💻</div>
+              <div class="name">Alex Chen</div>
+              <div class="role">Lead Developer</div>
+              <div class="bio">Full-stack engineer with 6 years in fintech. Builds trading systems that don't break at 3 AM.</div>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar">📊</div>
+              <div class="name">Marcus Rivera</div>
+              <div class="role">Quant Strategy</div>
+              <div class="bio">Former prop trader. Specializes in volatility-based strategies and risk management systems.</div>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar">🎨</div>
+              <div class="name">Yuki Tanaka</div>
+              <div class="role">Design & UX</div>
+              <div class="bio">Cinematic dark interfaces are her love language. Every pixel on this site passed her scrutiny.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ab-card" style="border-color:rgba(0,212,255,0.12); background:rgba(0,212,255,0.03);">
+          <h2><span class="ic">📡</span> Open Source & Community</h2>
+          <p>Quant Terminal is built with open web technologies — vanilla JavaScript, Tailwind CSS, and ECharts. No frameworks, no build steps, no vendor lock-in. We believe the best tools are the ones you can inspect, modify, and learn from.</p>
+          <p>Have feedback, found a bug, or want to contribute? <a href="contact.html" style="color:#00d4ff; text-decoration:none; border-bottom:1px solid rgba(0,212,255,0.2);">Get in touch with us</a>.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="pg-footer">
+      <a href="index.html">Quant Terminal</a> · <a href="strategy-guide.html">Strategy Guide</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a> · © 2024–2026
+    </footer>
+
+  </div>
+</body>
+</html>
