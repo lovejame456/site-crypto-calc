@@ -637,10 +637,36 @@
   }
 
   function initLangToggle() {
-    $('lang-toggle').addEventListener('click', function () {
-      var next = I18n.getLang() === 'en' ? 'zh' : 'en';
-      I18n.setLang(next);
+    var dropdown = $('lang-dropdown');
+    var menu = $('lang-menu');
+    var btn = $('lang-toggle');
+    if (!dropdown || !menu || !btn) return;
+
+    var langs = I18n.getLangList();
+    langs.forEach(function (lang) {
+      var item = document.createElement('button');
+      item.className = 'lang-menu-item' + (lang.code === I18n.getLang() ? ' active' : '');
+      item.innerHTML = '<span class="lang-flag">' + lang.flag + '</span><span>' + lang.label + '</span>';
+      item.addEventListener('click', function () {
+        I18n.setLang(lang.code);
+        menu.classList.remove('open');
+        menu.querySelectorAll('.lang-menu-item').forEach(function (el) {
+          el.classList.toggle('active', el.querySelector('span:last-child').textContent === lang.label);
+        });
+      });
+      menu.appendChild(item);
     });
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      menu.classList.toggle('open');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!dropdown.contains(e.target)) menu.classList.remove('open');
+    });
+
+    I18n.updateLangButton();
   }
 
   function init() {
