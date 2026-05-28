@@ -61,7 +61,7 @@
       $('mode-label').textContent = 'LIVE ⚡';
       $('mode-label').style.color = '#00e5a0';
     var ct = $('custom-token');
-    if (ct) { ct.disabled = false; ct.placeholder = 'e.g. PEPE, SHIB...'; }
+    if (ct) { ct.disabled = false; ct.placeholder = t('customTokenPlaceholder') || 'e.g. PEPE, SHIB...'; }
 
     updateIntervalCoverage();
     setModeLoading(true);
@@ -88,7 +88,7 @@
     $('mode-label').textContent = 'MOCK';
     $('mode-label').style.color = '#6b7a8d';
     var ct = $('custom-token');
-    if (ct) { ct.disabled = true; ct.value = ''; ct.placeholder = 'LIVE mode only'; }
+    if (ct) { ct.disabled = true; ct.value = ''; ct.placeholder = t('intervalMockOnly') || 'LIVE mode only'; }
     updateIntervalCoverage();
     runSimulation();
   }
@@ -324,7 +324,7 @@
     var winCount = metrics.winTrades || 0;
     var loseCount = metrics.totalTrades - winCount;
     $('m-wintrades').textContent = winCount;
-    $('m-winloss').textContent = winCount + 'W / ' + loseCount + 'L';
+    $('m-winloss').textContent = winCount + t('metricWinSplitSep') + loseCount + t('metricLoseSuffix');
     $('m-atrstops').textContent = metrics.atrStopCount || 0;
   }
 
@@ -476,7 +476,7 @@
   function initCustomToken() {
     var input = $('custom-token');
     input.disabled = state.dataMode === 'MOCK';
-    if (state.dataMode === 'MOCK') input.placeholder = 'LIVE mode only';
+    if (state.dataMode === 'MOCK') input.placeholder = t('intervalMockOnly') || 'LIVE mode only';
     input.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
         if (state.dataMode === 'MOCK') return;
@@ -610,6 +610,8 @@
       toggle.querySelector('[data-mode="LIVE"]').classList.add('active');
       $('mode-label').textContent = 'LIVE ⚡';
     $('mode-label').style.color = '#00e5a0';
+    var ct = $('custom-token');
+    if (ct) { ct.disabled = false; ct.placeholder = t('customTokenPlaceholder') || 'e.g. PEPE, SHIB...'; }
     }
   }
 
