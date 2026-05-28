@@ -249,14 +249,19 @@
       '5m': '~42h', '15m': '~5d', '1h': '~21d', '4h': '~83d', '1d': '~1.4y'
     };
     var el = $('interval-coverage');
-    if (el) {
-      if (state.dataMode === 'LIVE') {
+    var btns = $('interval-group').querySelectorAll('.interval-btn');
+    if (state.dataMode === 'LIVE') {
+      if (el) {
         el.textContent = '500 bars · ' + (coverageMap[state.interval] || '');
         el.style.color = '#00e5a0';
-      } else {
-        el.textContent = t('intervalMock') || '365 days simulated';
-        el.style.color = '#6b7a8d';
       }
+      btns.forEach(function (b) { b.disabled = false; b.style.opacity = '1'; });
+    } else {
+      if (el) {
+        el.textContent = t('intervalMockOnly') || 'LIVE mode only';
+        el.style.color = '#4a5568';
+      }
+      btns.forEach(function (b) { b.disabled = true; b.style.opacity = '0.35'; });
     }
   }
 
