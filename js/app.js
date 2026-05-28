@@ -60,6 +60,8 @@
     toggle.querySelector('[data-mode="LIVE"]').classList.add('active');
       $('mode-label').textContent = 'LIVE ⚡';
       $('mode-label').style.color = '#00e5a0';
+    var ct = $('custom-token');
+    if (ct) { ct.disabled = false; ct.placeholder = 'e.g. PEPE, SHIB...'; }
 
     updateIntervalCoverage();
     setModeLoading(true);
@@ -85,6 +87,8 @@
     toggle.querySelector('[data-mode="MOCK"]').classList.add('active');
     $('mode-label').textContent = 'MOCK';
     $('mode-label').style.color = '#6b7a8d';
+    var ct = $('custom-token');
+    if (ct) { ct.disabled = true; ct.value = ''; ct.placeholder = 'LIVE mode only'; }
     updateIntervalCoverage();
     runSimulation();
   }
@@ -471,15 +475,17 @@
 
   function initCustomToken() {
     var input = $('custom-token');
+    input.disabled = state.dataMode === 'MOCK';
+    if (state.dataMode === 'MOCK') input.placeholder = 'LIVE mode only';
     input.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
+        if (state.dataMode === 'MOCK') return;
         var val = input.value.trim().toUpperCase();
         if (!val) return;
         var presetBtns = $('token-group').querySelectorAll('.token-btn');
         presetBtns.forEach(function (b) { b.classList.remove('active'); });
         state.token = val;
         state.liveData = null;
-        if (state.dataMode === 'MOCK') switchToLIVE();
         debouncedSim();
       }
     });
