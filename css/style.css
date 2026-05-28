@@ -168,6 +168,8 @@ body::after {
 .metric-card[data-role="winrate"] { --role-color: #c9b896; }
 .metric-card[data-role="mdd"] { --role-color: #ff4757; }
 .metric-card[data-role="sharpe"] { --role-color: #00e5a0; }
+.metric-card[data-role="wintrades"] { --role-color: #00e5a0; }
+.metric-card[data-role="atrstops"] { --role-color: #ff4757; }
 
 .metric-card::before {
   content: '';
@@ -456,6 +458,45 @@ input[type="range"].range-red::-moz-range-thumb {
   border-radius: 8px;
   overflow: hidden;
 }
+
+.trade-log {
+  height: 200px;
+  overflow-y: auto;
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 6px;
+  background: rgba(0,0,0,0.2);
+  padding: 8px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  line-height: 1.8;
+  color: #6b7a8d;
+}
+
+.trade-log::-webkit-scrollbar {
+  width: 4px;
+}
+
+.trade-log::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.trade-log::-webkit-scrollbar-thumb {
+  background: rgba(0,212,255,0.15);
+  border-radius: 2px;
+}
+
+.trade-log-row {
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trade-log-row.open { color: #00e5a0; }
+.trade-log-row.close-win { color: #00d4ff; }
+.trade-log-row.close-loss { color: #ff4757; }
+.trade-log-empty { color: #3a4556; font-style: italic; padding: 40px 0; text-align: center; }
 
 .chart-title {
   display: flex;

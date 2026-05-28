@@ -298,6 +298,7 @@
 
   function formatPct(v) { return (v >= 0 ? '+' : '') + (v * 100).toFixed(2) + '%'; }
   function formatUSD(v) { return '$' + v.toLocaleString(undefined, { maximumFractionDigits: 0 }); }
+  function fmtPriceJS(p) { if (p >= 1000) return Math.round(p).toLocaleString(); if (p >= 1) return p.toFixed(2); return p.toFixed(6); }
 
   function updateMetrics(metrics) {
     var elReturn = $('m-return');
@@ -315,6 +316,35 @@
     var elSharpe = $('m-sharpe');
     elSharpe.textContent = metrics.sharpe.toFixed(2);
     elSharpe.className = 'metric-value ' + (metrics.sharpe >= 1 ? 'positive' : metrics.sharpe >= 0 ? 'neutral' : 'negative');
+
+    var winCount = metrics.winTrades || 0;
+    var loseCount = metrics.totalTrades - winCount;
+    $('m-wintrades').textContent = winCount;
+    $('m-winloss').textContent = winCount + 'W / ' + loseCount + 'L';
+    $('m-atrstops').textContent = metrics.atrStopCount || 0;
+  }
+
+  function updateTradeLog(log) {
+    var container = $('trade-log');
+    if (!container) return;
+    if (!log || log.length === 0) {
+      container.innerHTML = '<div class="trade-log-empty">' + t('tradeLogEmpty') + '</div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < log.length; i++) {
+      var entry = log[i];
+      var rowClass = 'trade-log-row ' + entry.type;
+      var priceStr = fmtPriceJS(entry.price);
+      if (entry.type === 'open') {
+        html += '<div class="' + rowClass + '">▸ ' + entry.date + '  OPEN @ ' + priceStr + '  [' + entry.signals + ']</div>';
+      } else {
+        var pnlStr = (entry.pnl >= 0 ? '+' : '') + (entry.pnl * 100).toFixed(2) + '%';
+        html += '<div class="' + rowClass + '">  ' + entry.date + '  ' + (entry.type === 'close-win' ? '✓' : '✗') + ' CLOSE @ ' + priceStr + '  ' + pnlStr + '  [' + entry.reason + ']</div>';
+      }
+    }
+    container.innerHTML = html;
+    container.scrollTop = container.scrollHeight;
   }
 
   function flashSimIndicator() {
@@ -335,6 +365,7 @@
         prices: data.prices,
         highs: data.highs,
         lows: data.lows,
+        dates: data.dates,
         maPeriod: state.maPeriod,
         rsiOverbought: state.rsiOverbought,
         rsiOversold: state.rsiOversold,
@@ -353,6 +384,7 @@
       }
 
       updateMetrics(result.metrics);
+      updateTradeLog(result.log);
       ChartManager.updateMainChart(data.dates, data.prices, result.boll, result.equity);
       ChartManager.updateRsiChart(data.dates, result.rsi, state.rsiOverbought, state.rsiOversold);
       flashSimIndicator();
