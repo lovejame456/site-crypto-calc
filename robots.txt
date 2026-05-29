@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://site-crypto-calc.vercel.app/sitemap.xml
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Googlebot
+Allow: /
