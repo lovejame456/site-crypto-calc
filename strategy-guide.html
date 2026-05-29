@@ -19,20 +19,120 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/style.css?v=10" />
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Crypto Trading Strategy Guide",
-    "url": "https://site-crypto-calc.vercel.app/strategy-guide.html",
-    "description": "20+ free educational articles on Bollinger Bands, RSI, MACD, ATR, risk management, candlestick patterns, and backtesting for cryptocurrency traders.",
-    "publisher": { "@type": "Organization", "name": "Quant Terminal", "url": "https://site-crypto-calc.vercel.app" },
-    "inLanguage": "en",
-    "about": [
-      { "@type": "Thing", "name": "Cryptocurrency Trading" },
-      { "@type": "Thing", "name": "Technical Analysis" },
-      { "@type": "Thing", "name": "Quantitative Trading" }
-    ]
-  }
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Crypto Trading Strategy Guide",
+      "url": "https://site-crypto-calc.vercel.app/strategy-guide.html",
+      "description": "20+ free educational articles on Bollinger Bands, RSI, MACD, ATR, risk management, candlestick patterns, and backtesting for cryptocurrency traders.",
+      "publisher": { "@type": "Organization", "name": "Quant Terminal", "url": "https://site-crypto-calc.vercel.app" },
+      "inLanguage": "en",
+      "about": [
+        { "@type": "Thing", "name": "Cryptocurrency Trading" },
+        { "@type": "Thing", "name": "Technical Analysis" },
+        { "@type": "Thing", "name": "Quantitative Trading" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://site-crypto-calc.vercel.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Strategy Guide" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Understanding Bollinger Bands: The Volatility Squeeze",
+      "description": "How to read Bollinger Band width as a leading indicator of explosive moves in crypto trading.",
+      "author": { "@type": "Person", "name": "Marcus Rivera", "url": "https://site-crypto-calc.vercel.app/about.html" },
+      "publisher": { "@type": "Organization", "name": "Quant Terminal" },
+      "datePublished": "2026-05-20",
+      "dateModified": "2026-05-29",
+      "mainEntityOfPage": "https://site-crypto-calc.vercel.app/strategy-guide.html#bollinger-bands",
+      "about": { "@type": "Thing", "name": "Bollinger Bands" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "RSI Deep Dive: Beyond Overbought and Oversold",
+      "description": "Why the default 70/30 RSI lines mislead more traders than they help in crypto markets.",
+      "author": { "@type": "Person", "name": "Marcus Rivera", "url": "https://site-crypto-calc.vercel.app/about.html" },
+      "publisher": { "@type": "Organization", "name": "Quant Terminal" },
+      "datePublished": "2026-05-20",
+      "dateModified": "2026-05-29",
+      "mainEntityOfPage": "https://site-crypto-calc.vercel.app/strategy-guide.html#rsi"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "ATR Stop-Loss: Why Fixed Stops Fail in Crypto",
+      "description": "How the Average True Range indicator creates adaptive stop-loss levels that survive crypto volatility.",
+      "author": { "@type": "Person", "name": "Marcus Rivera", "url": "https://site-crypto-calc.vercel.app/about.html" },
+      "publisher": { "@type": "Organization", "name": "Quant Terminal" },
+      "datePublished": "2026-05-20",
+      "dateModified": "2026-05-29",
+      "mainEntityOfPage": "https://site-crypto-calc.vercel.app/strategy-guide.html#atr"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Use ATR Stop-Loss in Crypto Trading",
+      "description": "Step-by-step guide to setting ATR-based stop-loss levels that adapt to crypto volatility.",
+      "step": [
+        { "@type": "HowToStep", "name": "Calculate ATR", "text": "Set ATR period to 14 (default) and read the current ATR value for your chosen coin." },
+        { "@type": "HowToStep", "name": "Choose multiplier", "text": "Select an ATR multiplier: 1.5x for tight stops, 2.0x for balanced, 3.0x for wide stops." },
+        { "@type": "HowToStep", "name": "Set stop level", "text": "Subtract (ATR × multiplier) from your entry price to get the stop-loss price." },
+        { "@type": "HowToStep", "name": "Trail the stop", "text": "As price moves up, move the stop up to (Current Price − ATR × multiplier). Never move it down." }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Risk Management: Position Sizing, Drawdown, and the Leverage Trap",
+      "description": "Why position sizing and drawdown management determine whether you survive long enough to be profitable.",
+      "author": { "@type": "Person", "name": "Marcus Rivera", "url": "https://site-crypto-calc.vercel.app/about.html" },
+      "publisher": { "@type": "Organization", "name": "Quant Terminal" },
+      "datePublished": "2026-05-20",
+      "dateModified": "2026-05-29",
+      "mainEntityOfPage": "https://site-crypto-calc.vercel.app/strategy-guide.html#risk"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Backtesting 101: Validate Your Strategy Without Losing Money",
+      "description": "How backtesting works, the pitfalls that catch almost everyone, and why past performance doesn't guarantee future results.",
+      "author": { "@type": "Person", "name": "Alex Chen", "url": "https://site-crypto-calc.vercel.app/about.html" },
+      "publisher": { "@type": "Organization", "name": "Quant Terminal" },
+      "datePublished": "2026-05-20",
+      "dateModified": "2026-05-29",
+      "mainEntityOfPage": "https://site-crypto-calc.vercel.app/strategy-guide.html#backtesting"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Trading Psychology: Your Worst Enemy Is You",
+      "description": "Understanding FOMO, revenge trading, loss aversion, and overtrading — the cognitive biases that destroy trading accounts.",
+      "author": { "@type": "Person", "name": "Marcus Rivera", "url": "https://site-crypto-calc.vercel.app/about.html" },
+      "publisher": { "@type": "Organization", "name": "Quant Terminal" },
+      "datePublished": "2026-05-25",
+      "dateModified": "2026-05-29",
+      "mainEntityOfPage": "https://site-crypto-calc.vercel.app/strategy-guide.html#psychology"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Dollar Cost Averaging (DCA) Strategy Explained",
+      "description": "How DCA works mathematically in volatile crypto markets, when it works best, and when it doesn't.",
+      "author": { "@type": "Person", "name": "Alex Chen", "url": "https://site-crypto-calc.vercel.app/about.html" },
+      "publisher": { "@type": "Organization", "name": "Quant Terminal" },
+      "datePublished": "2026-05-25",
+      "dateModified": "2026-05-29",
+      "mainEntityOfPage": "https://site-crypto-calc.vercel.app/strategy-guide.html#dca"
+    }
+  ]
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap');
@@ -306,6 +406,16 @@
       border-color: rgba(0,212,255,0.3);
     }
 
+    .article-byline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: #4a5568;
+      letter-spacing: 0.03em;
+      margin-top: 8px;
+    }
+    .article-byline .author { color: #5a6a7e; }
+    .article-byline .sep { margin: 0 6px; color: #3a4556; }
+
     .back-link {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.72rem;
@@ -394,6 +504,7 @@
               <h2>Understanding Bollinger Bands: The Volatility Squeeze</h2>
               <p class="excerpt">How to read band width as a leading indicator of explosive moves — and why the "squeeze" is where the money hides.</p>
               <div class="tag-row"><span class="atag">Volatility</span><span class="atag">TRIPLE</span></div>
+              <div class="article-byline"><span class="author">Marcus Rivera</span><span class="sep">·</span>May 20, 2026</div>
             </div>
           </div>
           <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
@@ -488,6 +599,7 @@
               <h2>ATR Stop-Loss: Why Fixed Stops Fail in Crypto</h2>
               <p class="excerpt">A 5% stop might work on Apple stock. On crypto, it gets chewed up by normal volatility. Here's how ATR fixes this.</p>
               <div class="tag-row"><span class="atag">Stop-Loss</span><span class="atag">All Strategies</span></div>
+              <div class="article-byline"><span class="author">Marcus Rivera</span><span class="sep">·</span>May 20, 2026</div>
             </div>
           </div>
           <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
@@ -521,6 +633,7 @@
               <h2>Risk Management: Position Sizing, Drawdown, and the Leverage Trap</h2>
               <p class="excerpt">Entry signals get all the attention. But position sizing and drawdown management determine whether you survive long enough to be profitable.</p>
               <div class="tag-row"><span class="atag">Risk</span><span class="atag">Essential</span></div>
+              <div class="article-byline"><span class="author">Marcus Rivera</span><span class="sep">·</span>May 20, 2026</div>
             </div>
           </div>
           <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
@@ -560,6 +673,7 @@
               <h2>Backtesting 101: Validate Your Strategy Without Losing Money</h2>
               <p class="excerpt">How backtesting works, the pitfalls that catch almost everyone, and why "past performance" really doesn't guarantee future results.</p>
               <div class="tag-row"><span class="atag">Methodology</span><span class="atag">Beginner</span></div>
+              <div class="article-byline"><span class="author">Alex Chen</span><span class="sep">·</span>May 20, 2026</div>
             </div>
           </div>
           <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
@@ -777,6 +891,7 @@
               <h2>Trading Psychology: Your Worst Enemy Is You</h2>
               <p class="excerpt">The market doesn't make you lose money — your emotions do. Understanding cognitive biases is the most profitable skill you'll never see on a chart.</p>
               <div class="tag-row"><span class="atag">Psychology</span><span class="atag">Essential</span></div>
+              <div class="article-byline"><span class="author">Marcus Rivera</span><span class="sep">·</span>May 25, 2026</div>
             </div>
           </div>
           <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
@@ -899,6 +1014,7 @@
               <h2>DCA (Dollar Cost Averaging) Strategy Explained</h2>
               <p class="excerpt">The simplest strategy that works in crypto — buy a fixed amount at regular intervals. No charts, no indicators, no stress. Here's the math behind why it works.</p>
               <div class="tag-row"><span class="atag">Strategy</span><span class="atag">Beginner</span></div>
+              <div class="article-byline"><span class="author">Alex Chen</span><span class="sep">·</span>May 25, 2026</div>
             </div>
           </div>
           <div class="article-toggle"><span class="arrow">▶</span> <span class="toggle-text">Read article</span></div>
