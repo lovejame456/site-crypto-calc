@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://site-crypto-calc.vercel.app/sitemap.xml
+Sitemap: https://quantterm.xyz/sitemap.xml
 
 User-agent: Mediapartners-Google
 Allow: /
